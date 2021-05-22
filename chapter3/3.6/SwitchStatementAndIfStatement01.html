@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>switch和if语句条件区别</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container" style="padding-top: 50px;">
+    <p>
+        注意：switch 语句在比较值时使用的是全等操作符`===`，因此不会发生类型转换（例如，
+        字符串"25"不等于数值 25）。
+    </p>
+
+    <p>
+        if语句自动调用 Boolean()转换函数将这个表达式的结果转换为一个布尔值，在进行比对值
+    </p>
+
+    <div class="row">
+        <table class="table table-bordered">
+            <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">switch</th>
+                <th class="text-center">if</th>
+            </tr>
+            <tr>
+                <th class="text-center">不同点</th>
+                <td>
+                    <ol>
+                        <li>性能较好</li>
+                        <li>使用全等操作符`===`进行条件比对值，因此不会进行类型转换</li>
+                    </ol>
+                </td>
+                <td>
+                    <ol>
+                        <li>性能较差</li>
+                        <li>Boolean()类型转换后，在进行条件比对值</li>
+                    </ol>
+                </td>
+            </tr>
+        </table>
+
+        <h3>扩展：</h3>
+        <ul>
+            <li>
+                <a href="https://juejin.cn/post/6844903638582689806">[浅析]特定场景下取代if-else和switch的方案</a></li>
+            <li>
+                <a href="./SwitchStatementExample01.html">switch语句性能</a>
+            </li>
+        </ul>
+
+    </div>
+</div>
+
+<script>
+    let i = '25';
+    switch (i) {
+        case 25:
+            console.log('25');
+            break;
+        case 45:
+            console.log('45');
+            break;
+        default:
+            console.log('other');
+    }
+
+    //不要将原始布尔值的true和false与Boolean对象的真或假混淆
+    //任何一个值，只要它不是 undefined、null、 0、NaN或空字符串（""），那么无论是任何对象，即使是值为假的Boolean对象，在条件语句中都为真
+    let b = new Boolean(false);
+    console.log(Boolean(b));//b的值为Boolean对象，所以转换过来是为true
+    if (b) {
+        console.log('is true');//可以由此得出if条件默认判断是相等操作符
+    } else {
+        console.log('not true');
+    }
+</script>
+</body>
+</html>

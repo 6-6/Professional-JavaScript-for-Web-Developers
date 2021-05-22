@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <title>arguments对象</title>
+</head>
+<body>
+<div class="container">
+    <p>
+        在函数体内可以通过 arguments 对象来访问这个参数数组，从而获取传递给函数的每一个参数.
+    </p>
+    <p>
+        arguments 对象只是与数组类似（它并不是 Array 的实例，类数组），因为可以使用方括号语法访
+        问它的每一个元素（即第一个元素是 arguments[0]，第二个元素是 argumetns[1]，以此类推），使
+        用 length 属性来确定传递进来多少个参数。
+    </p>
+</div>
+
+<script>
+    function sayHi(){
+        alert('Hello ' + arguments[0] +' '+ arguments[1]);
+    }
+    sayHi('Jason','Momoa')
+</script>
+</body>
+</html>

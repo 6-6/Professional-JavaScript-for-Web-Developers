@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>switch合并条件判断</title>
+</head>
+<body>
+<script>
+    let i = 25;
+    switch(i){
+        case 25:
+            /*合并两种情况的条件*/
+        case 35:
+            console.log('25 or 35');
+            break;
+        case 45:
+            console.log('45');
+            break;
+        default:
+            console.log('other');
+    }
+</script>
+</body>
+</html>

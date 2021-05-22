@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <title>function 没有重载</title>
+</head>
+<body>
+<div class="container">
+    <p>
+        ECMAScript 函数不能像传统意义上那样实现重载。但是可以通过判断arguments的长度，来进行不同的操作，可以达到类似重载的效果。
+        <a href="./FunctionExample07.html">JavaScript模拟重载</a>
+    </p>
+    <p>
+        什么是重载?</br>
+       简单来说：定义同样的方法名，通过传递不同的参数类型或数量，实现不同的目的
+    </p>
+</div>
+<script>
+    /*
+    * 下面示例，很好的看出了，JavaScript后定义的函数覆盖了先定义的函数。
+    * */
+    function addSomeNumber(num){
+        return num + 100;
+    }
+    function addSomeNumber(num){
+        return num + 200;
+    }
+    var result = addSomeNumber(100);
+</script>
+</body>
+</html>

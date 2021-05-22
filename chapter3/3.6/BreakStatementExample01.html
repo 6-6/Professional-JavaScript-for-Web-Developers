@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>break语句</title>
+</head>
+<body>
+<a href="./ContinueStatementExample01.html">break替换为continue呢？</a>
+<script>
+    var num = 0;
+    for(var i=1; i<10; i++){
+        //当取模的值为0，即为整除，推测i==5，num则为4。
+        //注：取模和取余运算是不一样的 ，参考：https://www.zhihu.com/question/30526656
+        if(i % 5 == 0){
+            break;
+        }
+        num++;
+    }
+    alert(num);
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <title>arguments对象 赋值</title>
+</head>
+<body>
+<div class="container">
+    <p>
+        每次执行这个 doAdd()函数都会重写第二个参数，将第二个参数的值修改为 10。因为 arguments
+        对象中的值会自动反映到对应的命名参数，所以修改 arguments[1]，也就修改了 num2，结果它们的
+        值都会变成 10。不过，这并不是说读取这两个值会访问相同的内存空间；它们的内存空间是独立的，但
+        它们的值会同步。另外还要记住，如果只传入了一个参数，那么为 arguments[1]设置的值不会反应到
+        命名参数中。<b>这是因为 arguments 对象的长度是由传入的参数个数决定的，</b>不是由定义函数时的命名
+        参数的个数决定的。
+    </p>
+    <p>
+        关于参数还要记住最后一点：没有传递值的命名参数将自动被赋予 undefined 值。这就跟定义了
+        变量但又没有初始化一样。例如，如果只给 doAdd()函数传递了一个参数，则 num2 中就会保存
+        undefined 值。
+    </p>
+</div>
+<script>
+    function doAdd(num1, num2){
+        arguments[1] = 10;
+        console.log(arguments[0] + num2);
+    }
+
+    doAdd(10);//只传入一个命名参数，argument对象的长度则为1，所以对其赋值是无效的。
+    //doAdd(30, 20);
+</script>
+</body>
+</html>

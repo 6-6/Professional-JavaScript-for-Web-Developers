@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>function</title>
+</head>
+<body>
+<script>
+    function diff(num1, num2){
+        if(num1 < num2){
+            return num2 - num1;// 执行完 return 语句之后停止并立即退出
+        }
+        else{
+            return num1 - num2;
+        }
+
+        alert(123);//不会执行
+    }
+
+    console.log(diff(1,2))
+</script>
+</body>
+</html>

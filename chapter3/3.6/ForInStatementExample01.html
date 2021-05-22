@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>for in循环</title>
+</head>
+<body>
+<p>
+    ECMAScript 对象的属性没有顺序。因此，通过 for-in 循环输出的属性名的顺序是不可预测的。
+    具体来讲，所有属性都会被返回一次，但返回的先后次序可能会因浏览器而异。（page 57）
+</p>
+
+<p>经过测试并未乱序</p>
+
+<span>扩展知识：</span>
+<a href="https://juejin.cn/post/6916058482231754765">for in 和 for of 的区别
+</a>
+<script>
+    /*
+    * 遍历对象结果为value
+    * */
+    for(let propName in window){
+        console.log('遍历obj',propName)
+    }
+
+    /*
+    * 遍历对象结果为key值
+    * */
+    let arr = ['apple','watermelon','mango']
+    for(let propName in arr){
+        console.log('遍历arr',propName)
+    }
+</script>
+</body>
+</html>
