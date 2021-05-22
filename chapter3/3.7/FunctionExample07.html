@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <title>通过判断arguments对象 模拟重载</title>
+</head>
+<body>
+<div class="container">
+    <p>
+        函数 doAdd()会在只有一个参数的情况下给该参数加上 10；如果是两个参数，则将那个参数简单
+        相加并返回结果。因此， doAdd(10)会返回 20，而 doAdd(30,20)则返回 50。虽然这个特性算不上完
+        美的重载，但也足够弥补 ECMAScript 的这一缺憾了。</p>
+
+</div>
+<script>
+    function doAdd(){
+        if(arguments.length == 1){
+            console.log(arguments[0] + 10);
+        }
+        else if(arguments.length == 2){
+            console.log(arguments[0] + arguments[1]);
+        }
+    }
+
+    doAdd(10);
+    doAdd(30, 20);
+</script>
+</body>
+</html>

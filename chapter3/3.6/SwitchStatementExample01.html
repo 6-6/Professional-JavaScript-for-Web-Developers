@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>switch语句</title>
+</head>
+<body>
+<p>
+    简单测试if和switch判断的性能，switch是要快几倍。
+</p>
+<p>
+    if条件分支超过3个，我们可以考虑使用switch。
+</p>
+
+<script>
+    let i = 25;
+
+    //if判断
+    const t0 = window.performance.now();
+    if (i == 25){
+        console.log("25");
+    } else if (i == 35) {
+        console.log("35");
+    } else if (i == 45) {
+        console.log("45");
+    } else {
+        console.log("Other");
+    }
+    const t1 = window.performance.now();
+    console.log("if循环执行了" + (t1 - t0) + "毫秒.")
+
+    //switch判断
+    const t2 = window.performance.now();
+    switch(i){
+        case 25:
+            console.log('25');
+            break;
+        case 35:
+            console.log('35');
+            break;
+        case 45:
+            console.log('45');
+            break;
+        default:
+            console.log('other');
+    }
+    const t3 = window.performance.now();
+    console.log("switch循环执行了" + (t3 - t2) + "毫秒.")
+
+</script>
+</body>
+</html>

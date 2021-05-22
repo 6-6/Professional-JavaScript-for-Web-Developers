@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>label 语句</title>
+</head>
+<body>
+<script>
+var num = 0;
+// label语句的标签
+outermost:
+for(var i=0; i<10; i++){
+    for(var j=0; j<10; j++){
+        if(i==5 && j==5){
+            //break 语句带了一个参数：要返回到的标签。表示跳出至label标签所在的位置，即跳出变量i的循环。
+            break outermost;//换成continue呢？同理跳到变量i的循环体，相当于内部循环少了5次，所以num为95
+        }
+        num++;//推测5*10+5，结果为55
+    }
+}
+
+alert(num);
+</script>
+</body>
+</html>
