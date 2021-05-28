@@ -5,14 +5,16 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>给基本类型添加属性</title>
+    <title>块级作用域</title>
 </head>
 <body>
-<p>我们不能给基本类型的值添加属性，尽管这样做不会导致任何错误。如下：</p>
+
 <script>
-    var name = 'Nicholas';
-    name.age = 27;
-    console.log(name.age)// undefined
+    if(true){
+        let color = 'blue'
+    }
+    console.log(color)
 </script>
+
 </body>
 </html>

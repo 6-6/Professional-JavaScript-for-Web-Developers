@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>instanceof</title>
+</head>
+<body>
+<p>
+    语法：[变量] instanceof [构造函数]</br>
+
+    作用的变量类型为对象，引用类型：Array，Object；其他类型：Function、RegExp、Date。</br>
+</p>
+<p>
+    instanceof原理是测试对象在其原型链是否存在构造函数的prototype属性
+</p>
+<script>
+    let s = 'Nicholas';
+    let n = null;
+    let o = new Object();
+
+    console.log(s instanceof String)//如果对象使用基础类型，那么无法进行判断，必须是一个对象。
+    console.log(n instanceof Object)
+    console.log(o instanceof Object)
+</script>
+</body>
+</html>

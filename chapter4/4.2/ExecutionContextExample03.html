@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>执行环境的作用域链</title>
+</head>
+<body>
+<p>
+    with 语句内部，定义了一个名为 url 的变量，因而 url 就成了函数执行环境的一
+    部分，所以可以作为函数的值被返回。即延长了作用域链的范围至buildUrl()方法当中
+</p>
+<p>
+    <a href="./withStatementExample01.html">了解下with语句</a>
+</p>
+<script>
+    function buildUrl(){
+        var qs = '?debug=true';
+
+        with (location) {
+            var url = href + qs;
+        }
+        return url;
+    }
+
+    console.log(buildUrl());
+</script>
+
+</body>
+</html>

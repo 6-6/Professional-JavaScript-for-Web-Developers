@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>执行环境的作用域链</title>
+</head>
+<body>
+<p>
+    内部环境可以通过作用域链访问所有的外部环境，但外部环境不能访问内部环境中的任何变量和函数。
+</p>
+<p>
+    每个环境都可以向上搜索作用域链，以查询变量和函数名，如下例子中swapColors()函数中，可以向上访问到变量color、 anotherColor 和 tempColor。
+</p>
+<script>
+    let color = 'blue';
+
+    function changeColor(){
+        let anotherColor = 'red';
+
+        function swapColors() {
+            let tempColor = anotherColor;
+            anotherColor = color;
+            color = tempColor;
+            // 这里可以访问 color、 anotherColor 和 tempColor
+        }
+
+        // 这里可以访问 color 和 anotherColor，但不能访问 tempColor
+        swapColors();
+    }
+
+    // 这里只能访问 color
+    changeColor();
+</script>
+</body>
+</html>

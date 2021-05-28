@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数传递参数</title>
+</head>
+<body>
+<p>函数的参数都是按值传递的，相当于num复制一份副本，num的值改变不影响count。</p>
+<script>
+    function addTen(num){
+        num += 10;
+        return num;
+    }
+    let count = 20;
+    let result = addTen(count);
+    alert(count); //20，没有变化
+    alert(result); //30
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数传递参数-引用类型</title>
+</head>
+<body>
+<p>那到底为什么说函数参数是按值传递呢？书中说：如果 person 是按引用传递的，那么 person 就会自动被修改为指向其 name 属性值
+    为"Greg"的新对象。</p>
+
+<a href="https://www.cnblogs.com/Syinho/p/13220753.html">参考：js_关于为什么'函数的参数都是按值传递'的理解</a>
+
+<p>
+    这里存在疑惑，setName(person)传参，使得obj和person指向同一个堆内存中的对象（这里不是应该按引用传递吗？）。
+    函数这段代码obj = new Object(); obj赋值新的对象。此时obj和person指向不同的地址，引用本身就不相同了，更改属性name也就不会一同更改了。
+    本身已经切断联系的两个变量，何能证明函数参数是按值传递呢？
+</p>
+
+<!--<script>-->
+<!--    function setName(obj){-->
+<!--        obj.name = 'Nicholas';-->
+<!--    }-->
+
+<!--    let person = new Object();-->
+<!--    setName(person);-->
+<!--    alert(person.name);-->
+<!--</script>-->
+
+<script>
+    function setName(obj){
+        obj.name = 'Nicholas';
+        obj = new Object();
+        obj.name = 'Greg';
+    }
+
+    let person = new Object();
+    setName(person);
+    alert(person.name);
+</script>
+
+</body>
+</html>

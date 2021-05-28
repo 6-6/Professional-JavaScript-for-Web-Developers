@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>执行环境的作用域链</title>
+</head>
+<body>
+<p>
+    函数 changeColor()的作用域链包含两个对象：它自己的变量对象（其中定义着 arguments 对象）和全局环境的变量对象。可以在函数内部访问变量 color，就是因为可以在
+    这个作用域链中找到它。
+</p>
+
+<script>
+    let color = 'blue';
+
+    function changeColor(){
+        if(color === 'blue'){
+            color = 'red';
+        }
+        else{
+            color = 'blue'
+        }
+    }
+    changeColor();
+
+    alert('color is now ' + color);
+</script>
+</body>
+</html>

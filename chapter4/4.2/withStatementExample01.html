@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <title>with语句</title>
+</head>
+<body>
+<div class="container">
+    <p>
+        with语句 作用：扩展一个语句的作用域链。
+    </p>
+    <pre>
+        with (expression) {
+            statement
+        }
+    </pre>
+    <p>
+        <b>expression</b>
+        <p>将给定的表达式添加到在评估语句时使用的作用域链上。表达式周围的括号是必需的。</p>
+        <b>statement</b>
+        <p>任何语句。要执行多个语句，请使用一个块语句 ({ ... })对这些语句进行分组。</p>
+    </p>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            不推荐使用with，在 ECMAScript 5 严格模式中该标签已被禁止。推荐的替代方案是声明一个临时变量来承载你所需要的属性。
+        </div>
+    </div>
+
+    <p>
+        参考：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/with">with语句</a>
+    </p>
+</div>
+
+<script>
+    function f(x, o) {
+        with(o){
+            console.log(x);//x的值有可能是o对象当中的属性值，如果o并非对象，x的值则是第一个参数x的值。
+        }
+    }
+    //两种方式结果不同，with语义不明的弊端
+    f(0,{x:2,y:3})
+    //f(0,1)
+</script>
+</body>
+</html>
