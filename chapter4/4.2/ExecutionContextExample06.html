@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>查询标识符</title>
+</head>
+<body>
+<p>
+    调用方法getColor()，方法当中return一个标识符（变量）color
+</p>
+<p>
+    1.搜索 getColor()的当中的标识符color； </br>
+    2.未查找到该标识符，则继续沿着作用域链查找； </br>
+    3.向上一级则是window的全局环境，在这找到名为color的标识符。 </br>
+</p>
+<script>
+    var color = 'blue';
+    function getColor(){
+        return color;
+    }
+    alert(getColor());
+</script>
+
+</body>
+</html>

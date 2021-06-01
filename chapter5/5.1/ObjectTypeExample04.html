@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>对象字面量，向函数传递数据</title>
+</head>
+<body>
+<p>
+    displayInfo(arg1, arg2, arg3...);
+</p>
+<p>
+    命名参数虽然容易处理，但在有多个可选参数的情况下就会显示不够灵活。最好的做法
+    是对那些必需值使用命名参数，而使用对象字面量来封装多个可选参数。
+</p>
+
+<script>
+
+    function displayInfo(args){
+        let output = '';
+
+        if(typeof args.name == 'string'){
+            output += 'Name: ' + args.name + '\n'
+        }
+
+        if(typeof args.age == 'number'){
+            output += 'Age: ' + args.age + '\n'
+        }
+
+        console.log(output);
+    }
+
+    displayInfo({
+        name: 'Nicholas',
+        age: 29
+    });
+
+    displayInfo({
+        name: 'Greg'
+    });
+</script>
+</body>
+</html>

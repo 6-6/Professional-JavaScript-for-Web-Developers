@@ -9,15 +9,15 @@
 </head>
 <body>
 <p>
-
+    我们建议在初始化变量之前，一定要先声明，这样就可以避免许多错误。
 </p>
 <script>
     function add(num1, num2){
-        var sum = num1 + num2;//var 声明的变量会自动被添加到最接近的环境中
+        sum = num1 + num2;//变量 sum 在被初始化赋值时没有使用 var 关键字，变量提升会自动将变量 sum添加到全局环境。
         return sum;
     }
     var result = add(10, 20);
-    alert(sum);//变量sum只存在于方法add()当中，所以全局环境中获取不到
+    alert(sum);
 </script>
 
 </body>
