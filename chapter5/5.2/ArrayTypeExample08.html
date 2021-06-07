@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>toLocaleString()</title>
+</head>
+<body>
+<p>
+    我们定义了两个对象，person1和person2，创建一个数组包含两个对象。
+</p>
+<p>
+    输出结果是字符串Nicholas,Greg
+</p>
+<p>
+    通过观察正好是toString()方法中return的值。说明对象中创建的方法toString()覆盖了对象原型链Object.prototype.toString()上的toString()方法。
+</p>
+
+<p>
+    还有一个疑问？不是应该通过访问某项数组，再访问到toString方法吗？类似这样people[0].toString()。people.toString()为何可以直接使用呢？
+</p>
+<script>
+    let person1 = {
+        toLocaleString: function(){
+            return 'Nikolaos';
+        },
+        toString: function(){
+            return 'Nicholas';
+        }
+    };
+    let person2 = {
+        toLocaleString: function(){
+            return 'Grigorios';
+        },
+        toString: function(){
+            return 'Greg';
+        }
+    }
+
+    let people = [person1, person2];
+
+    console.log(people);
+    console.log(people.toString());//Nicholas,Greg
+    console.log(people.toLocaleString());//Nikolaos,Grigorios
+
+    // toLocaleString()方法没有return任何值，所以为undefined。
+    // toString()并未被覆盖，所以执行的是对象原型上的方法toString()，那么对象就被输出为[object Object]
+    let person3 = {
+        toLocaleString: function(){
+        }//,
+        // toString: function () {
+        // }
+    }
+    let people2 = [person3]
+    console.log(people2.toString());//[object Object]
+    console.log(people2.toLocaleString());//undefined
+
+</script>
+</body>
+</html>

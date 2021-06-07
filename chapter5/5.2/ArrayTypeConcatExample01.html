@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>concat()方法</title>
+</head>
+<p>
+    传递的值可以是数组或是其它值，会自动添加在结果数组的末尾。返回的值是并非原数组，而是一个副本。
+</p>
+
+<script>
+let colors = ['red', 'green', 'blue'];
+let colors2 = colors.concat('yellow', ['black', 'brown']);
+console.log(colors);// ['red', 'green', 'blue'] 原数组未发生变化
+console.log(colors2);// ['red', 'green', 'blue', 'yellow', 'black', 'brown']，这个结果我们可以推测源码应该对数组进行了解构，也许是调用了toString()方法
+</script>
+
+</body>
+</html>

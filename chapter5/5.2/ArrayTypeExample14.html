@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>sort()方法</title>
+</head>
+<p>
+    对数组进行顺序（升序）处理，返回处理后的数组。
+</p>
+<p>
+    默认情况sort()方法根据Unicode位点进行排序，通常并非我们想要的排序。
+</p>
+<p>
+    我们可以通过传递比较函数传入sort([compareFunction])
+</p>
+<script>
+    let values = [0, 1, 5, 10, 15];
+    values.sort();
+    console.log(values);//[0,1,10,15,5]
+    /*
+        为什么输出的结果，5排在了最后呢？
+        默认排序顺序是在将元素toString()转换为字符串，然后比较它们的UTF-16代码单元值序列来排序的。
+     */
+</script>
+</body>
+</html>

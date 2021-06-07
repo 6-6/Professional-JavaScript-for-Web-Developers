@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>toString()和 valueOf()</title>
+</head>
+<body>
+<p>
+    不同的内置对象，valueOf()返回结果不尽相同。
+    <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/valueOf">valueOf()</a>
+</p>
+<script>
+    let colors = ['red', 'blue', 'green'];
+    console.log(colors.toString());//toString()输出成字符串，并不会改变原始数组
+    console.log(colors.valueOf());//返回对象的原始值，即数组
+    console.log(colors);
+</script>
+</body>
+</html>

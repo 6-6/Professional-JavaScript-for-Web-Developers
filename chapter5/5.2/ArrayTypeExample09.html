@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>push()和pop()模拟栈方法</title>
+</head>
+<p>
+    正所谓“后进先出”，就在于push()和pop()都操作着数组最后一项。
+</p>
+<script>
+    let colors = new Array();
+    let count = colors.push('red', 'green');
+    console.log(count);
+
+    count = colors.push('black');
+    console.log(count);
+
+    let item = colors.pop();
+    console.log(item);
+    console.log(colors.length);
+</script>
+</body>
+</html>

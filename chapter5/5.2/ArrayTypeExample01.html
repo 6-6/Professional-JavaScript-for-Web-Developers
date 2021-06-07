@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>创建数组的方式-new Array()</title>
+</head>
+<body>
+
+<p>
+    <a href="ArrayTypeExample02.html">数组字面量表示法创建</a>
+</p>
+<b>
+    扩展：手写一个Array()方法，应该如何写？
+</b>
+
+<script>
+    var colors = new Array(3); //    例子中可以看得出来向构造函数Array()传递数字时，代表创建长度为3的空数组。
+    var names = new Array('Greg', 'Nicholas'); //传递多组字符串参数时，创建一个带有两个字符串的数组。
+    console.log('colors:',colors)
+    console.log('names:',names)
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>unshift()和pop()模拟队列</title>
+</head>
+<p>
+    unshift()能够在数组首项添加任意长度的数组
+</p>
+<p>
+    unshift()和pop()从右向左开始，模拟队列
+</p>
+<script>
+    let colors = new Array();
+    let count = colors.unshift('red', 'green');
+    console.log(count);//2
+
+    count = colors.unshift('black');
+    console.log(count);//3
+
+    let item = colors.pop();
+    console.log(item);//green
+    console.log(colors.length);//2
+</script>
+</body>
+</html>

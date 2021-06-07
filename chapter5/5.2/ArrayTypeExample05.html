@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>通过长度作为下标添加数组项并赋值</title>
+</head>
+<body>
+<p>
+    数组最后一项length-1，那么新的一项即为length。
+</p>
+<script>
+    let colors = ['red', 'blue', 'green'];
+    colors[colors.length] = 'black';
+    colors[colors.length] = 'brown';
+    alert(colors);
+</script>
+</body>
+</html>

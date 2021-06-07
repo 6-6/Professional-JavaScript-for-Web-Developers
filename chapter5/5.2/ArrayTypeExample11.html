@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>shift()和 push()方法模拟队列方法</title>
+</head>
+<p>
+    正所谓“先进先出”，就在于push()操作最后一项，而shift()操作第一项。
+    就像是现实中排队一样，先来的先到，后来者居后排队。
+</p>
+<script>
+    let colors = new Array();
+    let count = colors.push('red', 'green');
+    console.log(count);
+
+    count = colors.push('black');
+    console.log(count);
+
+    let item = colors.shift();
+    console.log(item);
+    console.log(colors.length);
+</script>
+</body>
+</html>
