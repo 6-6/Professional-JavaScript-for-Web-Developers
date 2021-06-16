@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>indexOf()和lastIndexOf()方法</title>
+</head>
+<body>
+<p>
+    arr.indexOf(searchElement[, fromIndex]) fromIndex是从0开始计数
+</p>
+<p>
+    这两个方法都返回要查找的项在数组中的位置，或者在没找到的情况下返回-1。匹配数组每一项时，使用的是全等操作符===。
+</p>
+<script>
+    let numbers = [1, 2, 3, 4, 5, 4, 3, 2, 1];
+    console.log(numbers.indexOf(4)); // 结果是3，可以看出来只返回首次匹配到的第一项
+
+    console.log(numbers.lastIndexOf(4)); // 结果是5，从数组末尾开始查找，所以是第五项的4
+
+    console.log(numbers.indexOf(4, 4)); // 从位置4开始查询，所以结果为5
+    console.log(numbers.lastIndexOf(4, 4)); // 从末尾开始倒数4，结果3
+
+    let person = {name: 'Nicholas'};
+    let people = [{name: 'Nicholas'}];
+
+    let morePeople = [person];
+    console.log(people.indexOf(person)); //-1
+    console.log(morePeople.indexOf(person)); //0
+    //使用indexOf查找匹配使用的是全等操作符，
+    // 那么我们知道，两个属性值一样的引用类型并不一定相等，
+    // 因为引用类型的相等判断，是基于栈内存中的指针是否指向在堆内存中的同一个对象
+</script>
+</body>
+</html>

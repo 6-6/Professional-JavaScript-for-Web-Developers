@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>slice()方法</title>
+</head>
+<body>
+<p>
+    语法：arr.slice([begin[, end]])
+</p>
+
+<script>
+    let colors = ['red', 'green', 'blue', 'yellow', 'purple'];
+    let colors2 = colors.slice(1);//包括begin的值直到数组最后一位，['green', 'blue', 'yellow', 'purple']
+    let colors3 = colors.slice(1, 4);//['green', 'blue', 'yellow'] 提取的数组值不包括end的值
+    let colors4 = colors.slice(-2);//begin为负数，则从末尾倒数2位置开始截取，end也同理
+    let colors5 = colors.slice(2,1);//begin大于end，截取不到，所以就返回空数组
+
+    console.log(colors2);
+    console.log(colors3);
+    console.log(colors4);
+    console.log(colors5);
+
+</script>
+</body>
+</html>

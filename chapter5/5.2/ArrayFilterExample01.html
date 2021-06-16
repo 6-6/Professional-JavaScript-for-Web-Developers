@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>filter()方法</title>
+</head>
+<body>
+<p>
+    filter()方法可返回指定函数在数组中包含的项，并输出结果（数组）
+</p>
+
+<script>
+    let numbers = [1,2,3,4,5,4,3,2,1];
+    let filterResult = numbers.filter(function (item) {
+        return (item > 2);
+    });
+    console.log(filterResult);
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>forEach()方法</title>
+</head>
+<body>
+<p>
+    forEach() 方法对数组的每个元素执行一次给定的函数。
+</p>
+
+<script>
+    // forEach()不能够使用break跳出循环体
+    // return结果也是undefined
+    let numbers = [1,2,3,4,5,4,3,2,1];
+    let arr = [];
+    numbers.forEach(function (item, index, array) {
+        arr.push(item * 2);
+    })
+</script>
+
+</body>
+</html>

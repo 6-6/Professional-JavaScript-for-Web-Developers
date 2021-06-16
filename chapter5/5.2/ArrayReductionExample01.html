@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>reduce()方法</title>
+</head>
+<body>
+<p>
+    reduce() 方法对数组中的每个元素执行一个由您提供的reducer函数(升序执行)，将其结果汇总为单个返回值。
+</p>
+<p>
+    语法：arr.reduce(callback(accumulator, currentValue[, index[, array]])[, initialValue])
+</p>
+
+<ul>
+    <li>accumulator：累计器累计回调的返回值; 它是上一次调用回调时返回的累积值，或initialValue（见于下方）。</li>
+    <li>currentValue：数组中正在处理的元素。</li>
+    <li>index：数组中正在处理的当前元素的索引。 如果提供了initialValue，则起始索引号为0，否则从索引1起始。</li>
+    <li>array：调用reduce()的数组</li>
+</ul>
+
+<script>
+    (function () {
+        let values = [1,2,3,4,5];
+        let sum = values.reduce(function(prev, cur, index, array){
+            console.log('reduce prev',prev)
+            return prev + cur;
+        });
+        console.log(sum);
+    })();
+
+    /*-----------------分割线-----------------*/
+    /*
+    * reduceRight()方法区别，主要是累加的方向不一样，输出结果可以看出来，reduceRight()是从数组右侧（即末尾）开始累加
+    * */
+    (function () {
+        let values = [1,2,3,4,5];
+        let sum = values.reduceRight(function(prev, cur, index, array){
+            console.log('reduceRight prev',prev)
+            return prev + cur;
+        });
+        console.log(sum);
+    })();
+</script>
+</body>
+</html>

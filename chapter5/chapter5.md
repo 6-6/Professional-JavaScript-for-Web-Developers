@@ -90,3 +90,41 @@ unshift()和 pop()方法模拟队列方法：[示例](./5.2/ArrayTypeExample12.h
 ### 5.2.6 操作方法
 * concat()合并数组：[示例](./5.2/ArrayTypeConcatExample01.html)
 * slice()根据起始和结束提取数组元素：[示例](./5.2/ArrayTypeSliceExample01.html)
+* splice()强大的数组方法，可对原数组进行删除、插入、替换：[示例](./5.2/ArrayTypeSpliceExample01.html)
+
+### 5.2.7 位置方法
+[示例](./5.2/ArrayIndexOfExample01.html)
+* indexOf()：从数组的开头从前向后查找
+* lastIndexOf()：从数组的末尾开始向前查找
+
+### 5.2.8 迭代方法
+ECMAScript 5 为数组定义了 5 个[迭代方法](https://note.youdao.com/ynoteshare1/index.html?id=e8dc93c1e4028d2532206f1a79683c68&type=note)。每个方法都接收两个参数：要在每一项上运行的函数和（可选的）运行该函数的作用域对象——影响 this 的值。以下是这 5 个迭代方法的作用。
+
+* every()：对数组每一项运行给定函数，如果数组每一项返回true，则返回true
+* filter()：对数组中每一项运行给定函数，返回该函数会返回true的项组成的数组
+* forEach()：对数组中的每一项运行给定函数。这个方法没有返回值（不能够return）
+* map()：对数组中每一项运行给定函数，返回每次函数调用的结果组成的数组
+* some()：对数组中每一项运行给定函数，如果该函数对任一项返回true，则返回true
+
+示例：
+
+[every()和some()](./5.2/ArrayEveryAndSomeExample01.html)
+
+[filter()](./5.2/ArrayFilterExample01.html)
+
+[map()](./5.2/ArrayMapExample01.html)
+
+[forEach()](./5.2/ArrayForEachExample01.html)
+
+### 5.2.9 归并方法
+[示例](./5.2/ArrayReductionExample01.html)
+* reduce()
+* reduceRight()
+
+## 5.3 Date 类型
+ECMAScript 中的 Date 类型是在早期 Java 中的 java.util.Date 类基础上构建的。要创建一个日期对象，使用 new 操作符和 Date 构造函数即可。
+
+* new Date()：[示例1](./5.3/DateTypeExample01.html)、[示例2](./5.3/DateTypeConstructorExample01.html)
+* Date.UTC()：[示例](./5.3/DateTypeUTCExample01.html)
+
+### 5.3.1 继承的方法

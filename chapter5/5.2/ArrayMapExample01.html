@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>map()方法</title>
+</head>
+<body>
+<p>
+    map方法return了一个语句，返回的结果是数组中每一项进行乘以2，
+    最终返回这些乘积组成的数组。
+</p>
+
+<script>
+    let numbers = [1,2,3,4,5,4,3,2,1];
+    let mapResult = numbers.map(function (item, index, array) {
+        return item * 2;
+    });
+    console.log(mapResult);//[2,4,6,8,10,8,6,4,2]
+</script>
+
+<script>
+    // 循环输出的方法和map()方法是否原理相似呢？
+    function f() {
+        let numbers = [1,2,3,4,5,4,3,2,1];
+        let arr = [];
+
+        for(let i = 0; i < numbers.length; i++){
+            arr.push(numbers[i] * 2);
+        }
+        return arr;
+    }
+
+    console.log(f());
+
+</script>
+</body>
+</html>

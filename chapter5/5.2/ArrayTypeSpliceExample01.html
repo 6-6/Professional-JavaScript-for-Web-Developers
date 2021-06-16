@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>splice()方法</title>
+</head>
+<body>
+<p>
+  splice() 方法通过删除或替换现有元素或者原地添加新的元素来修改数组,并以数组形式返回被修改的内容。此方法会改变原数组。
+</p>
+<p>
+  array.splice(start[, deleteCount[, item1[, item2[, ...]]]])
+</p>
+<ul>
+  <li>
+    <p>必选 start</p>
+    <p>指定修改的开始位置（从0计数）</p>
+  </li>
+  <li>
+    <p>可选 deleteCount</p>
+    <p>整数，表示要移除的数组元素的个数。</p>
+  </li>
+  <li>
+    <p>可选 item1, item2, ...</p>
+    <p>要添加进数组的元素,从start 位置开始。如果不指定，则 splice() 将只删除数组元素。</p>
+  </li>
+</ul>
+<script>
+  let colors = ['red', 'green', 'blue'];
+  let removed = colors.splice(0, 1);                    // 删除第一项
+  console.log('colors',colors);//['green', 'blue']原数组变化了
+  console.log('removed',removed);//输出删除项
+
+  removed = colors.splice(1, 0, 'yellow', 'orange');    //从位置1之前添加项，deleteCount为0，代表插入
+  console.log('colors',colors);//['green', 'yellow', 'orange', 'blue']
+  console.log('removed',removed);//并未删除项，输出[]
+
+  removed = colors.splice(1, 1, 'red', 'purple');       //deleteCount为1代表替换，删除位置1的1项，并在原先位置1插入两项
+  console.log('colors',colors);//['green', 'red', 'purple', 'orange', 'blue']
+  console.log('removed',removed);//['yellow']
+</script>
+</body>
+</html>

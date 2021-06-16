@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>every()和some()方法</title>
+</head>
+<body>
+<p>
+    every()方法类似对数组每两项进行操作符&&，必须是每一次比对都为true，才会返回true
+</p>
+<p>
+    some()方法类似对数组每两项进行操作符||，只需任意一项为true，即可返回true
+</p>
+
+<script>
+    let numbers = [1,2,3,4,5,4,3,2,1];
+    let everyResult = numbers.every(function(item, index, array){
+        return (item > 2);
+    });
+    console.log(everyResult);
+
+    let someResult = numbers.some(function(item, index, array){
+        return (item > 2);
+    });
+    console.log(someResult);
+</script>
+</body>
+</html>
