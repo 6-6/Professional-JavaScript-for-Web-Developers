@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Date类型的valueOf()</title>
+</head>
+<body>
+<p>
+    Date类型使用操作符（小于或大于）来比较大小？输出date1的值，我们可以看到是字符串。但我们知道date1、date2是一个Date类型的对象。
+</p>
+<p>
+    valueOf通常用于隐式转换，所以Date类型的比较时先使用valueOf()方法转换为时间戳（毫秒值），再进行比较。
+</p>
+
+<script>
+    let date1 = new Date(2007, 0, 1);
+    let date2 = new Date(2007, 1, 1);
+
+    console.log(date1);
+    console.log(date1 < date2);
+</script>
+</body>
+</html>

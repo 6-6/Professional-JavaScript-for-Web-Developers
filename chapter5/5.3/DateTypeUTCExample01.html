@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>UTC()方法</title>
+</head>
+<body>
+<p>
+    UTC 方法接受以逗号隔开的日期参数，返回1970-1-1 00:00:00 UTC到指定的日期之间的毫秒数。
+</p>
+<p>
+    Date.parse()和Date.UTC()方法不同的的地方，就在于UTC会协调世界时代替本地时间
+</p>
+<p>
+    语法：Date.UTC(year,month[,date[,hrs[,min[,sec[,ms]]]]])
+</p>
+<p>
+    只有年份和月份必填，其余不填会默认最小值，Date.UTC(2000, 0)输出结果2000年1月1日00:00:00的时间戳。
+</p>
+<ul>
+    <li>year（必填）：表示年份</li>
+    <li>month（必填）：0 到 11 之间的一个整数，表示月份。</li>
+    <li>date：1 到 31 之间的一个整数，表示某月当中的第几天。</li>
+    <li>hrs：0 到 23 之间的一个整数，表示小时。</li>
+    <li>min：0 到 59 之间的一个整数，表示分钟。</li>
+    <li>sec：0 到 59 之间的一个整数，表示秒。</li>
+    <li>ms：0 到 999 之间的一个整数，表示毫秒。</li>
+</ul>
+<script>
+    // GMT时间2000年1月1日午时零时
+    let y2k = new Date(Date.UTC(2000, 0));
+    console.log('y2k：',y2k);
+
+    let allFives = new Date(Date.UTC(2005, 4, 5, 17, 55, 55));
+    console.log('allFives：',allFives);
+    /*
+    * 为什么1970 1-1 00:00:00是起始时间呢？
+    * UNIX操作系统考虑到计算机产生的年代和应用的时限综合取了1970年1月1日作为UNIX TIME的纪元时间(开始时间)，而java自然也遵循了这一约束。
+    * */
+    console.log('起始时间戳：',Date.UTC(1970, 0));
+
+    // 如果我取1970年之间的时间戳呢？值又是什么
+    console.log('起始时间戳：',Date.UTC(1969, 0));
+
+</script>
+</body>
+</html>

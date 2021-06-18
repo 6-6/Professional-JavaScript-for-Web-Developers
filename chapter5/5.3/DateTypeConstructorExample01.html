@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>new Date()方法设置本地时间</title>
+</head>
+<body>
+<p>
+    new Date()输出的是本地的UTC格式的时间，Date.UTC()方法则是使用的世界时间
+</p>
+<p>
+    输出的值是不一样的，这是为什么呢？看看有什么区别？<a href="./DateTypeUTCExample01.html">UTC()方法</a>
+</p>
+
+<script>
+    let y2k = new Date(2000, 0);
+    console.log('y2k：', y2k);
+
+    let allFives = new Date(2005, 4, 5, 17, 55, 55);
+    console.log('allFives：', allFives);
+</script>
+</body>
+</html>

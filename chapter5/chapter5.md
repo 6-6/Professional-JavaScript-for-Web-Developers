@@ -128,3 +128,65 @@ ECMAScript 中的 Date 类型是在早期 Java 中的 java.util.Date 类基础�
 * Date.UTC()：[示例](./5.3/DateTypeUTCExample01.html)
 
 ### 5.3.1 继承的方法
+Date 类型重写了 toLocaleString()、toString()和 valueOf()方法
+
+valueOf()：[示例](./5.3/DateTypeValueOfExample01.html)
+
+### 5.3.2 日期格式化方法
+Date 类型还有一些专门用于将日期格式化为字符串的方法：
+* toDateString()——以特定于实现的格式显示星期几、月、日和年；
+toTimeString()——以特定于实现的格式显示时、分、秒和时区；
+* toLocaleDateString()——以特定于地区的格式显示星期几、月、日和年；
+* toLocaleTimeString()——以特定于实现的格式显示时、分、秒；
+* toUTCString()——以特定于实现的格式完整的 UTC 日期。
+
+### 5.3.3 日期/时间组件方法
+| 方法 | 说明 |
+| ---- | ---- |
+| getTime() | 返回表示日期的毫秒数；与valueOf() 方法返回的值相同 |
+| setTime(毫秒) | 以毫秒数设置日期，会改变整个日期 |
+| getFullYear() | 取得4位数的年份（如2007而非仅07） |
+| getUTCFullYear() | 返回UTC日期的4位数年份 |
+| setFullYear(年) | 设置日期的年份。传入的年份值必须是4位数字（如2007而非仅07） |
+| setUTCFullYear(年) | 设置UTC日期的年份。传入的年份值必须是4位数字（如2007而非仅07） |
+| getMonth() | 返回日期中的月份，其中0表示一月， 11表示十二月 |
+| getUTCMonth() | 返回UTC日期中的月份，其中0表示一月， 11表示十二月 |
+| setMonth(月) | 设置日期的月份。传入的月份值必须大于0，超过11则增加年份 |
+| setUTCMonth(月) | 设置UTC日期的月份。传入的月份值必须大于0，超过11则增加年份 |
+| getDate() | 返回日期月份中的天数（1到31） |
+| getUTCDate() | 返回UTC日期月份中的天数（1到31） |
+| setDate(日) | 设置日期月份中的天数。如果传入的值超过了该月中应有的天数，则增加月份 |
+| setUTCDate(日) | 设置UTC日期月份中的天数。如果传入的值超过了该月中应有的天数，则增加月份 |
+| getDay() | 返回日期中星期的星期几（其中0表示星期日， 6表示星期六） |
+| getUTCDay() | 返回UTC日期中星期的星期几（其中0表示星期日， 6表示星期六） |
+| getHours() | 返回日期中的小时数（0到23） |
+| getUTCHours() | 返回UTC日期中的小时数（0到23） |
+| setHours(时) | 设置日期中的小时数。传入的值超过了23则增加月份中的天数 |
+| setUTCHours(时) | 设置UTC日期中的小时数。传入的值超过了23则增加月份中的天数 |
+| getMinutes() | 返回日期中的分钟数（0到59） |
+| getUTCMinutes() | 返回UTC日期中的分钟数（0到59） |
+| setMinutes(分) | 设置日期中的分钟数。传入的值超过59则增加小时数 |
+| setUTCMinutes(分) | 设置UTC日期中的分钟数。传入的值超过59则增加小时数 |
+| getSeconds() | 返回日期中的秒数（0到59） |
+| getUTCSeconds() | 返回UTC日期中的秒数（0到59） |
+| setSeconds(秒) | 设置日期中的秒数。传入的值超过了59会增加分钟数 |
+| setUTCSeconds(秒) | 设置UTC日期中的秒数。传入的值超过了59会增加分钟数 |
+| getMilliseconds() | 返回日期中的毫秒数 |
+| getUTCMilliseconds() | 返回UTC日期中的毫秒数 |
+| setMilliseconds(毫秒) | 设置日期中的毫秒数 |
+| setUTCMilliseconds(毫秒) | 设置UTC日期中的毫秒数 |
+| getTimezoneOffset() | 返回本地时间与UTC时间相差的分钟数。例如，美国东部标准时间返回300。在某地进入夏令时的情况下，这个值会有所变化 |
+
+## 5.4 RegExp 类型
+ECMAScript 通过 RegExp 类型来支持正则表达式。使用下面类似 Perl 的语法，就可以创建一个正则表达式。
+
+```javascript
+var expression = / pattern / flags ;
+```
+
+其中的模式（pattern）部分是正则表达式，可以包含字符类、限定符、分组、向前查找以及反向引用。每个正则表达式都可带有一或多个标志（flags），用以标明正则表达式的行为。正则表达式的匹配模式支持下列 3 个标志：
+
+* g：表示全局（global）模式，即模式将被应用于所有字符串，而非在发现第一个匹配项时立即停止；
+* i：表示不区分大小写（case-insensitive）模式，即在确定匹配项时忽略模式与字符串的大小写；
+* m：表示多行（multiline）模式，即在到达一行文本末尾时还会继续查找下一行中是否存在与模
+式匹配的项。

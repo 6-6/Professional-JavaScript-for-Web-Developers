@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>new Date()方法</title>
+</head>
+<body>
+<p>
+    new Date()输出的是UTC格式的时间
+</p>
+<p>
+    Date.parse()方法接收一个表示日期的字符串参数，然后返回相应日期的毫秒数。 Date.parse()支持哪种日期格式，因地区而异。
+</p>
+
+<script>
+    let now = new Date();
+    console.log('now',now);
+
+    let someDate = new Date(Date.parse('May 25, 2004'));
+    console.log('someDate',someDate);
+    /*------上面例子，等同于下面的例子，默认会先转换为时间戳再转换为时间-------*/
+    let someDate2 = new Date('May 25, 2004');
+    console.log('someDate2',someDate2);
+
+</script>
+</body>
+</html>
