@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RegExp构造函数长属性</title>
+</head>
+<body>
+
+<p>
+    RegExp.multiline报错了，查找兼容性，并未发现不支持chrome91。
+</p>
+
+<script>
+    let text = 'this has been a short summer.';
+    let pattern = /(.)hort/g;
+
+    /*
+    * 注意： Opera 不支持 input、 lastMatch、 lastParen 和 multiline 属性
+    * Internet Explorer 不支持 multiline 属性
+    * */
+
+    if(pattern.test(text)){
+        console.log(RegExp.input);// 最近一次要匹配的字符串
+        console.log(RegExp.leftContext);//input字符串中lastMatch之前的文本
+        console.log(RegExp.rightContext);//input字符串中lastMatch之后的文本
+        console.log(RegExp.lastMatch);// 最近一次匹配的项
+        console.log(RegExp.lastParen);// 最近一次匹配的捕获组
+        console.log(RegExp.multiline);//undefined，chrome 91版本报错
+    }
+</script>
+</body>
+</html>

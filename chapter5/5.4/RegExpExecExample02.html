@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>exec()方法设置pattern</title>
+</head>
+<body>
+<p>
+    在不 设置全局标志的情况下，在同一个字符串上多次调用 exec()将始终返回第一个匹配项的信息。
+</p>
+
+
+<script>
+    let text = 'cat, bat, sat, fat';
+    let pattern1 = /.at/;
+
+    let matches = pattern1.exec(text);
+    console.log(matches.index);//0
+    console.log(matches[0]);//cat
+    console.log(pattern1.lastIndex);//0
+
+    // 再次调用exec()方法，还是返回第一项
+    matches = pattern1.exec(text)
+    console.log(matches.index);//0
+    console.log(matches[0]);//cat
+    console.log(pattern1.lastIndex);//0
+
+    /*------------分割线----------*/
+    console.log('------------分割线----------');
+    let text2 = 'cat, bat, sat, fat';
+    let pattern2 = /.at/g;
+
+    let matches2 = pattern2.exec(text2);
+    console.log(matches2.index);//0
+    console.log(matches2[0]);//cat
+    console.log(pattern2.lastIndex);//3
+
+    // 再次调用exec()方法，还是返回第一项
+    matches2 = pattern2.exec(text2);
+    console.log(matches2.index);//5
+    console.log(matches2[0]);//cat
+    console.log(pattern2.lastIndex);//8
+</script>
+
+</body>
+</html>

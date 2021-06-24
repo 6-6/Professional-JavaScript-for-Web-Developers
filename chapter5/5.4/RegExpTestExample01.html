@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test()方法</title>
+</head>
+<body>
+<p>
+    test()方法接受一个字符串参数。在模式与该参数匹配的情况下返回
+    true；不匹配则返回 false。
+</p>
+
+<script>
+    let text = '000-00-0000';
+    let pattern = /\d{3}-\d{2}-\d{4}/;
+
+    if(pattern.test(text)){
+        alert('The pattern was matched.');
+    }
+</script>
+
+</body>
+</html>

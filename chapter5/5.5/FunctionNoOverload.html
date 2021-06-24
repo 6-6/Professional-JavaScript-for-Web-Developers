@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数没有重载</title>
+</head>
+<body>
+<p>
+    将函数名想象为指针，也有助于理解为什么 ECMAScript 中没有函数重载的概念。
+</p>
+<script>
+    function addSomeNumber(num) {
+        return num + 100;
+    }
+
+    function addSomeNumber(num) {
+        return num + 200;
+    }
+
+    let result = addSomeNumber(100);
+    console.log(result); // 300
+
+    console.log('----------等同于上面-----------');
+    /*
+    * 对于为什么没有重载，我们可以通过函数表达式的看清楚。
+    * 声明一个变量并指向一个函数，在下面又再次指向另一个函数，此时赋值覆盖了addSomeNumber的之前的引用。
+    * */
+    (function () {
+        let addSomeNumber = function(num){
+            return num + 100;
+        }
+
+        addSomeNumber = function(num){
+            return num + 200;
+        }
+
+        let result = addSomeNumber(100);
+        console.log(result);// 300
+    })()
+</script>
+</body>
+</html>

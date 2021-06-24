@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RegExp实例属性</title>
+</head>
+<body>
+<p>
+    两种创建方式，字面量和RegExp构造函数。
+</p>
+
+<script>
+    let pattern1 = /\[bc\]at/i;
+
+    console.log(pattern1.global);//是否设置了g标志，全局搜索
+    console.log(pattern1.ignoreCase);//是否设置i标志，忽略大小写
+    console.log(pattern1.multiline);//是否设置m标志，是否开启多行模式
+    console.log(pattern1.lastIndex);//搜索匹配项的位置
+    console.log(pattern1.source);//正则表达式的字符串，相当于输出pattern的字符串
+
+
+    let pattern2 = new RegExp('\\[bc\\]at', 'i');
+
+    console.log(pattern2.global);
+    console.log(pattern2.ignoreCase);
+    console.log(pattern2.multiline);
+    console.log(pattern2.lastIndex);
+    console.log(pattern2.source);
+
+</script>
+</body>
+</html>

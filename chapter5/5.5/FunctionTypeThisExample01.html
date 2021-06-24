@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数中的this</title>
+</head>
+<body>
+<p>
+    函数的名字仅仅是一个包含指针的变量，初学的时候容易将混淆
+</p>
+<p>
+    this指向最后调用它的那个对象
+</p>
+
+<script>
+    window.color = 'red';
+    let o = {color: 'blue'};
+
+    function sayColor(){
+        console.log(this.color);
+    }
+    sayColor();//全局环境下调用了sayColor()，因此函数内的this指向了window对象。this.color则为'red'
+
+    o.sayColor = sayColor; // o.sayColor赋值一个变量，该变量指向了sayColor()函数
+    o.sayColor();// 调用o.sayColor()，this指向为对象o，所以输出'blue'
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RegExp构造函数存储捕获组属性</title>
+</head>
+<body>
+<p>
+    RegExp构造函数有个9个存储捕获组的构造函数属性
+</p>
+<script>
+    let text = 'this has been a short summer';
+    let pattern = /(..)or(.)/g; // 括号中的点位代表着匹配的字符数量
+
+    if(pattern.test(text)){
+        console.log(RegExp.$1);//sh
+        console.log(RegExp.$2);//t
+    }
+</script>
+</body>
+</html>

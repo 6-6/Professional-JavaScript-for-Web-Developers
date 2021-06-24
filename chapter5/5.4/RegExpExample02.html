@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RegExp类型</title>
+</head>
+<body>
+<p>
+</p>
+
+<script>
+    let re = null,i;
+
+    for(i=0; i<10; i++){
+        re = /cat/g;
+        console.log(re.test('catastrophe'));
+    }
+
+    for(i=0; i<10; i++){
+        re = new RegExp('cat', 'g');
+        console.log(re.test('catastrophe'));
+    }
+
+</script>
+</body>
+</html>

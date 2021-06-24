@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>exec()方法的属性</title>
+</head>
+<body>
+<p>
+    exec()方法是专门为捕获组而设计的，传入的需要应用的字符串，返回匹配项信息的数组，如没有匹配项则为null。
+</p>
+<ul>
+    <li>index属性：表示匹配项在字符串中的位置</li>
+    <li>input属性：表示应用正则表达式的字符串</li>
+</ul>
+
+<script>
+    let text = 'mom and dad and baby';
+    let pattern = /mom( and dad( and baby)?)?/gi;
+
+    let matches = pattern.exec(text);
+    console.log(matches.index);
+    console.log(matches.input);
+    console.log(matches[0]);
+    console.log(matches[1]);
+    console.log(matches[2]);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>caller属性</title>
+</head>
+<body>
+<p>
+    ECMAScript 5 也规范化了另一个函数对象的属性： caller。除了 Opera 的早期版本不支持，其他
+    浏览器都支持这个 ECMAScript 3 并没有定义的属性。这个属性中保存着调用当前函数的函数的引用，
+    如果是在全局作用域中调用当前函数，它的值为 null
+</p>
+
+<script>
+    function outer(){
+        inner();
+    }
+
+    function inner(){
+        console.log(inner.caller);
+    }
+
+    outer();
+</script>
+</body>
+</html>

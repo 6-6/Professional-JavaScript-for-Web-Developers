@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数声明-变量提升</title>
+</head>
+<body>
+<p>
+    函数声明和函数表达式，在代码解析时候是有不同的。解析器会将函数声明提升到顶部，函数表达式则不会。
+</p>
+<p>
+    可以看看这个例子：
+    <a href="./FunctionInitializationExample01.html">函数表达式-变量提升</a>
+</p>
+<script>
+    alert(sum(10, 10));
+    function sum(num1, num2){
+        return num1 + num2;
+    }
+</script>
+</body>
+</html>

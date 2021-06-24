@@ -190,3 +190,59 @@ var expression = / pattern / flags ;
 * i：表示不区分大小写（case-insensitive）模式，即在确定匹配项时忽略模式与字符串的大小写；
 * m：表示多行（multiline）模式，即在到达一行文本末尾时还会继续查找下一行中是否存在与模
 式匹配的项。
+
+### 5.4.1 RegExp实例属性
+* global：布尔值，表示是否设置了 g 标志。
+* ignoreCase：布尔值，表示是否设置了 i 标志。
+* lastIndex：整数，表示开始搜索下一个匹配项的字符位置，从 0 算起。
+* multiline：布尔值，表示是否设置了 m 标志。
+* source：正则表达式的字符串表示，按照字面量形式而非传入构造函数中的字符串模式返回。
+
+### 5.4.2 RegExp实例方法
+* exec()方法：[exec()方法的属性](./5.4/RegExpExecExample01.html)，[exec()正则使用全局匹配模式](./5.4/RegExpExecExample02.html)
+* test()方法：[示例](./5.4/RegExpTestExample01.html)
+* toString()和toLocaleString()：[示例](./5.4/RegExpToStringExample01.html)
+
+### 5.4.3 RegExp构造函数属性
+RegExp 构造函数包含一些属性，下表列出了 RegExp 构造函数的属性
+
+**注：IE和Opera浏览器部分属性名不支持**
+
+| 长属性名 | 短属性名 | 说明 |
+|--------|-------|---|
+| input | $_ | 最近一次要匹配的字符串。 |
+| lastMatch | $& | 最近一次的匹配项。 |
+| lastParen | $+ | 最近一次匹配的捕获组。 |
+| leftContext | $` | input字符串中lastMatch之前的文本 |
+| multiline | $* | 布尔值，表示是否所有表达式都使用多行模式。 |
+| rightContext | $' | input字符串中lastMatch之后的文本 |
+
+[长属性名示例](./5.4/RegExpConstructorPropertiesExample01.html)
+
+[短属性名示例](./5.4/RegExpConstructorPropertiesExample02.html)
+
+[RegExp构造函数存储属性](./5.4/RegExpConstructorPropertiesExample03.html)
+
+## 5.5 Function 类型
+函数是Function类型的实例，而且都与其它引用类型一样具有属性和方法。函数实际上是对象，函数名是一个指向函数对象的指针（类似变量名）。
+
+[函数引用指针](./5.5/FunctionTypeExample01.html)
+
+### 5.5.1 没有重载（深入理解）
+[没有重载](./5.5/FunctionNoOverload.html)
+
+### 5.5.2 函数声明与函数表达式
+[函数声明示例](./5.5/FunctionDeclarationExample01.html)
+[函数表达式示例](./5.5/FunctionInitializationExample01.html)
+
+### 5.5.3 作为值的函数
+函数名本身就是变量，所以函数也可以作为值来使用。也就是说，不仅可以像传递参数一样把一个函数传递给另一个函数，而且可以将一个函数作为另一个函数的结果返回。来看一看[示例](./5.5/FunctionAsAnArgumentExample01.html)
+
+[函数返回嵌套函数](./5.5/FunctionReturningFunctionExample01.html)
+
+### 5.5.4 函数内部属性
+在函数内部，有两个特殊的对象： arguments 和 this。
+
+* [使用callee属性的阶乘函数](./5.5/FunctionTypeArgumentsExample01.html)
+* [函数内的this](./5.5/FunctionTypeThisExample01.html)
+* [caller属性](./5.5/FunctionTypeArgumentsCallerExample01.html)
