@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>slice()、substring()、substr()方法</title>
+</head>
+<body>
+<b>
+    String.prototype.substr() 没有严格被废弃，但尽量避免使用。使用substring()来代替
+</b>
+<b></b>
+<h3>参数为正</h3>
+<ul>
+    <li>slice()、substring()、substr()方法在接收一个参数时，作为开始的索引值（0为基数），截取直到结尾。</li>
+    <li>slice()和substring()，接收第二个参数时，作为结束的索引 <b>以该数字为索引的字符不包含在截取的字符串内</b> </li>
+    <li>substr()与前两者不同，第二个参数为需截取字符串的个数。</li>
+</ul>
+
+
+<h3>参数为负数</h3>
+<ul>
+    <li>
+        slice()和substr()第一个参数为负数，strLength（字符串长度）和beginIndex（第一个参数）相加，作为开始的索引值（0为基数），截取直到结尾。
+    </li>
+    <li>
+        slice()和substr()第二个参数为负数，strLength（字符串长度）和endIndex（第二个参数）相加，作为结束的索引值（不包括其本身）
+    </li>
+    <li>
+        substring()方法会把所有负值参数都转换为0
+    </li>
+</ul>
+<script>
+    let stringValue = 'hello world';
+    console.log(stringValue.slice(3)); //"lo world"
+    console.log(stringValue.substring(3)); //"lo world"
+    console.log(stringValue.substr(3)); //"lo world"
+    console.log(stringValue.slice(3, 7)); //"lo w"
+    console.log(stringValue.substring(3, 7)); //"lo w"
+    console.log(stringValue.substr(3, 7)); //"lo worl" 与前两者不同，第二个参数为截取字符串的数量
+
+    console.log(stringValue.slice(-3)); //"rld" strLength-3所以起始值为8
+    console.log(stringValue.substring(-3)); //"hello world"
+    console.log(stringValue.substr(-3)); //"rld" strLength-3所以起始值为8
+    console.log(stringValue.slice(3, -4));// lo w
+    console.log(stringValue.substring(3, -4));//hel 将负数转换为0，实际上是stringValue.substring(3, 0)
+    console.log(stringValue.substr(3, -4));// lo w 实际上是stringValue.substr(3, 11-4)
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>charAt()和charCodeAt()方法</title>
+</head>
+<body>
+<p>
+    String.charAt()方法，传入数字参数返回给定位置的那个字符
+</p>
+<p>
+    String.charCodeAt()方法，传入数字参数返回给定位置的那个字符编码
+</p>
+<script>
+    let stringValue = 'hello world';
+    console.log(stringValue.charAt(1));
+
+    let stringValue1 = 'hello world';
+    console.log(stringValue1.charCodeAt(1));
+
+    console.log(stringValue[0]);//h 利用数字索引访问字符串中某个字符
+</script>
+</body>
+</html>

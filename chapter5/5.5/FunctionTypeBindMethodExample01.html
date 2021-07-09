@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数bind()</title>
+</head>
+<body>
+<p>
+    bind() 函数会创建一个新的绑定函数。这个新函数的 this 被指定为 bind() 的第一个参数传入，其他参数逐个传入。
+</p>
+<p>
+    其语法同call()方法一样，不同的是bind()方法不会立即执行函数。例如：
+</p>
+
+<script>
+    window.color = 'red';
+    let o = {color:'blue'};
+
+    function sayColor(){
+        console.log(this.color);
+    }
+    let objectSayColor = sayColor.bind(o);
+    objectSayColor();
+</script>
+</body>
+</html>

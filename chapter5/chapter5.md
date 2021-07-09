@@ -84,8 +84,8 @@ unshift()和 pop()方法模拟队列方法：[示例](./5.2/ArrayTypeExample12.h
 **注意：IE7以及更早的版本，unshift()方法会返回undefined并非数组的长度。**
 
 ### 5.2.5 重排序方法
-* reverse()反转数组：[示例](./5.2/ArrayTypeExample13.html)
-* sort()排序方法：[数字排序](./5.2/ArrayTypeExample14.html)，[自定义比对方法](./5.2/ArrayTypeExample15.html)
+* [reverse()：](./5.2/ArrayTypeExample13.html) 反转数组
+* [sort()排序方法](./5.2/ArrayTypeExample14.html)，[sort()自定义排序方法](./5.2/ArrayTypeExample15.html)
 
 ### 5.2.6 操作方法
 * concat()合并数组：[示例](./5.2/ArrayTypeConcatExample01.html)
@@ -245,4 +245,52 @@ RegExp 构造函数包含一些属性，下表列出了 RegExp 构造函数的�
 
 * [使用callee属性的阶乘函数](./5.5/FunctionTypeArgumentsExample01.html)
 * [函数内的this](./5.5/FunctionTypeThisExample01.html)
-* [caller属性](./5.5/FunctionTypeArgumentsCallerExample01.html)
+* [caller属性](./5.5/FunctionTypeArgumentsCallerExample01.html)，[caller属性2](./5.5/FunctionTypeArgumentsCallerExample02.html)
+
+### 5.5.5 函数属性和方法
+函数是一个对象，那么函数也有属性和方法：
+
+* [length：](./5.5/FunctionTypeLengthPropertyExample01.html)函数的参数个数长度
+* [apply()：](./5.5/FunctionTypeApplyMethodExample01.html)执行函数并传入this和参数数组，改变函数作用域
+* [call()：](./5.5/FunctionTypeCallMethodExample01.html)执行函数并传入this和参数列表，改变数作用域
+* [bind()：](./5.5/FunctionTypeBindMethodExample01.html)绑定函数不执行，传入this和逐个参数，改变函数作用域
+
+## 5.6 基本包装类型
+为了便于操作基本类型值， ECMAScript 还提供了 3 个特殊的引用类型： Boolean、 Number 和
+String。
+
+### 5.6.1 Boolean类型
+Boolean 对象是与布尔值对应的引用类型。
+```javascript
+var booleanObject = new Boolean(true);
+```
+[创建Boolean对象](./5.6/BooleanTypeExample01.html)
+
+### 5.6.2 Number类型
+Number 是与数字值对应的引用类型。
+```javascript
+var numberObject = new Number(10);
+```
+
+[示例](./5.6/NumberTypeExample01.html)
+* Number.toFixed()：添加几位小数点
+* Number.toString()：转换进制
+
+### 5.6.3 String类型
+String 类型是字符串的对象包装类型。
+```javascript
+var booleanObject = new String('hello world');
+```
+
+* [charAt()：](./5.6/charAtMethodExample01.html)单字符字符串的形式返回给定位置的那个字符
+* [charCodeAt()：](./5.6/charAtMethodExample01.html)单字符字符串的形式返回给定位置的那个字符编码
+* [slice()、 substr()和 substring()：](./5.6/StringTypeManipulationMethodsExample01.html)这三个都是截取字符串的方法，返回一个新字符串，原字符串不变。
+* [indexOf()和 lastIndexOf()：](./5.6/StringTypeLocationMethodsExample02.html)方法传入给定的子字符串，然后返子字符串的位置（返回的是索引值）
+* [trim()：](./5.6/StringTypeTrimMethodExample01.html)创建一个字符串的副本，删除前置及后缀的所有空格，然后返回结果。
+* [toLowerCase()、 toLocaleLowerCase()、 toUpperCase()和 toLocaleUpperCase()：](./5.6/StringTypeCaseMethodExample01.html)
+* [search()：](./5.6/StringTypePatternMatchingExample01.html) String对象调用方法匹配正则表达式并检索字符串，返回一个索引值。
+* [match()：](./5.6/StringTypePatternMatchingExample01.html) String对象调用方法匹配正则表达式并检索字符串，返回一个数组。数组中有以下属性：
+    - groups: 一个捕获组数组 或 undefined（如果没有定义命名捕获组）。
+    - index: 匹配的结果的开始位置
+    - input: 搜索的字符串
+* [replace()：](./5.6/StringTypePatternMatchingExample01.html) 方法返回一个由替换值（replacement）替换部分或所有的模式（pattern）匹配项后的新字符串。模式可以是一个字符串或者一个正则表达式，替换值可以是一个字符串或者一个每次匹配都要调用的回调函数。如果pattern是字符串，则仅替换第一个匹配项。

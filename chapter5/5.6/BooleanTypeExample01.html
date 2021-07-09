@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Boolean对象</title>
+</head>
+<body>
+<p>
+    Boolean对象和基本类型的布尔值容易混淆
+</p>
+<p>
+    扩展：Boolean对象实际开发者中应用在什么地方？
+</p>
+
+<script>
+    let falseObject = new Boolean(false);// falseObject的值是false，但实际上它是一个Boolean对象
+    let result = falseObject && true;//所以falseObject转换成布尔值时是为true，result结果就是true
+    console.log(result);
+
+    let falseValue = false;
+    result = falseValue && true;
+    console.log(result);
+
+    console.log('--------------------------------');
+    console.log(typeof falseObject); //object
+    console.log(typeof falseValue); //boolean
+    console.log(falseObject instanceof Boolean); //true
+    console.log(falseValue instanceof Boolean); //false
+</script>
+</body>
+</html>

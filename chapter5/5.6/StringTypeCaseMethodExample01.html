@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>toLowerCase()、 toLocaleLowerCase()、 toUpperCase()和 toLocaleUpperCase()</title>
+</head>
+<body>
+<p>
+    toLowerCase()和 toUpperCase()是两个经典的方法，借鉴自 java.lang.String 中的同名
+    方法。而 toLocaleLowerCase()和 toLocaleUpperCase()方法则是针对特定地区的实现。
+</p>
+<script>
+    let stringValue = 'hello world';
+    console.log(stringValue.toLocaleUpperCase());
+    console.log(stringValue.toUpperCase());
+    console.log(stringValue.toLocaleLowerCase());
+    console.log(stringValue.toLowerCase());
+</script>
+</body>
+</html>

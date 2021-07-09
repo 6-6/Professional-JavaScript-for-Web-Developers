@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>操作字符串相关 localeCompare()、</title>
+</head>
+<body>
+<h3>localeCompare()</h3>
+<ul>
+    <li>如果字符串在字母表中应该排在字符串参数之前，则返回一个负数</li>
+    <li>如果字符串等于字符串参数，则返回 0；</li>
+    <li>如果字符串在字母表中应该排在字符串参数之后，则返回一个正数</li>
+</ul>
+
+
+
+<script>
+    (function(){
+        let stringValue = 'yellow';
+        console.log(stringValue.localeCompare('brick'));
+        console.log(stringValue.localeCompare('yellow'));
+        console.log(stringValue.localeCompare('zoo'));
+    })();
+</script>
+</body>
+</html>

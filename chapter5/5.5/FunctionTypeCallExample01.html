@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>使用函数call()和apply()，的扩展作用域</title>
+</head>
+<body>
+<p>
+</p>
+
+<script>
+    window.color = 'red';
+    let o = {color: 'blue'};
+
+    function sayColor(){
+        console.log(this.color);
+    }
+
+    /*
+    * 普通调用函数，this指向最后调用的作用域，即window
+    * 输出的值为'red'
+    * */
+    sayColor();
+
+    sayColor.call(this);// 传入this，即全局环境下的window，同普通调用函数一致
+    sayColor.call(window);// 也可以直接将window对象传入
+    sayColor.call(o);// 将对象o传入，那么this指向改变为o，因此this.color的值为'blue'
+</script>
+</body>
+</html>
