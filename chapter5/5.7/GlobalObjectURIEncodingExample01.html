@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>编码方法 encodeURIComponent()和encodeURI()</title>
+</head>
+<body>
+<p>
+    有效的 URI 中不能包含某些字符，例如空格。它们用特殊的 UTF-8 编码替换所有无效的字符，从而让浏览器能够接受和理解。
+</p>
+
+<h3>encodeURIComponent()和encodeURI()区别？</h3>
+<p>
+    encodeURIComponent()会对任何非标准字符进行编码（通常使用的比较多）
+</p>
+<p>
+    encodeURI()不会对本身属于 URI 的特殊字符进行编码（如下例子中，只对空格进行了编码）
+</p>
+<script>
+    let uri = 'http://www.wrox.com/illegal value.htm#start';
+
+    //"http://www.wrox.com/illegal%20value.htm#start"
+    console.log(encodeURI(uri));
+
+    //"http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.htm%23start"
+    console.log(encodeURIComponent(uri));
+</script>
+</body>
+</html>

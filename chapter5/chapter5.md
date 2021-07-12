@@ -294,3 +294,104 @@ var booleanObject = new String('hello world');
     - index: 匹配的结果的开始位置
     - input: 搜索的字符串
 * [replace()：](./5.6/StringTypePatternMatchingExample01.html) 方法返回一个由替换值（replacement）替换部分或所有的模式（pattern）匹配项后的新字符串。模式可以是一个字符串或者一个正则表达式，替换值可以是一个字符串或者一个每次匹配都要调用的回调函数。如果pattern是字符串，则仅替换第一个匹配项。
+* [localeCompare()：](./5.6/StringTypeLocaleCompareExample01.html)返回一个数字来指示一个参考字符串是否在排序顺序前面或之后或与给定字符串相同。
+
+## 5.7 单体内置对象
+ECMA-262 对内置对象的定义是：“由 ECMAScript 实现提供的、不依赖于宿主环境（常见的宿主环境：浏览器和nodejs）的对象，这些对象在 ECMAScript 程序执行之前就已经存在了。” ECMA-262 还定义了两个单体内置对象： Global 和 Math。
+
+### 5.7.1 Global对象
+Global（全局）对象可以说是 ECMAScript 中最特别的一个对象了，因为不管你从什么角度上看，
+这个对象都是不存在的。不属于任何其他对象的属性和方法，最终都是它的属性和方法。
+
+它更像是一个抽象概念，而要指明它是什么，取决于程序在什么环境中运行。Global相对于浏览器这个环境而言就是window对象。
+
+1. URI 编码方法  
+Global 对象的 encodeURI()和 encodeURIComponent()方法可以对 URI（Uniform Resource Identifiers，通用资源标识符）进行编码，以便发送给浏览器。
+
+* [encodeURIComponent()和encodeURI()：](./5.7/GlobalObjectURIEncodingExample01.html)这两个 URI 编码方法就可以对 URI 进行编码，它们用特殊的 UTF-8 编码替换所有无效的字符，
+从而让浏览器能够接受和理解。
+
+* [decodeURIComponent()和decodeURI()：](./5.7/GlobalObjectURIDecodingExample01.html)这两个 URI 编码方法就可以对 URI 进行编码，它们用特殊的 UTF-8 编码替换所有无效的字符，从而让浏览器能够接受和理解。
+
+2. eval()方法  
+eval()方法非常强大。其就像是一个完整的ECMAScript 解析器，它只接受一个参数，即要执行的 ECMAScript （或 JavaScript）字符串。**使用必须谨慎，如果用心不良之人使用代码注入可以威胁站点的安全。**
+```javascript
+var msg = "hello world";
+eval("alert(msg)"); //"hello world"
+```
+
+3. Global 对象的属性  
+下表列出了 Global 对象的所有属性：
+
+| 属性 | 说明 |
+| ---- | ---- |
+| undefined | 特殊值undefined |
+| NaN | 特殊值NaN |
+| Infinity | 特殊值Infinity |
+| Object | 构造函数Object |
+| Array | 构造函数Array |
+| Function | 构造函数Function |
+| Boolean | 构造函数Boolean |
+| String | 构造函数String |
+| Number | 构造函数Number |
+| Date | 构造函数Date |
+| RegExp | 构造函数RegExp |
+| Error | 构造函数Error |
+| EvalError | 构造函数EvalError |
+| RangeError | 构造函数RangeError |
+| ReferenceError | 构造函数ReferenceError |
+| SyntaxError | 构造函数SyntaxError |
+| TypeError | 构造函数TypeError |
+| URIError | 构造函数URIError |
+
+4. window 对象  
+是相对于Web浏览器而言的，它并不是ECMAScript规定的内置对象，它是浏览器的Web API,是存在于浏览器之中的，也就是离开浏览器这个宿主环境的话就不存在此对象了。
+
+结论：JavaScript中的window对象扮演ECMAScript中的Global对象，所以Global对象包含着window对象
+
+### 5.7.2 Math对象
+ECMAScript 还为保存数学公式和信息提供了一个公共位置，即 Math 对象。与我们在JavaScript 直接编写的计算功能相比， Math 对象提供的计算功能执行起来要快得多。 Math 对象中还提供了辅助完成这些计算的属性和方法。
+
+1. Math 对象的属性  
+
+| 属性 | 说明 |
+| ---- | ---- |
+| Math.E | 自然对数的底数，即常量e的值 |
+| Math.LN10 | 10的自然对数 |
+| Math.LN2 | 2的自然对数 |
+| Math.LOG2E | 以2为底e的对数 |
+| Math.LOG10E | 以10为底e的对数 |
+| Math.PI | π的值 |
+| Math.SQRT1_2 | 1/2的平方根（即2的平方根的倒数）|
+
+2. min()和 max()方法  
+min()和 max()方法用于确定一组数值中的最小值和最大值。这两个方法都可以接收任意多个数值参数。
+
+[min()和 max()方法示例](./5.7/MathObjectMinMaxExample01.html)
+
+3. 舍入方法  
+* Math.ceil()：执行向上舍入，即它总是将数值向上舍入为最接近的整数；
+* Math.floor()执行向下舍入，即它总是将数值向下舍入为最接近的整数；
+* Math.round()执行标准舍入，即它总是将数值四舍五入为最接近的整数（这也是我们在数学课
+上学到的舍入规则）。
+
+4. random()方法  
+Math.random()方法返回大于等于 0 小于 1 的一个随机数。
+
+5. 其他方法
+
+
+| 方法 | 说明 |
+| ---- | ---- |
+| Math.abs(num) | 返回num 的绝对值 |
+| Math.exp(num) | 返回Math.E 的num 次幂 |
+| Math.log(num) | 返回num 的自然对数 |
+| Math.pow(num,power) | 返回num 的power 次幂 |
+| Math.sqrt(num) | 返回num 的平方根 |
+| Math.acos(x) | 返回x 的反余弦值 |
+| Math.asin(x) | 返回x 的反正弦值 |
+| Math.atan(x) | 返回x 的反正切值 |
+| Math.atan2(y,x) | 返回y/x 的反正切值 |
+| Math.cos(x) | 返回x 的余弦值 |
+| Math.sin(x) | 返回x 的正弦值 |
+| Math.tan(x) | 返回x 的正切值 |

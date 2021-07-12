@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>min()和max()方法</title>
+</head>
+<body>
+<p>
+    参数为一组数值。max()返回最大值，min()返回最小值
+</p>
+<p>
+    语法：Math.max(value1[,value2, ...])
+</p>
+<p>
+    语法：Math.min(value1[,value2, ...])
+</p>
+<script>
+    let max = Math.max(3, 54, 32, 16);
+    // 返回了一个最大的值
+    console.log(max);//54
+
+    let min = Math.min(3, 54, 32, 16);
+    // 返回了一个最小的值
+    console.log(min);//3
+
+    //如果是数组呢？如何使用Math.max()
+    let values = [1,2,3,4,5,6,7,8];
+    let max2 = Math.max.apply(Math, values);//apply()传入数组参数values，Math对象作为this的指向，扩展作用域
+    console.log(max2);
+
+    let max3 = Math.max(...values);//展开语法解构数组
+    console.log(max3);
+</script>
+</body>
+</html>

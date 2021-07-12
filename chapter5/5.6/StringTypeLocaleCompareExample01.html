@@ -5,25 +5,44 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>操作字符串相关 localeCompare()、</title>
+    <title>操作字符串相关 localeCompare()</title>
 </head>
 <body>
 <h3>localeCompare()</h3>
+<p>比较两个字符串，并返回下列值中的一个：</p>
 <ul>
-    <li>如果字符串在字母表中应该排在字符串参数之前，则返回一个负数</li>
+    <li>如果字符串在字母表中排在字符串参数之前，则返回一个负数</li>
     <li>如果字符串等于字符串参数，则返回 0；</li>
-    <li>如果字符串在字母表中应该排在字符串参数之后，则返回一个正数</li>
+    <li>如果字符串在字母表中排在字符串参数之后，则返回一个正数</li>
 </ul>
 
-
+<b>扩展：此方法是否可和sort()方法配合实现排序？</b>
 
 <script>
     (function(){
-        let stringValue = 'yellow';
+        let stringValue = 'a';
         console.log(stringValue.localeCompare('brick'));
         console.log(stringValue.localeCompare('yellow'));
         console.log(stringValue.localeCompare('zoo'));
+
+        function determineOrder(value){
+            let result = stringValue.localeCompare(value);
+            if(result < 0){
+                console.log('The string "yellow" comes before the string "'+value+'".');
+            }
+            else if(result > 0){
+                console.log('The string "yellow" comes after the string "'+ value +'".');
+            }
+            else{
+                console.log('The string "yellow" is equal to the string "'+ value +'".');
+            }
+        }
+
+        determineOrder('brick');
+        determineOrder('yellow');
+        determineOrder('zoo');
     })();
+
 </script>
 </body>
 </html>

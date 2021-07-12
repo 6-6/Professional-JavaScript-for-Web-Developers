@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>解码方法 decodeURIComponent()和decodeURI()</title>
+</head>
+<body>
+<p>
+    URI 方法 encodeURI()、 encodeURIComponent()、 decodeURI()和 decodeURIComponent()
+    用于替代已经被 ECMA-262第3版废弃的 escape()和 unescape()方法。注意不再使用escape()
+    和 unescape()方法。
+</p>
+
+<script>
+    let uri = 'http%3A%2F%2Fwww.wrox.com%2Fillegal%20value.htm%23start';
+
+    //http%3A%2F%2Fwww.wrox.com%2Fillegal value.htm%23start
+    console.log(decodeURI(uri));
+
+    //http://www.wrox.com/illegal value.htm#start
+    console.log(decodeURIComponent(uri));
+</script>
+</body>
+</html>
