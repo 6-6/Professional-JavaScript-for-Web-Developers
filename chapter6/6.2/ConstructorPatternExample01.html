@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>构造函数模式</title>
+</head>
+<body>
+
+<p>
+    从本例和<a href="./FactoryPatternExample01.html">函数封装对象</a>的例子比较，有几点不同的地方
+</p>
+
+<ul>
+    <li>没有显式创建对象</li>
+    <li>直接将属性和方法赋给了this对象</li>
+    <li>没有return语句，构造函数直接返回创建的对象</li>
+</ul>
+
+<b>注意：构造函数的方法名首字母应用大写，用于区分普通的方法名</b>
+<script>
+    function Person(name, age, job){
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        this.sayName = function(){
+            console.log(this.name);
+        };
+    }
+
+    let person1 = new Person('Nicholas', 29, 'Software Engineer');
+    let person2 = new Person('Greg', 27, 'Doctor');
+
+    console.log(person1.sayName == person2.sayName);
+    console.log(person2);
+</script>
+</body>
+</html>

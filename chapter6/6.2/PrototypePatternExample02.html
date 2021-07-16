@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>重写原型中的属性值</title>
+</head>
+<body>
+<p>
+
+</p>
+<script>
+    function Person(){}
+
+    Person.prototype.name = 'Nicholas';
+    Person.prototype.age = 29;
+    Person.prototype.job = 'Software Engineer';
+    Person.prototype.sayName = function(){
+        console.log(this.name);
+    };
+
+    let person1 = new Person();
+    let person2 = new Person();
+
+    person1.name = 'Greg';
+    console.log(person1.name);//'Greg'
+    console.log(person2.name);//'Nicholas'
+</script>
+</body>
+</html>

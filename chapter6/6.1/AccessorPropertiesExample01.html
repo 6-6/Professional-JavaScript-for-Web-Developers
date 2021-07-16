@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>defineProperty的getter函数和setter函数</title>
+</head>
+<body>
+<p>
+    * [[Get]]：在读取属性时调用的函数。默认值为 undefined。
+</p>
+<p>
+    * [[Set]]：在写入属性时调用的函数。默认值为 undefined。
+</p>
+
+<b>扩展：数据属性和访问性属性的区别？</b>
+<p>从书中的释义，“访问器属性不包含数据值”。通过例子<a href="./DataPropertiesExample01.html">Object.defineProperty()方法-writable属性</a>
+    发现，person.name是实际存在的并赋值的，而此页面例子中book.year是我们自定义的一个访问器属性，读取的时候会调用getter函数，并未直接赋值但却可以获取到book.year的值。</p>
+<script>
+    let book = {
+        _year: 2004,
+        edition: 1
+    };
+
+    /*
+    * 访问器属性 year 则包含一个getter 函数和一个 setter 函数。
+    * 设置一个属性的值会导致其他属性发生变化
+    * */
+    Object.defineProperty(book, 'year', {
+       get: function(){
+           return this._year;
+       },
+        set: function(newValue){
+           if(newValue > 2004){
+               this._year = newValue;
+               this.edition += newValue - 2004;
+           }
+        }
+    });
+
+    book.year = 2005;//写入属性时调用set方法，book._year == 2005，
+    console.log(book.year);//读取属性时调用get方法，return this._year，即2005
+    console.log(book.edition);
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object.defineProperties() 方法</title>
+</head>
+<body>
+<p>
+    Object.defineProperties() 方法直接在一个对象上定义新的属性或修改现有属性，并返回该对象。
+</p>
+<p>
+    语法：Object.defineProperties(obj, props)
+</p>
+
+<ul>
+    <li>obj 在其上定义或修改属性的对象。</li>
+    <li>
+        props 要定义其可枚举属性或修改的属性描述符的对象。对象中存在的属性描述符主要有两种：数据描述符和访问器描述符
+        <ul>
+            <li>configurable</li>
+            <li>enumerable</li>
+            <li>value</li>
+            <li>writable</li>
+            <li>get</li>
+            <li>set</li>
+        </ul>
+    </li>
+</ul>
+<script>
+    let book = {};
+
+    Object.defineProperties(book, {
+        _year: {
+            value: 2004
+        },
+        edition: {
+            value: 1
+        },
+        year: {
+            get: function(){
+                return this._year;
+            },
+            set: function(newValue){
+                if(newValue > 2004){
+                    this._year = newValue;
+                    this.edition += newValue - 2004;
+                }
+            }
+        }
+    });
+
+    console.log('读取访问器属性year的值：',book.year);//2004
+    book.year = 2005;
+    console.log('写入访问器属性过后edition：',book.edition);//2004
+    console.log('写入访问器属性过后year：',book.year);//1
+
+    /*
+    * 书本当中的示例，并未达到我们想要的效果，什么情况？
+    * */
+
+    /*文档：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties#parameters*/
+
+    /*
+    * 通过以上文档，可以看到writable属性的值默认为false，所以我们要先将数据属性改变其writable: true
+    *  _year: {
+    *    writable: true,
+    *    value: 2004
+    *  }
+    * */
+</script>
+</body>
+</html>

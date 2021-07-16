@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>__defineSetter__()和__defineGetter__()方法</title>
+</head>
+<body>
+<p>
+    __defineSetter__ 方法可以将一个函数绑定在当前对象的指定属性上，当那个属性被赋值时，你所绑定的函数就会被调用。
+</p>
+<p>
+    __defineGetter__ 方法可以将一个函数绑定在当前对象的指定属性上，当那个属性的值被读取时，你所绑定的函数就会被调用。
+</p>
+<b>
+    该特性已经从 Web 标准中删除，虽然一些浏览器目前仍然支持它，但也许会在未来的某个时间停止支持，请尽量不要使用该特性。
+</b>
+<script>
+    let book = {
+        _year: 2004,
+        edition: 1
+    }
+
+    //定义访问器的旧有方法
+    book.__defineGetter__('year', function(){
+        return this._year;
+    });
+
+    book.__defineSetter__('year', function(newValue){
+        if(newValue > 2004){
+            this._year = newValue;
+            this.edition += newValue - 2004;
+        }
+    });
+
+    book.year = 2005;
+    console.log(book.edition);
+</script>
+</body>
+</html>

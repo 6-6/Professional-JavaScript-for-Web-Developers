@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object.defineProperty()方法-writable属性</title>
+</head>
+<body>
+<p>
+    Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+</p>
+<b>备注：应当直接在 Object 构造器对象上调用此方法，而不是在任意一个 Object 类型的实例上调用。</b>
+<p>
+    语法：Object.defineProperty(obj, prop, descriptor)
+</p>
+<ul>
+    <li>obj 要定义属性的对象。</li>
+    <li>prop 要定义或修改的属性的名称或 Symbol 。</li>
+    <li>descriptor 要定义或修改的属性描述符。</li>
+</ul>
+<p>返回值：被传递给函数的对象。</p>
+
+<a href="./DataPropertiesExample02.html">Object.defineProperty()方法-configurable属性</a>
+<script>
+    let person = {};
+    Object.defineProperty(person, 'name', {
+        writable: false,//writable 值为 true 时，才能被赋值运算符改变。
+        value: 'Nicholas'
+    });
+
+    console.log(person.name);
+    person.name = 'Greg';
+    console.log(person.name);
+</script>
+</body>
+</html>

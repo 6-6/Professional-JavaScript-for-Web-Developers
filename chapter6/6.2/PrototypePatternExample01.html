@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原型模式</title>
+</head>
+<body>
+<p>
+    通过原型创建的属性和方法是由所有实例共享的
+</p>
+<script>
+    function Person(){}
+
+    Person.prototype.name = 'Nicholas';
+    Person.prototype.age = 29;
+    Person.prototype.job = 'Software Engineer';
+    Person.prototype.sayName = function(){
+        console.log(this.name);
+    };
+
+    let person1 = new Person();
+    person1.sayName();
+
+    let person2 = new Person();
+    person2.sayName();
+
+    console.log(person1.sayName == person2.sayName);
+</script>
+</body>
+</html>

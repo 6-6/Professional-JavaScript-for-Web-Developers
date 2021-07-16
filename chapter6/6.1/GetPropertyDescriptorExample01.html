@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object.getOwnPropertyDescriptor()方法</title>
+</head>
+<body>
+<p>
+    Object.getOwnPropertyDescriptor() 方法返回指定对象上一个自有属性对应的属性描述符。（自有属性指的是直接赋予该对象的属性，不需要从原型链上进行查找的属性）
+</p>
+<script>
+    let book = {};
+
+    Object.defineProperties(book, {
+        _year: {
+            value: 2004
+        },
+        edition: {
+            value: 1
+        },
+        year: {
+            get: function(){
+                return this._year;
+            },
+            set: function(newValue){
+                if(newValue > 2004){
+                    this._year = newValue;
+                    this.edition += newValue - 2004;
+                }
+            }
+        }
+    });
+
+    // let descriptor = Object.getOwnPropertyDescriptor(book, '_year');
+    // console.log(descriptor.value);//2004
+    // console.log(descriptor.configurable);//configurable默认是false
+    // console.log(typeof descriptor.get);//数据属性不存在get方法，结果为 undefined
+
+    let descriptor = Object.getOwnPropertyDescriptor(book, 'year');
+    console.log(descriptor.value);//访问器属性当中并没有value值，所以为undefined
+    console.log(descriptor.enumerable);//当前属性是否可以枚举，默认是false
+    console.log(typeof descriptor.get);//为函数对象 function
+</script>
+</body>
+</html>

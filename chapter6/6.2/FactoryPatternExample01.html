@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数封装对象</title>
+</head>
+<body>
+
+<script>
+    function createPerson(name, age, job){
+        let o = new Object();
+        o.name = name;
+        o.age = age;
+        o.job = job;
+        o.sayName = function(){
+            console.log(this.name);
+        };
+        return o;
+    }
+
+    let person1 = createPerson('Nicholas', 29, 'Software Engineer');
+    let person2 = createPerson('Greg', 27, 'Doctor');
+
+    person1.sayName();// person1返回的值是o，this指向最后调用的作用域，因此this指向o，this.name的值为Nicholas
+    console.log(person1);//返回对象o
+    console.log(person2);//返回对象o
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object.defineProperty()方法-configurable属性不可重定义</title>
+</head>
+<body>
+<script>
+    let person = {};
+    Object.defineProperty(person, 'name', {
+        configurable: false,//configurable 键值为 true 时，该属性才能从对应的对象上被删除或修改。
+        value: 'Nicholas'
+    });
+
+    /*
+    抛出错误
+    Uncaught TypeError: Cannot redefine property: name
+    一旦把属性configurable定义为不可配置的，就不能再把它变回可配置了。
+    */
+    Object.defineProperty(person, 'name', {
+        configurable: true,
+        value: 'Nicholas'
+    });
+</script>
+</body>
+</html>
