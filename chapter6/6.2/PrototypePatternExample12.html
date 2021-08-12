@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原型对象存在的问题--共享属性</title>
+</head>
+<body>
+
+<script>
+  function Person(){}
+
+  Person.prototype = {
+    constructor: Person,
+    name: 'Nicholas',
+    age: 29,
+    job: 'Software Engineer',
+    friends: ['Shelby', 'Count'],
+    sayName: function(){
+      alert(this.name);
+    }
+  }
+
+  let person1 = new Person();
+  let person2 = new Person();
+console.log(person1.sayName());
+
+  person1.friends.push('Van');
+
+  // 两个实例共用了一个构造函数，那么friends的值也是共享的，修改
+  console.log(person1.friends); // ['Shelby', 'Count', 'Van']
+  console.log(person2.friends); // ['Shelby', 'Count', 'Van']
+  console.log(person1.friends == person2.friends); // true
+  
+  
+  
+</script>
+</body>
+</html>

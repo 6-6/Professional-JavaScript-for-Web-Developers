@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原型语法-字面量对象方式添加属性</title>
+</head>
+<body>
+
+<p>
+  1.Person.prototype.constructor == Person // **准则1：原型对象（即Person.prototype）的constructor指向其构造函数本身**
+</p>
+<p>
+  2.friend.__proto__ == Person.prototype // **准则2：实例（即friend）的__proto__和其原型对象指向同一个地方**
+</p>
+
+<b>参考：</b>
+<a href="https://juejin.cn/post/6844903989088092174">轻松理解JS 原型原型链</a>
+
+<script>
+  function Person(){}
+  
+  //Person.prototype.name = 'Nicholas' /*修改为点符号创建对象属性，其constructor的值指向构造函数本身，就是Person*/
+  Person.prototype = {
+    name: 'Nicholas',
+    age: 29,
+    job: 'Software Engineer',
+    sayName: function(){
+      console.log(this.name);
+    }
+  }
+
+  let friend = new Person();
+  // instanceof 运算符用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上。
+  console.log(friend instanceof Object);// true
+  console.log(friend instanceof Person);// true
+
+  /*
+    constructor属性是记录实例由哪个构造函数创建的，
+    因此friend实例是由Person构造函数创建的，可是为什么以下示例和我们预想的不一样？
+    仔细观察Person构造函数的原型对象，我们是以对象字面量的方式创建，相当于重写了默认prototype对象，
+    因此constructor属性指向了Object构造函数。
+  */
+  console.log(friend.constructor == Person);// false
+  console.log(friend.constructor == Object);// true
+
+  /*
+    那么如果我们希望获取到正确的constructor，可以重写constructor的值，使其指向自身的构造函数才是正确的。
+  */
+  Person.prototype.constructor = Person 
+
+  console.log('重写constructor',friend.constructor == Person);
+  
+</script>
+</body>
+</html>

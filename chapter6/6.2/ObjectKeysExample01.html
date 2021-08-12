@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object.keys()方法</title>
+</head>
+<body>
+<p>
+  Object.keys()方法 接收一个对象作为参数，返回一个包含所有可枚举属性的字符串数组。
+</p>
+<script>
+  function Person(){}
+
+  Person.prototype.name = 'Nicholas';
+  Person.prototype.age = 29;
+  Person.prototype.job = 'Software Engineer';
+  Person.prototype.sayName = function(){
+    console.log(this.name);
+  };
+
+  let keys = Object.keys(Person.prototype);
+  console.log(keys);
+  
+  let p1 = new Person();
+  p1.name = 'Rob';
+  p1.age = 31;
+  let p1keys = Object.keys(p1);
+  console.log(p1keys);
+  
+</script>
+</body>
+</html>

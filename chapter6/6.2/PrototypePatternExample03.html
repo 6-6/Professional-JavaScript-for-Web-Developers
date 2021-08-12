@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
+    <title>同名属性是否会更改原型中的值</title>
 </head>
 <body>
 <p>
@@ -23,6 +23,17 @@
 
     let person1 = new Person();
     let person2 = new Person();
+
+    person1.name = 'Greg';// 重写实例person1原型上的属性name
+    console.log(person1.name);
+    console.log(person2.name);
+
+    delete person1.name;// 删除person1.name，那么原型链上的值是否会一起删掉呢？
+    console.log(person1.name);// 'Nicholas' 原型链的person1.name值还在
+    /*
+    * 这说明了为对象实例添加一个属性，这个属性只是屏蔽原型对象保存的同名属性，
+    * 并不会改动原型中的属性。当删掉person1.name，则恢复访问原型中的属性。
+    * */
 </script>
 </body>
 </html>

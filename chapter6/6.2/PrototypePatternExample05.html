@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>判断属性是否在原型链上的方法</title>
+</head>
+<body>
+<p>
+</p>
+<script>
+/**
+*判断属性是否在当前对象原型链上
+*@param object {String} 传入对象
+*@param name {String} 传入对象属性名称
+*@return {Boolean} true:该属性在原型链上;false:该属性不在原型链上
+*/
+function hasPrototypeProperty(object, name){
+  return !object.hasOwnProperty(name) && (name in object)
+}
+
+function Person(){}
+
+Person.prototype.name = 'Nicholas';
+Person.prototype.age = 29;
+Person.prototype.job = 'Software Engineer';
+Person.prototype.sayName = function(){
+    console.log(this.name);
+};
+
+let person = new Person();
+console.log(hasPrototypeProperty(person, "name")); //true
+person.name = 'James';
+
+console.log(hasPrototypeProperty(person, 'name')); //false 此时原型链上的属性被重写，所以只会读取到实例中的属性
+</script>
+</body>
+</html>

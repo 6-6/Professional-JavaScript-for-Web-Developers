@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>in操作符遍历对象</title>
+</head>
+<body>
+<p>
+</p>
+<script>
+  let o = {
+    toString: function(){
+      return 'My Object';
+    },
+    lable: '1232'
+  };
+
+  for(let prop in o){
+    if(prop == 'toString'){
+      console.log('Found toString'); //在 IE 中不会显示
+    }
+    else if(prop == 'lable'){
+      console.log('Found lable');
+    }
+  }
+</script>
+</body>
+</html>

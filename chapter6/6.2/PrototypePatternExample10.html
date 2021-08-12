@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>构造函数的实例</title>
+</head>
+<body>
+
+<script>
+  function Person(){}
+
+  let friend = new Person();
+  
+  Person.prototype = {
+    constructor: Person,
+    name: 'Nicholas',
+    age: 29,
+    job: 'Software Engineer',
+    sayName: function(){
+      alert(this.name);
+    }
+  };
+
+  
+  console.log(friend.sayName) 
+  
+  /* 
+    报错Uncaught TypeError: friend.sayName is not a function 
+    实例先赋值后，Person构造函数的prototype原型对象重写，使得Person.prototype指向新的堆内存，
+    切断了现有原型和之前对象实例的联系，因此通过实例调用sayName()就会报错
+  */
+
+  //console.log(Person.prototype.sayName());
+  //console.log(friend.constructor.prototype.sayName())
+</script>
+</body>
+</html>

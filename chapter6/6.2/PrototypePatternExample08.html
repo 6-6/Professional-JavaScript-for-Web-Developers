@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>[[Enumerable]]被自动设置为true</title>
+</head>
+<body>
+
+
+<script>
+  (function(){
+    function Person(){}
+  
+    Person.prototype = {
+      constructor: Person,
+      name: 'Nicholas',
+      age: 29,
+      job: 'Software Engineer',
+      sayName: function(){
+        console.log(this.name);
+      }
+    }
+
+    let descriptor = Object.getOwnPropertyDescriptor(Person.prototype, 'constructor');
+    /* 结果为true，默认情况constructor属性是不可枚举的。这是因为我们重设其属性值，[[Enumerable]]被自动设置为true */
+    console.log(descriptor.enumerable);
+  })();
+  
+  (function(){
+    function Person(){}
+  
+    Person.prototype = {
+      name: 'Nicholas',
+      age: 29,
+      job: 'Software Engineer',
+      sayName: function(){
+        console.log(this.name);
+      }
+    }
+    /*我们也可以通过Object.defineProperty()方法重设constructor的内部值[[enumerable]]和其自身属性值*/
+    Object.defineProperty(Person.prototype, 'constructor', {
+      enumerable: false,
+      value: Person
+    });
+
+    let descriptor = Object.getOwnPropertyDescriptor(Person.prototype, 'constructor');
+    console.log(descriptor.enumerable); // false 恢复其不可枚举的状态
+  })();
+</script>
+</body>
+</html>

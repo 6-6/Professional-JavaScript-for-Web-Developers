@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>in操作符判断属性存在原型或实例中</title>
+</head>
+<body>
+<p>
+    hasOwnProperty() 方法会返回一个布尔值，指示对象自身属性中是否具有指定的属性（无法判断原型中的属性）
+</p>
+<p>
+    如果指定的属性在指定的对象或其原型链中，则in 运算符返回true。
+</p>
+<script>
+    function Person(){}
+
+    Person.prototype.name = 'Nicholas';
+    Person.prototype.age = 29;
+    Person.prototype.job = 'Software Engineer';
+    Person.sayName = function(){
+        console.log(this.name);
+    };
+
+    let person1 = new Person();
+    let person2 = new Person();
+
+    console.log(person1.hasOwnProperty('name'));//false
+    console.log('name' in person1);//true
+
+    person1.name = 'Greg';//为对象实例person1.name 添加值
+    console.log(person1.name);// 'Greg'来自实例
+    console.log(person1.hasOwnProperty('name'));//true 此时实例person1.name有值
+
+    console.log(person2.name); //'Nicholas'来自原型
+    console.log(person2.hasOwnProperty(name));// false
+
+    delete person1.name;
+    console.log(person1.name);
+    console.log(person1.hasOwnProperty(name));
+</script>
+</body>
+</html>

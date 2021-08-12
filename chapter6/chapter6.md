@@ -25,6 +25,8 @@ ECMAScript 中有两种属性：数据属性和访问器属性：
 * [[Value]]：包含这个属性的数据值。读取属性值的时候，从这个位置读；写入属性值的时候，
 把新值保存在这个位置。这个特性的默认值为 undefined。
 
+**Object.defineProperty()** 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+
 [Object.defineProperty()方法-writable属性](./6.1/DataPropertiesExample01.html)
 
 [Object.defineProperty()方法-configurable属性](./6.1/DataPropertiesExample02.html)
@@ -43,12 +45,12 @@ true。
 * [[Get]]：在读取属性时调用的函数。默认值为 undefined。
 * [[Set]]：在写入属性时调用的函数。默认值为 undefined。
 
-[defineProperty的getter函数和setter函数](./6.1/AccessorPropertiesExample01.html)
+[defineProperty的getter函数和setter函数，扩展：数据属性和访问性属性的区别？](./6.1/AccessorPropertiesExample01.html)
 
 [非标准方法__defineSetter__()和__defineGetter__()](./6.1/AccessorPropertiesExample02.html)
 
 ### 6.1.2 定义多个属性
-Object.defineProperties() 方法直接在一个对象上定义新的属性或修改现有属性，并返回该对象。
+Object.defineProperties() 方法直接在一个对象上定义一个或多个新的属性或修改现有属性，并返回该对象。
 
 [Object.defineProperties() 方法](./6.1/MultiplePropertiesExample01.html)
 
@@ -83,3 +85,25 @@ Object 构造函数或对象字面量都可以用来创建单个对象，但这�
 只要创建了一个新函数，就会根据一组特定的规则为该函数创建一个prototype属性，这个属性指向函数的原型对象。Person.prototype 指向了原型对象，而 Person.prototype.constructor 又指回了 Person。
 
 **原型最初只包含 constructor 属性，而该属性也是共享的，因此可以通过对象实例访问。**
+
+
+
+2. 原型与 in 操作符  
+有两种方式使用 in 操作符：单独使用和在for-in 循环中使用。在单独使用时，in 操作符会在通过对象能够访问给定属性时返回 true，无论该属性存在于实例中还是原型中。
+
+* [同名属性是否会更改原型中的值](./6.2/PrototypePatternExample03.html)
+* [in 操作符](./6.2/PrototypePatternExample04.html)
+* [判断属性是否在原型链上的方法](./6.2/PrototypePatternExample05.html)
+* [in操作符遍历对象](./6.2/PrototypePatternExample06.html)
+* [Object.getOwnPropertyNames()方法](./6.2/ObjectPropertyNamesExample01.html)
+* [原型语法-字面量对象方式添加属性](./6.2/PrototypePatternExample07.html)
+* [[[Enumerable]]被自动设置为true](./6.2/PrototypePatternExample08.html)
+* [构造函数的实例](./6.2/PrototypePatternExample10.html)
+
+5. 原生对象的原型
+原生的引用类型都在其构造函数的原型上定义了方法。（如Array.prototype.sort()方法）也可以新增或修改原型上的方法。[自定义String构造函数的原型方法](./6.2/PrototypePatternExample11.html)
+
+### 6.2.4 组合使用构造函数模式和原型模式
+[组合使用构造函数模式和原型模式](./6.2/HybridPatternExample01.html)
+
+### 6.2.5 动态原型模式
