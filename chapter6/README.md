@@ -104,6 +104,104 @@ Object 构造函数或对象字面量都可以用来创建单个对象，但这�
 原生的引用类型都在其构造函数的原型上定义了方法。（如Array.prototype.sort()方法）也可以新增或修改原型上的方法。[自定义String构造函数的原型方法](./6.2/PrototypePatternExample11.html)
 
 ### 6.2.4 组合使用构造函数模式和原型模式
-[组合使用构造函数模式和原型模式](./6.2/HybridPatternExample01.html)
+[示例：组合使用构造函数模式和原型模式](./6.2/HybridPatternExample01.html)
 
 ### 6.2.5 动态原型模式
+[示例：动态添加原型](./6.2/DynamicPrototypeExample01.html)
+
+### 6.2.6 寄生构造函数模式
+返回的对象与构造函数或者与构造函数的原型属性之间没有关系；为此，不能依赖 instanceof 操作符来确定对象类型。由于存在上述问题，我们建议尽量不要使用这种模式。
+[示例：寄生构造函数模式-构造函数内部创建Object对象](./6.2/HybridFactoryPatternExample01.html)
+[示例：寄生构造函数模式-构造函数内部创建Array对象](./6.2/HybridFactoryPatternExample02.html)
+
+### 6.2.7 稳妥构造函数模式
+道格拉斯·克罗克福德（Douglas Crockford）发明了 JavaScript 中的稳妥对象（durable objects）这个概念。相比之前的寄生构造函数模式，主要两点不同：一是新创建对象的实例方法不引用 this；二是不使用 new 操作符调用构造函数。
+
+```javascript
+function Person(name, age, job){
+  //创建要返回的对象
+  var o = new Object();
+  //可以在这里定义私有变量和函数
+  //添加方法
+  o.sayName = function(){
+    alert(name);
+  };
+  //返回对象
+  return o;
+}
+
+var friend = Person("Nicholas", 29, "Software Engineer");
+friend.sayName(); //"Nicholas"
+```
+
+通过示例可以发现，使用sayName()方法才可以访问到name的值，保证了原始数据的安全性。
+
+## 6.3 继承
+许多 OO 语言都支持两种继承方式：**接口继承**只继承方法签名，而**实现继承**则继承实际的方法。ECMAScript 只支持实现继承，而且其实现继承主要是依靠原型链来实现的。
+
+### 6.3.1 原型链
+ECMAScript 中描述了原型链的概念，并将原型链作为实现继承的主要方法。其基本思想是利用原型让一个引用类型继承另一个引用类型的属性和方法。
+
+实现原型链有一种基本模式，代码如此链接：[实现原型链实例](./6.3/PrototypeChainingExample01.html)
+
+1. 默认的原型  
+所有函数的默认原型都是 Object 的实例，因此默认原型都会包含一个内部指针，指向 Object.prototype。这也正是所有自定义类型都会继承 toString()、valueOf()等默认方法的根本原因。如下图6-5
+
+![图 6-5](http://waimai.taros.xyz/?explorer/share/fileOut&shareID=7Qcgurrg&path=%7BshareItemLink%3A7Qcgurrg%7D%2F)
+
+2. 确定原型和实例的关系
+第一种方式：instanceof操作符确定实例是否存在该原型链上
+```javascript
+  console.log(instance instanceof Object); //true
+  console.log(instance instanceof SuperType); //true
+  console.log(instance instanceof SubType); //true
+```
+
+第二种方式：isPrototypeOf()方法传入实例，确定实例是否存在该原型链上
+```javascript
+  console.log(Object.prototype.isPrototypeOf(instance)); //true
+  console.log(SuperType.prototype.isPrototypeOf(instance)); //true
+  console.log(SubType.prototype.isPrototypeOf(instance)); //true
+```
+
+总结：由于原型链的关系，我们可以说 instance 是 Object、 SuperType 或 SubType 中任何一个类型的实例。
+
+3. 谨慎地定义方法
+[子类重写父类的原型方法](./6.3/PrototypeChainingExample02.html)
+[字面量重写子类原型对象对继承的影响](./6.3/PrototypeChainingExample03.html)
+```javascript
+function Person(){}
+let friend = new Person();
+
+Person.prototype.constructor == Person
+friend.__proto__ == Person.prototype
+```
+
+* 原型对象（即Person.prototype）的constructor指向其构造函数本身
+* 实例（即friend）的__proto__和其原型对象指向同一个地方
+
+
+摘自：[轻松理解JS 原型原型链](https://juejin.cn/post/6844903989088092174)
+
+4. 原型链的问题
+原型对象定义属性，所有实例都会共享。如果我们想要独立创建私有属性，那么应该在构造函数中创建属性，而不是原型对象上。
+[原型链的问题](./6.3/PrototypeChainingExample04.html)
+
+### 6.3.2 借用构造函数
+借用构造函数constructor stealing（也叫伪造对象或经典继承）。原理：在子类型构造函数内部通过call()或apply()调用超类型的的构造函数，并将作用域设置会this。每次在创建子类型构造函数的实例，实例就会拥有超类型的属性副本。[示例：借用构造函数](./6.3/ConstructorStealingExample01.html)
+
+1. 传递参数
+相对于原型链而言，借用构造函数有一个很大的优势，即可以在子类型构造函数中向超类型构造函
+数传递参数。看下面这个[示例：子类型构造函数给超类型构造函数传递参数](./6.3/ConstructorStealingExample02.html)
+
+2. 借用构造函数的问题
+方法都在构造函数中定义，因此在超类型的原型定义的方法，子类型是不可见的。
+
+### 6.3.3 组合继承
+组合继承（combination inheritance），有时候也叫做伪经典继承，指的是将原型链和借用构造函数的
+技术组合到一块，从而发挥二者之长的一种继承模式。
+[示例：原型链和借用构造函数的组合继承](./6.3/CombinationInheritanceExample01.html)
+
+### 6.3.4 原型式继承
+道格拉斯·克罗克福德在 2006 年写了一篇文章，题为 Prototypal Inheritance in JavaScript （JavaScript
+中的原型式继承）。[原型式继承](./6.3/PrototypalInheritanceExample01.html)

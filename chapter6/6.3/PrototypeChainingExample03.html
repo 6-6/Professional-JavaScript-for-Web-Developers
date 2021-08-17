@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>字面量重写子类原型对象对继承的影响</title>
+</head>
+<body>
+
+<script>
+  function SuperType(){
+    this.property = true;
+  }
+
+  SuperType.property.getSuperValue = function(){
+    return this.property;
+  }
+
+  function SubType(){
+    this.subproperty = false;    
+  }
+
+  //继承了SuperType
+  SubType.prototype = new SuperType();
+
+  //使用字面量添加新方法，会导致上一行代码无效
+  SubType.prototype = {
+    getSubValue: function(){
+      return this.subproperty;
+    },
+    someOtherMethod: function(){
+      return false;
+    }
+  }
+
+  let instance = new SubType();
+  /* 因为使用了字面量重写SubType.prototype对象，所以原先继承的getSuperValue()方法，原型链上就找不到了*/
+  console.log(instance.getSuperValue()); // Uncaught TypeError: Cannot set property 'getSuperValue' of undefined 
+  
+</script>
+</body>
+</html>

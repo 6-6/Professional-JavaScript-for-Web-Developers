@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原型链和借用构造函数的组合继承</title>
+</head>
+<body>
+
+<script>
+  function SuperType(name){
+    this.name = name;
+    this.colors = ['red', 'blue', 'green'];
+  }
+
+  //定义SuperType.prototype原型方法sayName
+  SuperType.prototype.sayName = function(){
+    alert(this.name);
+  }
+
+  function SubType(name, age){
+    // 继承构造函数SuperType所有属性
+    SuperType.call(this, name);
+    this.age = age;
+  }
+
+  //继承SuperType构造函数原型对象上的方法
+  SubType.prototype = new SuperType();
+  //SubType.prototype原型被重写，construtor随之变化，应主动修正
+  SubType.prototype.constructor = SubType;
+  //定义SubType.prototype原型方法sayAge
+  SubType.prototype.sayAge = function(){
+    alert(this.age);
+  }
+
+  //可以通过子类型向超类型传递值
+  let instance1 = new SubType('Nicholas', 29);
+  //改变构造函数中的colors属性，再次创建实例instance2构造函数重置，不影响其的colors属性
+  instance1.colors.push('black');
+  console.log(instance1.colors);//['red', 'blue', 'green', 'black']
+  //子类型继承父类型的方法
+  instance1.sayName();//'Nicholas'
+  //子类型上自带原型方法
+  instance1.sayAge();//29
+  
+  let instance2 = new SubType('Greg', 27);
+  console.log(instance2.colors);//['red', 'blue', 'green']
+  instance2.sayName();//'Greg'
+  instance2.sayAge();//27
+  
+</script>
+</body>
+</html>

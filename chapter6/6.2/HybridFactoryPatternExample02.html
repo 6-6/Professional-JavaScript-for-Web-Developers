@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>寄生构造函数模式-构造函数内部创建Array对象</title>
+</head>
+<body>
+
+<script>
+  function SpecialArray(){
+    //创建一个数组
+    let values = new Array();
+
+    //数组添加值，apply指向自身并解构类数组
+    values.push.apply(values, arguments);
+
+    //为这个数组对象添加方法
+    values.toPipedeString = function(){
+      return this.join('|');
+    }
+
+    //返回数组对象
+    return values;
+  }
+
+  let colors = new SpecialArray('red', 'blue', 'green');
+  console.log(colors.toPipedeString());
+
+  /*
+    colors实例为返回的数组对象，通过instanceof检测实例构造函数为Array对象，其不依赖构造函数，
+    即使在外部全局环境下依然是可以使用的。
+  */
+  console.log(colors instanceof Array); // true
+  
+</script>
+</body>
+</html>

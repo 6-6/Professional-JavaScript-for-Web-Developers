@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原型式继承-Object.create()</title>
+</head>
+<body>
+
+<script>
+  let person = {
+    name: 'Nicholas',
+    friends: ['Shelby', 'Court', 'Van']
+  }
+
+  let anotherPerson = Object.create(person, {
+    name: {
+      value: 'Greg'
+    }
+  });
+
+  console.log(anotherPerson.name);
+  
+</script>
+</body>
+</html>

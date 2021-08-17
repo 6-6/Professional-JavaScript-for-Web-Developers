@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原型链的问题</title>
+</head>
+<body>
+
+<script>
+  function SuperType(){
+    this.colors = ['red', 'blue', 'green'];
+  }
+
+  function SubType(){}
+
+  // SubType继承了SuperType
+  SubType.prototype = new SuperType();
+
+  let instance1 = new SubType();
+  instance1.colors.push('black');
+  /*超类型SuperType当中的colors属性不会变化*/
+  console.log(instance1.colors); //['red', 'blue', 'green', 'black']
+
+  /*
+  如需私有属性，应该在构造函数定义属性，而非原型对象上。但是这样相当于重新“白手起家”，
+  失去了继承的意义。我们期望改变实例instance1的colors属性，但是instance2不受到影响，
+  继续继承SuperType。参考：ConstructorStealingExample01.html
+  */
+  instance1.type = [1,2,3];
+  console.log(instance1.type); //[1,2,3]
+  
+  // 所有SubType的实例都会共享colors属性，因此同上一个实例instance1结果一致
+  let instance2 = new SubType();
+  console.log(instance2.colors); //['red', 'blue', 'green', 'black']
+  console.log(instance2.type); //undefined
+</script>
+</body>
+</html>

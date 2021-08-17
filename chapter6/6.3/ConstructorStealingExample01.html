@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>借用构造函数</title>
+</head>
+<body>
+
+<script>
+  function SuperType(){
+    this.colors = ['red', 'blue', 'green'];
+  }
+
+  function SubType(){
+    // 通过call()方法调用SuperType()，并将SuperType的作用域扩充到this环境，使得SubType继承了SuperType
+    SuperType.call(this);
+  }
+
+  let instance1 = new SubType();
+  /*
+    因为我们改动的是构造函数SubType当中定义的属性，而这个属性又是“借调”了超类型的构造函数SuperType。
+    每次在创建SubType的实例，都是重新调用一次SuperType，相当于每个实例都有colors属性的副本。
+  */
+  instance1.colors.push('black');
+  console.log(instance1.colors); // ['red', 'blue', 'green', 'black']
+  
+  // 新创建的实例，会再次借调SuperType当中的colors，就可以实现类似继承的效果了。
+  let instance2 = new SubType();
+  console.log(instance2.colors); // ['red', 'blue', 'green']
+  
+</script>
+</body>
+</html>

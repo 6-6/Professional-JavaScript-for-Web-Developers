@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实现原型链</title>
+</head>
+<body>
+
+<script>
+  function SuperType(){
+    this.property = true;
+  }
+
+  SuperType.prototype.getSuperValue = function(){
+    return this.property;
+  }
+
+  function SubType(){
+    this.subproperty = false;
+  }
+
+  /*继承了 SuperType 构造函数， new SuperType()返回的是一个object对象，是否会覆盖prototype原型对象中的属性或方法？
+  答案会，本质上就是重写了prototype对象，可以试着把原型对象声明的方法移至该代码段上方*/
+  SubType.prototype = new SuperType();
+
+  SubType.prototype.getSubValue = function(){
+    return this.subproperty;
+  }
+
+  let instance = new SubType();
+  console.log(instance.getSuperValue());
+  
+  /*instanceof操作符确定实例是否存在该原型链上*/
+  console.log(instance instanceof Object); //true
+  console.log(instance instanceof SuperType); //true
+  console.log(instance instanceof SubType); //true
+
+  /*isPrototypeOf()方法传入实例，确定实例是否存在该原型链上*/
+  console.log(Object.prototype.isPrototypeOf(instance)); //true
+  console.log(SuperType.prototype.isPrototypeOf(instance)); //true
+  console.log(SubType.prototype.isPrototypeOf(instance)); //true
+</script>
+</body>
+</html>

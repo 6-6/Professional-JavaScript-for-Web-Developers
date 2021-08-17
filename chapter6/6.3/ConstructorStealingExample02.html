@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>子类型构造函数给超类型构造函数传递参数</title>
+</head>
+<body>
+
+<script>
+  function SuperType(name){
+    this.name = name;
+  }
+
+  function SubType(){
+    // 继承了SuperType，同时传递了参数
+    SuperType.call(this, 'Nicholas');
+
+    //实例属性
+    this.age = 29;
+  }
+
+  let instance = new SubType();
+  console.log(instance.name);
+  console.log(instance.age);
+  
+</script>
+</body>
+</html>

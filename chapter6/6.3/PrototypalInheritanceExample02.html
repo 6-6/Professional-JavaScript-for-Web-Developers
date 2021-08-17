@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原型式继承-Object.create()</title>
+</head>
+<body>
+<p>
+  释义：Object.create()方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__。
+</p>
+
+<h3>语法：</h3>
+<p>
+  Object.create(proto，[propertiesObject])
+</p>
+
+<h3>参数：</h3>
+<ul>
+  <li>
+    <b>proto：</b><span>新创建对象的原型对象</span>
+  </li>
+  <li>
+    <b>propertiesObject：</b><span>可选。一个为新对象定义额外属性的对象。该对象的属性类型参照Object.defineProperties()的第二个参数。</span>
+  </li>
+</ul>
+
+<h3>返回值：</h3>
+<p>
+  一个新对象，带着指定的原型对象和属性。
+</p>
+<a href="./PrototypalInheritanceExample01.html">在传入一个参数的情况下，等同于示例中的object()方法效果</a>
+<script>
+  let person = {
+    name: 'Nicholas',
+    friends: ['Shelby', 'Court', 'Van']
+  }
+
+  let anotherPerson = Object.create(person);
+  anotherPerson.name = 'Greg';
+  anotherPerson.friends.push('Rob');
+
+  let yetAnotherPerson = Object.create(person);
+  yetAnotherPerson.name = 'Linda';
+  yetAnotherPerson.friends.push('Barbie');
+
+  console.log(person.friends);//['Shelby', 'Court', 'Van', 'Rob', 'Barbie']
+  
+</script>
+</body>
+</html>
