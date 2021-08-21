@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>闭包与变量-执行作用域</title>
+</head>
+<body>
+
+<script>
+  function createFunctions(){
+    let result = new Array();
+
+    for(var i=0; i<10; i++){
+      result[i] = function(){
+        return i;
+      }
+    }
+
+    return result;
+  }
+
+  /*
+    执行createFunctions()方法，返回的是一个函数数组。
+  */
+  console.log(createFunctions());
+
+  /*
+    函数数组返回了索引值i，输出结果都是10，与我们预期返回索引值的结果不一致。这是为什么呢？
+    我们注意到变量i是var语句，变量提升至函数顶部，所以i的作用域是在createFunctions()当中。
+    for循环return的i一直是同一个变量，循环结束后i的值是为10，因此我们得到的值就是全部为10的数组。
+  */
+  console.log(createFunctions().map(i=> i())); //[10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+  
+</script>
+</body>
+</html>

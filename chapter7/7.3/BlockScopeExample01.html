@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>javascript没有块级作用域</title>
+</head>
+<body>
+<p>
+  在 Java、 C++等语言中，变量 i只会在 for 循环的语句块中有定义，循环一旦结束，变量 i 就会被销毁。
+</p>
+<p>
+  可是在 JavaScrip 中，没有块级作用域，所以变量i会变量提升至函数顶部，在函数outputNumbers()内都可访问。
+</p>
+<script>
+  function outputNumbers(count){
+    for(var i=0; i<count; i++){
+      console.log(i);
+    }
+    console.log('The last number',i);
+  }
+  outputNumbers(3);
+</script>
+</body>
+</html>

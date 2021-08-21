@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>闭包与变量-通过立即执行函数创建私有作用域</title>
+</head>
+<body>
+<p>
+  分支问题：还有其它方式吗？
+</p>
+<p>
+  解答：可以将循环体中的i声明为块级作用域，即使用 <code>let</code> 关键字，将作用域限制在循环体中，
+  每次循环的函数就可以正确返回索引的数值了。
+</p>
+<script>
+  /*
+    闭包版本的createFunctions()方法，此处在循环体当中定义了一个匿名立即执行函数，
+    并将i的值赋值给参数num，num的作用域就在当前函数体当中。相当于result数组中每个函数都有num变量的副本，
+    就可以正确返回不同的数值了。
+  */
+  function createFunctions(){
+    let result = new Array();
+    
+    for(var i=0; i<10; i++){
+      result[i] = function(num){
+        return function(){
+          return num;
+        }
+      }(i);
+    }
+
+    return result;
+  }
+
+  console.log(createFunctions().map(i=> i())); // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  
+</script>
+</body>
+</html>

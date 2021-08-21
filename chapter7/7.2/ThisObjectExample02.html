@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>改变闭包内this对象的指向</title>
+</head>
+<body>
+
+<script>
+  var name = 'The Window';
+   
+  var object = {
+    name: 'My Object',
+    getNameFunc: function(){
+      //声明一个变量that赋值this，this指向最后调用的作用域，即是object
+      var that = this;
+      return function(){
+        //通过获取变量that，就可以获取指定作用域下的对象属性
+        return that.name;
+      }
+    }
+  }
+
+  console.log(object.getNameFunc()());
+  //也可以使用call()或apply()改变作用域
+  //console.log(object.getNameFunc().call(object));
+  
+</script>
+</body>
+</html>

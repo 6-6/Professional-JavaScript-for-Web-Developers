@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>特权方法-访问私有变量</title>
+</head>
+<body>
+<p>有权访问私有变量和私有函数的公有方法称为特权方法（privileged method）</p>
+<script>
+  /*
+    定义了两个特权方法： getName()和 setName()。这两个方法都可以在构造函数外部使用，
+    而且都有权访问私有变量 name。这两个方法还是一个闭包，通过作用域链访问到name。
+    而Person构造函数外部不能直接访问name。
+  */
+  function Person(name){
+    this.getName = function(){
+      return name;
+    }
+
+    this.setName = function(value){
+      name = value
+    }
+  }
+
+  /*
+    优点：创建不同实例时，私有变量name都是不相同的。
+    缺点：也正是每次创建实例时，都要重复创建相同的方法。
+  */
+  var person = new Person('Nicholas');
+  console.log(person.getName());// 'Nicholas'
+  person.setName('Greg');
+  console.log(person.getName());//'Greg'
+  
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>递归</title>
+</head>
+<body>
+<p>
+  书中的示例是这么写的，这样可以不被factorial的指向所影响。但是经过了解arguments.callee属性被认为是一个糟糕的解决方案，
+  可以看以下链接。
+</p>
+<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/arguments/callee">
+  arguments.callee 从ES5严格模式中删除了
+</a>
+<script>
+  function factorial(num){
+    if(num <= 1){
+      return 1;
+    }
+    else{
+      return num * arguments.callee(num-1);
+    }
+  }
+  
+  let anotherFactorial = factorial;
+  factorial = null;
+  console.log(anotherFactorial(4));
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>递归</title>
+</head>
+<body>
+<a href="./RecursionExample02.html">另一种解决方案</a>
+<script>
+  function factorial(num){
+    if(num <= 1){
+      return 1;
+    }
+    else{
+      return num * factorial(num-1);
+    }
+  }
+  /*
+    factorial赋值给anotherFactorial，这两个名称分别为存储在栈空间的两个指针，指向相同的堆空间
+  */
+  let anotherFactorial = factorial;
+  /*
+    factorial对象被赋值null，也就是说factorial的指针被切断其指向的方法体。
+    当调用anotherFactorial()方法时，方法体内部会再次执行factorial()方法，
+    而此时factorial不再是函数，所以就会导致报错。
+  */
+  factorial = null;
+
+  console.log(anotherFactorial(4));//报错 RecursionExample01.html:18 Uncaught TypeError: factorial is not a function
+</script>
+</body>
+</html>

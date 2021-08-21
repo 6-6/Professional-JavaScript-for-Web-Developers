@@ -1,0 +1,44 @@
+
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>静态私有变量</title>
+</head>
+<body>
+<script>
+  (function(){
+    var name = '';
+
+    Person = function(value){
+      name = value;
+    }
+    /*
+      在构造函数原型对象创建getName()和setName()方法，同样可以访问函数内的私有变量name。
+      这样每次调用构造函数的时候实例就不需要重复创建方法，但是这样实例都没有自己的的私有变量。
+    */
+    Person.prototype.getName = function(){
+      return name;
+    }
+
+    Person.prototype.setName = function(value){
+      name = value;
+    }
+  })();
+
+  var person1 = new Person('Nicholas');
+  console.log(person1.getName());//'Nicholas'
+  person1.setName('Greg');
+  console.log(person1.getName());//'Greg'
+  
+  var person2 = new Person('Michale');
+  console.log(person1.getName());//'Michale'
+  console.log(person2.getName());//'Michale'
+  
+  
+</script>
+</body>
+</html>
