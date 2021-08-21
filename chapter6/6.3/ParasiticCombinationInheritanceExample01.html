@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>寄生式组合式继承</title>
+</head>
+<body>
+<p>
+  组合继承是 JavaScript 最常用的继承模式，不足之处就在于会调用两次超类型构造函数。
+</p>
+<script>
+  function object(o){
+    function F(){}
+    F.prototype = o;
+    return new F();
+  }
+
+  function inheritPrototype(subType, superType){
+    let prototype = object(superType.prototype);
+    prototype.constructor = subType;
+    subType.prototype = prototype;
+  }
+
+  function SuperType(name){
+    this.name = name;
+    this.colors = ['red', 'blue', 'green'];
+  }
+
+  SuperType.prototype.sayName = function(){
+    alert(this.name);
+  }
+
+  function SubType(name, age){
+    SuperType.call(this, name);
+    this.age = age;
+  }
+
+  inheritPrototype(SubType, SuperType);
+
+  SubType.prototype.sayAge = function(){
+    alert(this.age);
+  }
+</script>
+</body>
+</html>
