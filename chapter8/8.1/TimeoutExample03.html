@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <script>
+      var num = 0;
+      var max = 0;
+
+      function incrementNumber(){
+        num++;
+
+        //如未达到max最大值，再次调用setTimeout()
+        if(num < max){
+          setTimeout(incrementNumber, 500);
+        }
+        else{
+          alert('Done');
+        }
+      }
+
+      setTimeout(incrementNumber, 500);
+    </script>
+  </body>
+</html>

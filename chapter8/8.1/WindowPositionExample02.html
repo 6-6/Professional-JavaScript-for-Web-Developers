@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>window.moveTo()和window.moveBy()方法</title>
+  <style>
+  </style>
+</head>
+<p>一般浏览器默认是会拦截禁用此方法，需用户手动同意</p>
+<p>当前窗口或标签页必须是由window.open方法创建的才能够使用，window.moveTo()和window.moveBy()方法</p>
+<body>
+  <button onclick="moveTo1()">moveTo1</button>
+  <button onclick="moveBy1()">moveBy1</button>
+  <button onclick="moveTo2()">moveTo2</button>
+  <button onclick="moveTo2()">moveTo2</button>
+  <script>
+
+    myWindow=window.open('','','width=200,height=100')
+    myWindow.document.write("This is 'myWindow'")
+
+    function moveTo1(){
+      //将窗口移动到屏幕左上角
+      myWindow.moveTo(0,0);
+      myWindow.focus();
+    }
+
+    function moveBy1(){
+      //将窗向下移动 100 像素
+      myWindow.moveBy(0,100);
+      myWindow.focus();
+    }
+
+    function moveTo2(){
+      //将窗口移动到(200,300)
+      myWindow.moveTo(200,300);
+      myWindow.focus();
+    }
+
+    function moveBy2(){
+      //将窗口向左移动 50 像素
+      myWindow.moveBy(-50,0);
+      myWindow.focus();
+    }
+  </script>
+</body>
+</html>

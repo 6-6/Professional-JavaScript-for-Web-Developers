@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>clearInterval()方法</title>
+</head>
+<body>
+  <script>
+    var num = 0;
+    var max = 10;
+    var intervalId = null;
+
+    function increamentNumber(){
+      num++;
+
+      //如果执行次数达到了max设定的值，则清除定时器
+      if(num == max){
+        clearInterval(intervalId);
+        alert('Done');
+      }
+    }
+
+    intervalId = serInterval(increamentNumber, 500);
+  </script>
+</body>
+</html>

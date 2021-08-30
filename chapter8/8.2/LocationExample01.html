@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>查询字符串解析并生成键值对</title>
+</head>
+<body>
+  <script>
+    function getQueryStringArgs(){
+      //判断查询字符的长度，然后取得查询字符串并去掉开头的问号
+      var qs = (location.search.length > 0 ? location.search.substring(1) : ''),
+      args = {},
+
+      items = qs.length ? qs.split('&') : [],//将截取的查询字符串split()分成数组
+      item = null,
+      name = null,
+      value = null,
+      i = 0,
+      len = items.length;
+
+      /*
+        循环将查询字符字符串数组解析，再次分割为键值对，存入args对象
+      */
+      for(i=0; i<len; i++){
+        item = items[i].split('=');
+        name = decodeURIComponent(item[0]);
+        value = decodeURIComponent(item[1]);
+
+        if(name.length){
+          args[name] = value;
+        }
+      }
+
+      return args;
+    }
+  </script>
+</body>
+</html>

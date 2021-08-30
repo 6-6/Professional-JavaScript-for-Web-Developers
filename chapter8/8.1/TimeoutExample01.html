@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>setTimeout()方法</title>
+  </head>
+  <body>
+    <p>
+      它接受两个参数：要执行的代码和以毫秒表示的时间（即在执行代码前需要等待多少毫秒）。
+    </p>
+    <script>
+      /*
+        不建议传递字符串！虽然也可以运行，
+        但由于传递字符串可能导致性能损失，因此不建议以字符串作为第一个参数
+      */
+      setTimeout("alert('Hello world!')", 1000);
+
+      /*
+        推荐的调用方式
+      */
+      setTimeout(function () {
+        alert('Hello world!');
+      }, 1000);
+    </script>
+  </body>
+</html>

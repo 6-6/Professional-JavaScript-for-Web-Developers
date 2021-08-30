@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>setInterval()方法</title>
+</head>
+<body>
+  <script>
+    /*
+      不建议传递字符串！虽然也可以运行，
+      但由于传递字符串可能导致性能损失，因此不建议以字符串作为第一个参数
+    */
+    setInterval("alert('Hello world!')", 10000);
+
+    /*
+      推荐的调用方式
+    */
+    setInterval(function(){
+      alert('Hello world!');
+    }, 10000);
+  </script>
+</body>
+</html>

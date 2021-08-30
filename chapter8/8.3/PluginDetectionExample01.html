@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigator.plugins检测浏览器插件</title>
+</head>
+<body>
+  <p>
+    Navigator.plugins即将不被支持，最好不要用。Chrome 92.0.4515.159测试结果，
+    返回的值只有Chrome自带的插件PDF Preview，并没有用户自己安装的那些插件。
+  </p>
+  <script>
+    function hasPlugin(name){
+      name = name.toLowerCase();
+      for(var i=0; i<navigator.plugins.length; i++){
+        console.log(navigator.plugins[i]);
+        
+        // if(navigator.plugins[i].name.toLowerCase().indexOf(name) > -1){
+        //   return true;
+        // }
+      }
+
+      //return false;
+    }
+
+    alert(hasPlugin("Flash"));
+  </script>
+</body>
+</html>

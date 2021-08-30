@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>获取页面视口的大小</title>
+</head>
+<body>
+  <p>
+    从 Firefox 7 开始，不能resizeTo()和resizeBy()改变浏览器窗口，要依据下面的规则：
+  </p>
+  <ol>
+    <li>不能设置那些不是通过 window.open 创建的窗口或 Tab 的大小。
+    </li>
+    <li>当一个窗口里面含有一个以上的 Tab 时，无法设置窗口的大小。
+    </li>
+  </ol>
+
+  <script>
+    // //调整到 100× 100
+    // window.resizeTo(100, 100);
+    // //调整到 200× 150
+    // window.resizeBy(100, 50);
+    // //调整到 300× 300
+    // window.resizeTo(300, 300);
+
+    var pageWidth = window.innerWidth,
+        pageHeight = window.innerHeight;
+    //标准兼容模式开启，为兼容IE
+    if(typeof pageWidth != 'number'){
+      if(document.compatMode == 'CSS1Compat'){
+        pageWidth = document.documentElement.clientWidth;
+        pageHeight = document.documentElenent.clientHeight;
+      }
+      else{
+        pageWidth = document.body.clientWidth;
+        pageHeight = document.body.clientHeight;
+      }
+    }
+
+
+
+    /*
+      将浏览器拖动调整宽高，可以看到值会随之变化。因为这是相对视口的宽高
+    */
+    console.log(pageWidth);
+    console.log(pageHeight);
+  </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>测试弹窗是否被限制</title>
+</head>
+<body>
+  <p>大多数浏览器都内置有弹出窗口屏蔽程序，或是用户自己安装的类似blockad插件之类的</p>
+  <ol>
+    <li>浏览器内置的屏蔽程序阻止的弹出窗口，那么 window.open()很可能会返回 null</li>
+    <li>浏览器扩展或其他程序阻止的弹出窗口，那么 window.open()通常会抛出一个错误，try catch便能捕捉到错误信息</li>
+  </ol>
+  <script>
+    var blocked = false;
+    /*
+      
+    */
+    try{
+      var wroxWin = window.open('http://www.wrox.com', '_blank');
+      if(wroxWin == null){
+        blocked = true;
+      }
+    }
+    catch(ex){
+      blocked = true;
+    }
+
+    if(blocked){
+      alert('The popup was blocked!');
+    }
+  </script>
+</body>
+</html>

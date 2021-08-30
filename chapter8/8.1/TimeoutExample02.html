@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>clearTimeout()方法</title>
+  </head>
+  <body>
+    <p>
+      它接受两个参数：要执行的代码和以毫秒表示的时间（即在执行代码前需要等待多少毫秒）。
+    </p>
+    <script>
+      // 设置setTimout()方法，返回了一个id号
+      var timeoutId = setTimeout(function(){
+        alert('Hello world!');
+      }, 1000);
+
+      console.log(timeoutId);//1
+      
+      //通过clearTimeout()方法清除定时器
+      clearTimeout(timeoutId);
+    </script>
+  </body>
+</html>

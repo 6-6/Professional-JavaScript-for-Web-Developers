@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    
+    /*
+      window.location = "http://www.wrox.com";和window.location.href = "http://www.wrox.com";效果是一致的
+      location是一个对象，通过输出可以看到所有属性。分支问题：为何location对象赋值可等同于为其href属性赋值？
+    */
+    //window.location = "http://www.wrox.com";
+    //window.location.href = "http://www.wrox.com";
+
+    /* 
+      等同于location.href = "http://www.wrox.com"和window.location = "http://www.wrox.com"
+    */
+    //location.assign("http://www.wrox.com");
+
+    //假设初始 URL 为 http://www.wrox.com/WileyCDA/
+
+    //location.hash = '#section1';// "http://www.wrox.com/WileyCDA/#section1"
+    
+    //location.search = "?q=javascript";// "http://www.wrox.com/WileyCDA/?q=javascript"
+
+    //location.hostname = "www.yahoo.com";// "http://www.yahoo.com/WileyCDA/"
+
+    //location.pathname = "mydir";// "http://www.yahoo.com/mydir/"
+
+    //location.port = 8080;// "http://www.yahoo.com:8080/WileyCDA/"
+  </script>
+</body>
+</html>

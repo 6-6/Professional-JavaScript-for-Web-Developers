@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>delete操作符对window对象的属性删除操作</title>
+</head>
+<body>
+  <script>
+    var age = 29;
+    window.color = 'red';
+    
+    /*
+      var 语句添加的 window 属性有一个名为[[Configurable]]的特性，这个特性的值被
+      设置为false，因此这样定义的属性不可以通过delete 操作符删除。
+    */
+    delete window.age;//false
+    delete window.color;//true
+
+    console.log(window.age);// 29
+    console.log(window.color);// undefind
+  </script>
+</body>
+</html>

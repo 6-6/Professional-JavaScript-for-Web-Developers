@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>window对象位置属性（相对屏幕左边和上边的窗口位置）</title>
+  <style>
+  </style>
+</head>
+<body>
+  <script>
+    var leftPos = (typeof window.screenLeft == 'number') ? window.screenLeft : window.screenX;
+    var topPos = (typeof window.screenTop == 'number') ? window.screenTop : window.screenY;
+
+    console.log(leftPos,topPos);
+  </script>
+</body>
+</html>
