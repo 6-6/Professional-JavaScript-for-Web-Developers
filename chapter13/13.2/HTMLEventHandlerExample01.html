@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML事件处理程序</title>
+</head>
+<body>
+  <p>事件处理程序（或事件侦听器），例如onclick、onload、onmouseover，事件侦听器响应即执行某个函数。</p>
+  <input type="button" value="普通函数响应" onclick="showMessage()">
+  <input type="button" value="构造函数响应" onclick="new ShowMessage2()">
+  <input type="button" value="函数传值this" onclick="showMessage3(this)">
+  <input type="button" value="函数传值event对象" onclick="showMessage4(event)">
+  <input type="button" value="函数不传值event对象" onclick="showMessage5()">
+  <script>
+    function showMessage(){
+      alert('Hello world!');
+    }
+
+    function ShowMessage2(){
+      alert('Hello world2!');
+    }
+
+    function showMessage3(that){
+      /*从事件侦听器传入的this值为该元素本身*/
+      console.log(that);
+      alert(that.getAttribute("value"));
+    }
+
+    function showMessage4(event){
+      /*从事件侦听器传入的event变量（事件对象）*/
+      console.log(event);
+    }
+
+    function showMessage5(){
+      /*从事件侦听器传入的event变量（事件对象）*/
+      console.log(arguments.callee);
+    }
+  </script>
+</body>
+</html>

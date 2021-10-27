@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>target.addEventListener()开启事件捕获</title>
+  <style>
+    #level1{
+      width: 300px;
+      height: 300px;
+      background-color: red;
+      color: #fff;
+    }
+    #level2{
+      width: 200px;
+      height: 200px;
+      background-color: blue;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <p>
+    语法：target.addEventListener(type, listener, useCapture);
+  </p>
+  <ul>
+    <li>type（必须）：不带on的事件名字符串</li>
+    <li>listener（可选）：根据监听事件响应执行的函数，可写匿名函数或函数名</li>
+    <li>useCapture（可选）：true - 使用事件捕获的方式处理函数，false- 默认。使用事件冒泡的方式处理函数</li>
+  </ul>
+  <div id="level1">
+    level1
+    <div id="level2">level2</div>
+  </div>
+  <script>
+    var lv1 = document.getElementById('level1');
+    var lv2 = document.getElementById('level2');
+
+    /*
+      useCapture为true，开启事件捕获，所以执行顺序从外到内
+    */
+    lv1.addEventListener('click', f1, true);
+    lv2.addEventListener('click', f1, true);
+
+
+    function f1(){
+      console.log(this.id+'被点击了');
+    }
+  </script>
+</body>
+</html>

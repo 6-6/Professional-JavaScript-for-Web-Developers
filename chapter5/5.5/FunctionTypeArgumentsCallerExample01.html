@@ -8,19 +8,22 @@
     <title>caller属性</title>
 </head>
 <body>
+<p><b>非标准: 该特性是非标准的，请尽量不要在生产环境中使用它！</b></p>
 <p>
-    ECMAScript 5 也规范化了另一个函数对象的属性： caller。除了 Opera 的早期版本不支持，其他
-    浏览器都支持这个 ECMAScript 3 并没有定义的属性。这个属性中保存着调用当前函数的函数的引用，
-    如果是在全局作用域中调用当前函数，它的值为 null
+  如果一个函数outer()是在全局作用域内被调用的,则outer.caller为null,相反,inner()函数是在outer()函数作用域内被调用的,则inner.caller指向调用它的那个函数.
+</p>
+<p>
+  该属性的常用形式arguments.callee.caller替代了被废弃的 arguments.caller.
 </p>
 
 <script>
     function outer(){
         inner();
+        console.log(outer.caller);//全局环境调用outer()，该方法的caller属性为null
     }
 
     function inner(){
-        console.log(inner.caller);
+        console.log(inner.caller);//在另一个函数作用域调用的inner()，指向调用它的函数，即函数outer()
     }
 
     outer();

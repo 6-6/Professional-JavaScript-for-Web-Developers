@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事件冒泡和阻止冒泡</title>
+</head>
+<body>
+  <p>
+    我们点击button标签，发现'div被点击'、'button被点击'同时响应。这就是典型的事件冒泡
+  </p>
+  <p>
+    我们可以使用e.stopPropagation();用于阻止冒泡，即事件冒泡不会向父级扩散，事件响应只会停留在当前。
+  </p>
+  <div style="border:1px solid red;" onclick="divClick()">
+    <button onclick="btnClick()">点击冒泡</button>
+  </div>
+  <script>
+    function divClick() {
+      console.log('div被点击')
+    }
+
+    function btnClick() {
+      var e=window.event || arguments.callee.caller.arguments[0];
+      /*我们可以使用e.stopPropagation()阻止冒泡，后续的btnClick()就不会执行*/
+      e.stopPropagation();//阻止冒泡
+      console.log('button被点击')
+    }
+  </script>
+</body>
+</html>
