@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+</head>
+
+<body>
+  <p>
+    已知script堵塞的特性，将F12中network调整为slow 3G，模拟script堵塞。（记得清理缓存）并且在第一个script未加载完成的情况下，快速点击"html event handle"按钮。
+  </p>
+  <p>
+    可以看到错误
+    <code>
+      Uncaught ReferenceError: showMessage is not defined
+      at HTMLInputElement.onclick
+    </code>
+    由于showMessage()方法所在的script是第二个，第一个script堵塞会影响调用。所以HTML事件处理是存在问题的
+  </p>
+
+  <input type="button" value="html event handle" onclick="showMessage()">
+
+  <p>
+    html处理事件调用存在问题，可以尝试JavaScript处理事件程序。由于绑定事件是在script中，如果未执行也不会绑定该方法，所以也不会报错。
+  </p>
+
+  <input type="button" value="script event handle" id="inputEle">
+</body>
+
+<!---->
+<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.7.0/build/yahoo/yahoo-min.js&2.7.0/build/event/event-min.js"></script>
+<script>
+  document.getElementById('inputEle').onclick = function(){
+    alert('script event handle');
+    alert('The end ')
+  }
+
+  function showMessage(){
+    alert('html event handle');
+    alert('The end ')
+  }
+
+  
+
+</script>
+
+</html>

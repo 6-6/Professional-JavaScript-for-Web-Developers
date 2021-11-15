@@ -41,3 +41,5 @@ document -> html -> body -> div
 <!--用转义字符代替单引号，防止影响到HTML解析-->
 <input type="button" value="Click Me" onclick="alert(&quot;Clicked&quot;)" />
 ```
+
+[html标签对于事件的响应](./13.1/HTMLEventHandlerExample01.html)
