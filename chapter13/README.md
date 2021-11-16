@@ -42,4 +42,47 @@ document -> html -> body -> div
 <input type="button" value="Click Me" onclick="alert(&quot;Clicked&quot;)" />
 ```
 
-[html标签对于事件的响应](./13.1/HTMLEventHandlerExample01.html)
+[html指定事件处理程序](./13.2/HTMLEventHandlerExample01.html)
+[html和JavaScript指定事件处理程序](./13.2/HTMLEventHandlerExample05.html)
+
+### 13.2.2 DOM0 级事件处理程序
+DOM0、DOM1、DOM2...这些代表的是DOM的规范，是不同时代的DOM标准，其中DOM0的兼容性最好。
+
+> DOM1一般只有设计规范没有具体实现，所以一般跳过。
+
+[DOM0 级事件处理程序](./13.2/DOMLevel0EventHandlerExample01.html)
+
+### 13.2.3 DOM2 级事件处理程序
+“DOM2 级事件” 定义了两个方法，用于处理指定和删除事件处理程序的操作： addEventListener()
+和 removeEventListener()。大多数情况下，都是将事件处理程序添加到事件流的冒泡阶段，这样可以最大限度地兼容各种浏览
+器。
+
+这两个方法都传入三个参数：
+- 要处理的事件名
+- 作为事件处理程序的函数
+- true捕获阶段调用事件处理程序，false冒泡阶段调用事件处理程序
+
+[DOM2 级事件处理程序](./13.2/DOMLevel2EventHandlerExample01.html)
+
+## 13.3 事件对象
+在触发 DOM 上的某个事件时，会产生一个事件对象 event，这个对象中包含着所有与事件有关的
+信息。可以看看示例：[html指定事件处理程序](./13.2/HTMLEventHandlerExample01.html)，showEvent()方法输出event对象信息都包含了哪些。
+
+### 13.3.1 DOM中的事件对象
+
+| 属性/方法 | 类 型 | 读/写 | 说 明 |
+| ---- | ---- | ---- | ---- |
+| bubbles | Boolean | 只读 | 表明事件是否冒泡 |
+| cancelable | Boolean | 只读 | 表明是否可以取消事件的默认行为 |
+| currentTarget | Element | 只读 | 其事件处理程序当前正在处理事件的那个元素 |
+| defaultPrevented | Boolean | 只读 | 为true 表 示 已 经 调 用 了 preventDefault()（DOM3级事件中新增） |
+| detail | Integer | 只读 | 与事件相关的细节信息 |
+| eventPhase | Integer | 只读 | 调用事件处理程序的阶段：1表示捕获阶段， 2表示“处于目标”， 3表示冒泡阶段 |
+| preventDefault() | Function | 只读 | 取消事件的默认行为。如果cancelable是
+true，则可以使用这个方法 |
+| stopImmediatePropagation() | Function | 只读 | 取消事件的进一步捕获或冒泡，同时阻止任何事件处理程序被调用（DOM3级事件中新增） |
+| stopPropagation() | Function | 只读 | 取消事件的进一步捕获或冒泡。如果bubbles为true，则可以使用这个方法 |
+| target | Element | 只读 | 事件的目标 |
+| trusted | Boolean | 只读 | 为true表示事件是浏览器生成的。为false表示事件是由开发人员通过JavaScript创建的（DOM3级事件中新增） |
+| type | String | 只读 | 被触发的事件的类型 |
+| view | AbstractView | 只读 | 与事件关联的抽象视图。等同于发生事件的window对象 |

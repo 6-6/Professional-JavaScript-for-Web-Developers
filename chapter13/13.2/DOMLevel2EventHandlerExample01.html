@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM2 级事件处理程序</title>
+</head>
+
+<body>
+  <button id="myBtn">click me</button>
+</body>
+<script>
+  (function(){
+    var btn = document.getElementById('myBtn')
+
+    btn.addEventListener('click', function(){
+      console.log(this.id);
+    }, false)
+
+    /*两次通过addEventListener()绑定事件，执行结果会按照顺序*/
+    btn.addEventListener('click', function(){
+      console.log('Hello world!');
+    }, false)
+
+    /*
+      removeEventListener()方法必须和addEventListener()的第二个参数一致，才能够有效果。
+      这里虽然显得一模一样，但其实是两个不同指针的方法，所以无效
+    */
+    btn.removeEventListener('click', function(){
+      console.log(this.id)
+    }, false)
+  })();
+
+  (function(){
+    var btn = document.getElementById('myBtn')
+
+    var handler = function(){
+      console.log('second: ', this.id)
+    }
+
+    btn.addEventListener('click', handler, false)
+
+    /*
+      removeEventListener()方法必须和addEventListener()的第二个参数一致，才能够有效果。
+      这里虽然显得一模一样，但其实是两个不同指针的方法，所以无效
+    */
+    btn.removeEventListener('click', handler, false)
+  })();
+
+</script>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM0 级事件处理程序</title>
+</head>
+
+<body>
+  <button id="myBtn">click me</button>
+</body>
+<script>
+  /*
+    为这个元素指定事件处理程序（方法）
+  */
+  let btn = document.getElementById('myBtn')
+  btn.onclick = function(){
+    //这个事件处理程序是在元素的作用域中运行，所以this指向当前html元素
+    console.log(this)
+    alert(this.id)
+    btn.onclick = null; //删除事件处理程序和元素之间的绑定
+  }
+</script>
+
+</html>
