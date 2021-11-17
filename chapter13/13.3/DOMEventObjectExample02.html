@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>冒泡事件触发事件理解event对象中currentTarget和target属性</title>
+</head>
+
+<body>
+  <div style="width: 500px;height: 500px;background-color: blanchedalmond;">
+    点击外层
+    <button id="myBtn">点击 button元素</button>
+  </div>
+</body>
+
+<script>
+  document.body.onclick = function(event){
+    console.log(event.currentTarget === document.body); //true，绑定事件的元素为body
+    console.log(this === document.body);  //true，this指向绑定事件的元素body
+    console.log(event.target === document.getElementById('myBtn')); /* event.target代表的就是触发该事件的元素，点击外层div，触发该事件的就是div。点击button，触发该事件的就是button。 */
+  }
+</script>
+
+</html>

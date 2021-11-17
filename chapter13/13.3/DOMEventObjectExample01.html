@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>event.currentTarget和event.target</title>
+</head>
+
+<body>
+  <button id="myBtn">点我</button>
+</body>
+
+<script>
+  var btn = document.getElementById('myBtn');
+  btn.onclick = function(event){
+    //currentTarget和target都是指向了element类型的对象，分别为指向事件绑定的元素和事件触发的元素
+    console.log(event.currentTarget === this);  //true
+    console.log(event.target === this); //true
+  }
+</script>
+
+</html>
