@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>preventDefault()方法</title>
+</head>
+
+<body>
+  <p>preventDefault()方法，用于阻止特定事件的默认行为</p>
+  <a href="www.taros.xyz" id="myLink">点我</a>
+</body>
+
+<script>
+  var link = document.getElementById('myLink');
+  link.onclick = function(event){
+    event.preventDefault();// 比如点击a链接默认行为是打开一个链接
+  }
+</script>
+
+</html>

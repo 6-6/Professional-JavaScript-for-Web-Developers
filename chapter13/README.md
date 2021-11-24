@@ -86,3 +86,8 @@ true，则可以使用这个方法 |
 | trusted | Boolean | 只读 | 为true表示事件是浏览器生成的。为false表示事件是由开发人员通过JavaScript创建的（DOM3级事件中新增） |
 | type | String | 只读 | 被触发的事件的类型 |
 | view | AbstractView | 只读 | 与事件关联的抽象视图。等同于发生事件的window对象 |
+
+* [event.currentTarget和event.target](./13.3/DOMEventObjectExample01.html)
+* [冒泡事件触发事件理解event对象中currentTarget和target属性](./13.3/DOMEventObjectExample02.html)
+* [元素绑定多个事件](./13.3/DOMEventObjectExample03.html)
+* [preventDefault()方法](./13.3/DOMEventObjectExample04.html)

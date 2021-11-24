@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
+  <title>元素绑定多个事件</title>
 </head>
 
 <body>
-
+  <button id="myBtn">点我</button>
 </body>
 
 <script>
@@ -18,8 +18,17 @@
       case 'click':
         console.log('Clicked');
         break;
+      case 'mouseover':
+        event.target.style.backgroundColor = 'red';
+        break;
+      case 'mouseout':
+        event.target.style.backgroundColor = '';
+        break;
     }
   }
+  btn.onclick = handler;
+  btn.onmouseover = handler;
+  btn.onmouseout = handler;
 </script>
 
 </html>
