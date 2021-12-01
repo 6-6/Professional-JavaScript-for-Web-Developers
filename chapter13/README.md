@@ -91,3 +91,4 @@ true，则可以使用这个方法 |
 * [冒泡事件触发事件理解event对象中currentTarget和target属性](./13.3/DOMEventObjectExample02.html)
 * [元素绑定多个事件](./13.3/DOMEventObjectExample03.html)
 * [preventDefault()方法](./13.3/DOMEventObjectExample04.html)
+* [stopPropagation()方法](./13.3/DOMEventObjectExample05.html)

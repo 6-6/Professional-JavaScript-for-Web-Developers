@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>stopPropagation()方法</title>
+</head>
+
+<body>
+  <p>stopPropagation()方法立即停止事件在 DOM 层次中的传播，即取消进一步的事件捕获或冒泡。</p>
+  <button id="myBtn">点我</a>
+</body>
+
+<script>
+  var btn = document.getElementById('myBtn');
+  
+  btn.onclick = function(event){
+    alert('btn clicked');
+    event.stopPropagation();// 阻止事件冒泡或事件捕获
+  }
+
+  // btn.onclick是遵循事件冒泡，而stopPropagation()会阻止它的进行，所以document.body.onclick不会触发
+  document.body.onclick = function(){
+    alert('Body clicked');
+  }
+</script>
+
+</html>

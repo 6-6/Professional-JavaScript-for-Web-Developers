@@ -37,7 +37,7 @@
     var lv2 = document.getElementById('level2');
 
     /*
-      useCapture为true，开启事件捕获，所以执行顺序从外到内
+      useCapture为true，开启事件捕获，所以执行顺序从外到内，直到捕获到触发的当前事件。
     */
     lv1.addEventListener('click', f1, true);
     lv2.addEventListener('click', f1, true);

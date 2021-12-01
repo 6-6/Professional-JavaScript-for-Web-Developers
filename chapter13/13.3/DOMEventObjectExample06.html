@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eventPhase属性</title>
+  <style>
+    body {
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <p>事件对象的 eventPhase 属性，可以用来确定事件当前正位于事件流的哪个阶段。</p>
+  <ul>
+    <li>捕获阶段：1</li>
+    <li>目标对象：2</li>
+    <li>冒泡阶段：3</li>
+  </ul>
+  <p><b>只有在事件处理程序执行期间， event 对象才会存在；一旦事件处理程序执行完
+    成， event 对象就会被销毁。</b></p>
+  <button id="myBtn">点我</a>
+</body>
+
+<script>
+  var btn = document.getElementById('myBtn');
+  /* 
+    当我们注释以下事件回调，点击myBtn的按钮时，event.eventPhase为2。
+    因为触发的是当前的目标对象，this.target和 currentTarget 始终都是相等的。
+  */
+  btn.onclick = function(event){
+    console.log(this);
+    console.log(event.currentTarget);
+    alert(event.eventPhase);
+  }
+
+  // document.body.addEventListener('click', function(event){
+  //   alert(event.eventPhase);
+  // }, true)
+
+  // document.body.onclick = function(event){
+  //   alert(event.eventPhase);
+  // }
+</script>
+
+</html>
