@@ -5,31 +5,18 @@
 事件冒泡和事件捕获分别由微软和网景公司提出，这两个概念都是为了解决页面中事件流（事件发生顺序）的问题。
 
 ### 13.1.1 事件冒泡
-冒泡事件(event bubbling)：事件从最精确的对象（最内层的元素）开始触发，然后到最不精确的对象(document 对象)。
+冒泡事件(event bubbling)：事件从目标事件的元素向最外层（document 对象）的传递。
 
 示例：[事件冒泡和阻止冒泡](./13.1/eventBubbling.html)
-```html
-<!DOCTYPE html>
-  <html>
-    <head>
-      <title>Event Bubbling Example</title>
-    </head>
-    <body>
-      <div id="myDiv">Click Me</div>
-    </body>
-</html>
-```
 
 如果你单击了页面中的```<div>```元素，那么这个 click 事件会按照如下顺序传播：  
 div -> body -> html -> document
 
 ### 13.1.2 事件捕获
-捕获型事件(event capturing)：事件从最不精确的对象(document 对象)开始触发，然后到最精确（最内层的元素）。  
+捕获型事件(event capturing)：事件从外向内开始捕获事件，直到到达目标事件。 
 
 示例：[target.addEventListener()开启事件捕获](./13.1/eventcapturing.html)
 
-以上个例子为例，点击了页面中的```<div>```元素，事件捕获的顺序是：  
-document -> html -> body -> div
 
 ## 13.2 事件处理程序
 事件就是用户或浏览器自身执行的某种动作。诸如 click、 load 和 mouseover，都是事件的名字。
@@ -92,3 +79,4 @@ true，则可以使用这个方法 |
 * [元素绑定多个事件](./13.3/DOMEventObjectExample03.html)
 * [preventDefault()方法](./13.3/DOMEventObjectExample04.html)
 * [stopPropagation()方法](./13.3/DOMEventObjectExample05.html)
+* [eventPhase属性](./13.3/DOMEventObjectExample06.html)

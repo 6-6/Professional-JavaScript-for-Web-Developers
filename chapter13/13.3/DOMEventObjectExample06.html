@@ -27,22 +27,24 @@
 <script>
   var btn = document.getElementById('myBtn');
   /* 
-    当我们注释以下事件回调，点击myBtn的按钮时，event.eventPhase为2。
-    因为触发的是当前的目标对象，this.target和 currentTarget 始终都是相等的。
+    执行以下事件处理程序，顺序是这样的：document.body.addEventListener > btn.onclick > document.body.onclick 
+    为什么是这样的执行顺序呢？
   */
+  /* 点击#myBtn和body看看有什么不同？*/
   btn.onclick = function(event){
+    console.log(event.target);
     console.log(this);
     console.log(event.currentTarget);
-    alert(event.eventPhase);
+    alert('触发了btn.onclick，eventPhase:' + event.eventPhase);//处于目标对象，所以为2
   }
 
-  // document.body.addEventListener('click', function(event){
-  //   alert(event.eventPhase);
-  // }, true)
+  document.body.addEventListener('click', function(event){
+    alert('触发了document.body.addEventListener，eventPhase:' + event.eventPhase);//注意这里useCapture属性为true，所以开启了捕获，结果1
+  }, true)
 
-  // document.body.onclick = function(event){
-  //   alert(event.eventPhase);
-  // }
+  document.body.onclick = function(event){
+    alert('触发了document.body.onclick，eventPhase:' + event.eventPhase);//这是btn.onclick触发冒泡事件处理程序，所以为3
+  }
 </script>
 
 </html>
