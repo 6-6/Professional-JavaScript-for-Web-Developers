@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>strokeRect()方法绘制描边矩形</title>
+</head>
+
+<body>
+  <canvas id="drawing" width=" 200" height="200">A drawing of something.</canvas>
+  <p>strokeRect()方法分别对应的四个参数</p>
+  <ul>
+    <li>矩形的 x 坐标</li>
+    <li>矩形的 y 坐标</li>
+    <li>矩形宽度</li>
+    <li>矩形高度</li>
+  </ul>
+</body>
+
+<script>
+  var drawing = document.getElementById('drawing');
+
+  //确定浏览器支持<canvas>元素
+  if(drawing.getContext){
+    var context = drawing.getContext('2d');
+
+    //绘制红色描边矩形，strokeStyle属性为描边色，strokeRect()方法为描边矩形
+    context.strokeStyle = '#ff0000';
+    context.strokeRect(10, 10, 50, 50);
+
+    //绘制半透明的蓝色描边矩形
+    context.strokeStyle = 'rgba(0, 0, 255, 0.5)';
+    context.strokeRect(30, 30, 50, 50);
+  }
+</script>
+
+</html>

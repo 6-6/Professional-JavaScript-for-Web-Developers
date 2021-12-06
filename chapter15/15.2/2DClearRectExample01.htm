@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>clearRect()方法清除矩形</title>
+</head>
+
+<body>
+  <canvas id="drawing" width=" 200" height="200" style=" background: green;">A drawing of something.</canvas>
+  <p>clearRect()方法分别对应的四个参数</p>
+  <ul>
+    <li>矩形的 x 坐标</li>
+    <li>矩形的 y 坐标</li>
+    <li>矩形宽度</li>
+    <li>矩形高度</li>
+  </ul>
+
+  <p>分支问题：clearRect()是否等同于绘制一个透明的矩形区域呢？</p>
+  <p>解答：我们在canvas上添加一个背景色，可以看到clearRect()方法清空的区域，透过了背景色。说明clearRect()方法并非画一个透明的矩形，而是真实的清空。</p>
+</body>
+
+<script>
+  var drawing = document.getElementById('drawing');
+
+  //确定浏览器支持<canvas>元素
+  if(drawing.getContext){
+    var context = drawing.getContext('2d');
+
+    //绘制红色矩形，fillStyle为填充色，fillRect()绘制矩形
+    context.fillStyle = '#ff0000';
+    context.fillRect(10, 10, 50, 50);
+
+    //绘制半透明的蓝色矩形
+    context.fillStyle = 'rgba(0, 0, 255, 0.5)';
+    context.fillRect(30, 30, 50, 50);
+
+    //在这个两个矩形重叠的地方清除一个小矩形，本质上相当于某个矩形区域变透明
+    context.clearRect(40, 40, 10, 10);
+  }
+</script>
+
+</html>
