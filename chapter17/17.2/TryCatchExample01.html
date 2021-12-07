@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>finally语句</title>
+</head>
+
+<body>
+</body>
+
+<script>
+  /*
+    finally语句是一定执行的，不论是是否进入try或catch语句当中，也不论是否return，
+    IE7此前版本的浏览器必须要加catch，否则不会执行finally语句
+  */
+  function testFinally(){
+    try {
+      return 2;
+    }
+    catch (error){
+      return 1;
+    }
+    finally {
+      return 0;
+    }
+  }
+  console.log(testFinally());
+</script>
+
+</html>

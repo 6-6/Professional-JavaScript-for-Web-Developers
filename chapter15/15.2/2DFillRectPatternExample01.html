@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+</head>
+
+<body>
+  <p>createPattern()方法的第一个参数也可以是一个<code>&lt;video&gt;</code>元素，或者另一个<code>&lt;canvas&gt;</code>元素。</p>
+  <img src="./wilson.jpg" alt="">
+  <canvas id="drawing" width="500" height="500" style="border:1px solid #ccc;">A drawing of something.</canvas>
+</body>
+
+<script>
+  window.onload = function(){
+    var drawing = document.getElementById('drawing');
+
+    //确定浏览器支持<canvas>元素
+    if(drawing.getContext){
+      var context = drawing.getContext('2d');
+
+      var image = document.images[0],
+          pattern = context.createPattern(image, 'repeat');
+      
+      //绘制矩形
+      context.fillStyle = pattern;
+      context.fillRect(10, 10, 500, 500);
+    }
+  }
+</script>
+
+</html>

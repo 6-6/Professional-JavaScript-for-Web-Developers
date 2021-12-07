@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文字自适应宽度显示</title>
+</head>
+
+<body>
+  <canvas id="drawing" width="140" height="140" style="border:1px solid #ccc;">A drawing of something.</canvas>
+</body>
+
+<script>
+  var drawing = document.getElementById('drawing');
+
+  //确定浏览器支持<canvas>元素
+  if(drawing.getContext){
+    var context = drawing.getContext('2d');
+
+    var fontSize = 100;
+    context.font = fontSize + 'px Arial';
+    //这里测量'Hello world!'的宽度，并循环递减fontSize的大小，以最终实现文字适应140px的宽度
+    while(context.measureText('Hello world!').width > 140){
+      fontSize--;
+      context.font = fontSize + 'px Arial';
+    }
+
+    context.fillText('Hello world!', 0, 30, 140);
+
+    /*
+      如果需要自适应还可以输入fillText的第四个参数，即可选的最大像素宽度。
+      但是字体收缩以自适应该宽度，会有一定形变。
+    */
+    context.fillText('Font size is ' + fontSize + 'px', 0, 50, 140);
+
+  }
+</script>
+
+</html>

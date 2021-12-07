@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>drawImage()方法将图片绘制到画布上</title>
+</head>
+
+<body>
+  
+  <p>
+    相关方法canvas.toDataURL()，可以将canvas转换为base64图片，可看示例：<a href="../15.1/2DDataUrlExample01.html">canvas导出为base64图片</a>。
+    不过如果该图片的来源是其它域，会导致跨域的错误。
+  </p>
+  <img src="./wilson.jpg" alt="">
+  <canvas id="drawing" width="500" height="500" style="border:1px solid #ccc;">A drawing of something.</canvas>
+</body>
+
+<script>
+  window.onload = function(){
+    var drawing = document.getElementById('drawing');
+
+    //确定浏览器支持<canvas>元素
+    if(drawing.getContext){
+      var context = drawing.getContext('2d');
+
+      var image = document.images[0];
+
+      // 三个参数：<img>元素，x 和 y 坐标
+      context.drawImage(image, 10, 10);
+      
+      //五个参数：<img>元素，x 和 y 坐标、目标宽度、目标高度
+      context.drawImage(image, 50, 10, 20, 30);
+
+      //九个参数：<img>元素、源图像的 x 坐标、源图像的 y 坐标、源图像的宽度、源图像的高度、目标图像的 x 坐标、目标图像的 y 坐标、目标图像的宽度、目标图像的高度
+      context.drawImage(image, 50, 10, 20, 30);
+
+    }
+  }
+
+</script>
+
+</html>

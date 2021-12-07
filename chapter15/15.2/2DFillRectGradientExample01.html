@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>createLinearGradient()方法设置渐变色</title>
+</head>
+
+<body>
+  <p>addColorStop()接收两个参数：</p>
+  <ul>
+    <li>色标位置</li>
+    <li>CSS颜色值</li>
+  </ul>
+  <canvas id="drawing" width="500" height="500" style="border:1px solid #ccc;">A drawing of something.</canvas>
+</body>
+
+<script>
+  var drawing = document.getElementById('drawing');
+
+  //确定浏览器支持<canvas>元素
+  if(drawing.getContext){
+    var context = drawing.getContext('2d');
+
+    var gradient = context.createLinearGradient(30, 30, 70, 70);
+    gradient.addColorStop(0, 'white');
+    gradient.addColorStop(1, 'black');
+
+    //绘制红色矩形
+    context.fillStyle = '#ff0000';
+    context.fillRect(10, 10, 50, 50);
+
+    //绘制渐变矩形
+    context.fillStyle = gradient;
+    context.fillRect(30, 30, 50, 50);
+
+    //如果改变矩形的位置，会发现渐变消失了，那是因为渐变需要与矩形的位置相对齐，才会有效果
+    //context.fillRect(50, 50, 50, 50);
+  }
+</script>
+
+</html>

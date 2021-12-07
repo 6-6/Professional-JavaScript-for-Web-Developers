@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>save()和restore()，保存和恢复上下文的状态</title>
+</head>
+
+<body>
+  <p>save()方法保存的只是对绘图上下文的设置和变换，不会保存绘图上下文的内容。</p>
+  <p> restore()方法，在保存设置的栈结构（后进先出原则）中向前返回一级，恢复之前的状态。</p>
+  <canvas id="drawing" width="500" height="500" style="border:1px solid #ccc;">A drawing of something.</canvas>
+</body>
+
+<script>
+  var drawing = document.getElementById('drawing');
+
+  //确定浏览器支持<canvas>元素
+  if(drawing.getContext){
+    var context = drawing.getContext('2d');
+
+    context.fillStyle = '#ff0000';//红色
+    context.save();
+
+    context.fillStyle = '#00ff00';//绿色
+    context.translate(100, 100);
+    context.save();
+
+    context.fillStyle = '#0000ff';//蓝色
+    context.fillRect(0, 0, 100, 200);//上一行已设置了蓝色，所以从点(100,100)开始绘制蓝色矩形
+
+    context.restore();
+    context.fillRect(10, 10, 100, 200);//后进先出的原则，所以是从点(110,110)开始绘制绿色矩形
+
+    context.restore();
+    context.fillRect(0, 0, 100, 200);//因为此时restore()状态是没有设置translate的值，且设置为红色，所以从点(0,0)开始绘制红色矩形
+  }
+</script>
+
+</html>

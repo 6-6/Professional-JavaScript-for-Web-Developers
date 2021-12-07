@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>绘制一个简单的时钟</title>
+  <title>绘制时钟的文字</title>
 </head>
 
 <body>
@@ -17,6 +17,11 @@
   //确定浏览器支持<canvas>元素
   if(drawing.getContext){
     var context = drawing.getContext('2d');
+
+    context.font = 'bold 14px Arial';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    context.fillText('12', 100, 20);
 
     //开始路径
     context.beginPath();
