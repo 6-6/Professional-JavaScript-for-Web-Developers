@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>原型链继承 Error 对象</title>
+  </head>
+  <body>
+    <script>
+      function CustomError(message) {
+        this.name = 'CustomError';
+        this.message = message;
+      }
+      // 构造函数Customer的原型链prototype指向了new Error()构造函数，拥有其Error()的属性和方法
+      CustomError.prototype = new Error();
+      throw new CustomError('My message');
+    </script>
+  </body>
+</html>
