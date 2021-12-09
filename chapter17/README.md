@@ -75,3 +75,36 @@ window.onerror的方案有如下特点：
 * 类型转换错误
 * 数据类型错误
 * 通信错误
+
+1. 类型转换错误
+在使用相等（==）和不相等（!=）操作符，或者在 if、for 及 while 等流控制语句中使用非布尔值时，最常发生类型转换错误。
+
+```javascript
+// 这个方法有三个参数，其中str3是非必须项
+function concat(str1, str2, str3){
+    var result = str1 + str2;
+    //常见的错误写法，假设str3为0会导致自动转换为false
+    if(str3){
+        result += 5;
+    }
+
+    return result;
+}
+concat(1,2,0);
+```
+
+以上错误写法很常见，这就是为什么强调在控制流语句中避免使用类型转换的方式判断，可以用全等操作符```===```或是typeof等方式判断，重写以上函数：
+
+```javascript
+function concat(str1, str2, str3){
+    var result = str1 + str2;
+    if(typeof str3 == 'number'){
+        result += 5;
+    }
+    return result;
+}
+concat(1,2,0);
+```
+
+2. 数据类型错误
+JavaScript 是松散类型（弱类型）的语言，数据类型需要进行检测，否则容易出现数据类型的错误。
