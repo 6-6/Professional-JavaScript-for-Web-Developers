@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>阻止浏览器报告错误的默认行为</title>
+</head>
+<body>
+  <p>
+    window.onerror能捕捉到语法错误，但是必须先执行window.onerror，否则错误会阻止代码继续运行下去
+  </p>
+  <script>
+
+    window.onerror = function(message, url, line){
+      alert(message);
+      // 返回true时错误不显示在控制台上，返回false则相反（原书上的例子是错误的）
+      return true;
+    }
+
+    // 写一个错误的语句
+    var a = '';
+    a.sort();
+  </script>
+</body>
+</html>

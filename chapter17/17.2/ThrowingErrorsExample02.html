@@ -4,11 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>原型链继承 Error 对象</title>
+    <title>抛出错误的时机</title>
   </head>
   <body>
     <script>
       function process(values){
+        //提前进行验证，自定义一个错误抛出去，这样可以清晰的知道错误的来源和问题
         if(!(values instanceof Array)){
           throw new Error('process(): Argument must be an array.')
         }
