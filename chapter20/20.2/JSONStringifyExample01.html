@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 对象序列化为 JSON字符串</title>
+</head>
+<body>
+    <p>默认情况下， JSON.stringify()输出的 JSON 字符串不包含任何空格字符或缩进</p>
+    <script>
+        var book = {
+            title: 'Professional JavaScript',
+            authors: [
+                'Nicholsa C. Zakas'
+            ],
+            edition: 3,
+            year: 2011
+        };
+
+        //默认情况下的JSON.stringify()
+        //var jsonText = JSON.stringify(book);
+
+        //加入过滤器，即只输出参数中指定的属性
+        var jsonText = JSON.stringify(book, ["title", "edition"]);
+
+        console.log(jsonText);
+        
+    </script>
+</body>
+</html>
