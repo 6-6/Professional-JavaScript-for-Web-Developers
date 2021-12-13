@@ -107,4 +107,46 @@ concat(1,2,0);
 ```
 
 2. 数据类型错误
-JavaScript 是松散类型（弱类型）的语言，数据类型需要进行检测，否则容易出现数据类型的错误。
+JavaScript 是松散类型（弱类型）的语言，数据类型需要进行检测，否则容易出现数据类型的错误。基本类型的值应该使用 typeof 来检测，而对象的值则应该使用 instanceof 来检测。
+```javascript
+//安全，非数组的参数不会执行
+function reverseSort(values){
+    if(values instanceof Array){
+        values.sort();
+        values.reverse();
+    }
+}
+```
+
+3. 通信错误
+通过Ajax的方式与服务器通信，常见的问题就是没有使用encodURIComponent()对数据进行编码。例如：
+```
+//不正确的：
+http://www.yourdomain.com/?redir=http://www.someotherdomain.com?a=b&c=d
+
+//用 encodeURIComponent()对"redir="后的参数进行编码：
+http://www.yourdomain.com/?redir=http%3A%2F%2Fwww.someotherdomain.com%3Fa%3Db%26c%3Dd
+```
+
+### 17.2.6 区分致命错误和非致命错误
+任何错误处理策略中最重要的一个部分，就是确定错误是否致命。
+
+### 17.2.7 把错误记录到服务器
+数据库和服务器错误都会定期写入日志，在复杂的 Web 应用程序中，我们同样可以把 JavaScript 错误也回写到服务器。
+
+## 17.3 调试技术
+最远古也是至今有些开发者还在使用的调试技术，那就是```alert()```函数，现在还是有更好的调试解决方案。
+
+### 17.3.1 将消息记录到控制台
+console 对象向 JavaScript 控制台中写入消息，这个对象具有下列方法：
+* error(message)：将错误消息记录到控制台
+* info(message)：将信息性消息记录到控制台
+* log(message)：将一般消息记录到控制台
+* warn(message)：将警告消息记录到控制台
+
+### 17.3.2 将消息记录到当前页面
+这种技术在不支持 JavaScript 控制台的 IE7 及更早版本或其他浏览器中十分有用。示例：[将消息记录到当前页面](./17.3/PageLoggingExample01.html)
+
+### 17.3.3 抛出错误
+[自定义错误抛出函数](./17.3/AssertExample01.html)
+
