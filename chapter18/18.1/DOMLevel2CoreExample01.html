@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>创建 XML DOM文档</title>
+  </head>
+  <body>
+    <p>
+      这个例子创建了一个 XML DOM文档，没有默认的命名空间，也没有文档类型。但要注意的是，尽
+      管不需要指定命名空间和文档类型，也必须传入相应的参数。具体来说，给命名空间
+      URI 传入一个空字 符串，就意味着未指定命名空间，而给文档类型传入
+      null，就意味着不指定文档类型。
+    </p>
+    <script>
+      var xmldom = document.implementation.createDocument("", "root", null);
+
+      alert(xmldom.documentElement.tagName);
+
+      var child = xmldom.createElement("child");
+      xmldom.documentElement.appendChild(child);
+    </script>
+  </body>
+</html>
