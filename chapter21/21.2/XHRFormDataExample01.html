@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FormData()构造函数序列化</title>
+</head>
+<body>
+    <p>
+        XMLHttpRequest 2 不再需要像是以前这样<a href="./Professional-JavaScript-for-Web-Developers/chapter21/21.1/XHRPostExample01.html">自定义serialize()方法序列化form表单</a>
+        只需要使用FormData()创建一个FormData对象，并将form表单元素传入，返回form表单序列化过后的数据。
+    </p>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+                if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                    alert(xhr.responseText);
+                }
+                else{
+                    alert('Request was unsuccessful: ' + xhr.status);
+                }
+            }
+        };
+
+        xhr.open('post', '../21.1/XHRExample01.html', true);
+        var form = document.getElementById('user-info');
+        xhr.send(new FormData(form));
+    </script>
+</body>
+</html>

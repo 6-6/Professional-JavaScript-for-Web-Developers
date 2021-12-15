@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON.parse()方法添加过滤器</title>
+</head>
+<body>
+    <p></p>
+    <script>
+        var book = {
+            title: 'Professional JavaScript',
+            authors: [
+                'Nicholsa C. Zakas'
+            ],
+            edition: 3,
+            year: 2011,
+            releaseDate: new Date(2011, 11, 1)
+        };
+
+        var jsonText = JSON.stringify(book);
+        var bookCopy = JSON.parse(jsonText, function(key, value){
+            if(key == 'releaseDate'){
+                return new Date(value);
+            }
+            else{
+                return value;
+            }
+        });
+
+        console.log(bookCopy.releaseDate.getFullYear());
+    </script>
+</body>
+</html>

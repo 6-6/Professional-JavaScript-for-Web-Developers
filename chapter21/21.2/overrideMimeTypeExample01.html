@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>overrideMimeType()方法该变MIME类型</title>
+</head>
+<body>
+    <p>调用 overrideMimeType()必须在send()方法之前</p>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.open('get', '../text.php', true);
+        xhr.overrideMimeType('text/xml');
+        xhr.send(null);
+    </script>
+</body>
+</html>

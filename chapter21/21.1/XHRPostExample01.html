@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自定义serialize()方法序列化form表单</title>
+  </head>
+  <body>
+    <form action="" id="user-info">
+      <input type="text" value="1231" name="name" placeholder="姓名" />
+      <input type="text" value="1231" name="age" placeholder="年龄" />
+      <button type="button" onclick="submitData()">提交</button>
+    </form>
+
+    <script>
+    //第14章的自定义序列化函数
+      function serialize(form) {
+        var parts = [],
+          field = null,
+          i,
+          len,
+          j,
+          optLen,
+          option,
+          optValue;
+        for (i = 0, len = form.elements.length; i < len; i++) {
+          field = form.elements[i];
+          switch (field.type) {
+            case "select-one":
+            case "select-multiple":
+              if (field.name.length) {
+                for (j = 0, optLen = field.options.length; j < optLen; j++) {
+                  option = field.options[j];
+                  if (option.selected) {
+                    optValue = "";
+                    if (option.hasAttribute) {
+                      optValue = option.hasAttribute("value")
+                        ? option.value
+                        : option.text;
+                    } else {
+                      optValue = option.attributes["value"].specified
+                        ? option.value
+                        : option.text;
+                    }
+                    parts.push(
+                      encodeURIComponent(field.name) +
+                        "=" +
+                        encodeURIComponent(optValue)
+                    );
+                  }
+                }
+              }
+              break;
+            case undefined: //字段集
+            case "file": //文件输入
+            case "submit": //提交按钮
+            case "reset": //重置按钮
+            case "button": //自定义按钮
+              break;
+            case "radio": //单选按钮
+            case "checkbox": //复选框
+              if (!field.checked) {
+                break;
+              }
+            /* 执行默认操作 */
+            default:
+              //不包含没有名字的表单字段
+              if (field.name.length) {
+                parts.push(
+                  encodeURIComponent(field.name) +
+                    "=" +
+                    encodeURIComponent(field.value)
+                );
+              }
+          }
+        }
+        return parts.join("&");
+      }
+
+      function submitData() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4) {
+            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+              alert(xhr.responseText);
+            } else {
+              alert("Request was unsuccessful: " + xhr.status);
+            }
+          }
+        };
+
+        xhr.open("post", "XHRExample01.html", true);
+        xhr.setRequestHeader(
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        );
+        var form = document.getElementById("user-info");
+        console.log(serialize(form));
+        xhr.send(serialize(form));
+      }
+    </script>
+  </body>
+</html>

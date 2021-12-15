@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get请求 自定义添加参数的方法</title>
+</head>
+<body>
+    <script>
+        var xhr = new XMLHttpRequest();
+        var url = 'XHRExample01.html';
+
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+                if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                    alert(xhr.responseText);
+                }
+                else{
+                    alert('Request was unsuccessful: ' + xhr.status);
+                }
+            }
+        };
+
+        function addURLParam(url, name, value){
+            //判断是否有'?'号，即查询字符串的首位标识符，没有就创建，有的话逐级添加分号'&'
+            url += (url.indexOf('?') == -1 ? '?' : '&');
+            url += encodeURIComponent(name) + '=' + encodeURIComponent(value);
+            return url;
+        }
+
+        //添加参数
+        url = addURLParam(url, 'name', 'Nicholas');
+        url = addURLParam(url, 'book', 'Professional JavaScript');
+
+        //初始化请求
+        xhr.open('get', url, false);
+        xhr.send(null);
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>readyState 属性 和 xhr.abort()方法</title>
+</head>
+<body>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+                if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                    alert(xhr.responseText);
+                }
+                else{
+                    alert('Request was unsuccessful: ' + xhr.status);
+                }
+            }
+        };
+
+        xhr.open('get', 'XHRExample01.html', true);
+        xhr.send(null);
+        //xhr.abort()方法取消异步请求
+        //xhr.abort();
+    </script>
+</body>
+</html>

@@ -4,10 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JSON.stringify() 添加字符串缩进</title>
+    <title>toJSON()方法</title>
   </head>
   <body>
-    <p>缩进字符串最长不能超过 10 个字符长。如果字符串长度超过了 10 个，结果中将只出现前 10 个字符。</p>
+    <p>定义一个toJSON()方法，可以自定义返回自身的JSON数据格式。</p>
+    <ol>
+      <li>如果可用，JSON.stringify 会自动调用它。否则，返回对象本身。</li>
+      <li>如果提供了第二个参数，应用这个函数过滤器。</li>
+      <li>对第(2)步返回的每个值进行相应的序列化。</li>
+      <li>如果提供了第三个参数，执行相应的格式化。</li>
+    </ol>
+
+    <p><b>分支问题：为何toJSON()一个自定义方法，可以使得JSON.stringify()发生返回值的改变？</b></p>
     <script>
         var book = {
             title: 'Professional JavaScript',
@@ -21,8 +29,9 @@
             }
         };
 
+        //输出的结果跟想象中的不同，为何
         var jsonText = JSON.stringify(book);
-
+        console.log(jsonText);
     </script>
   </body>
 </html>

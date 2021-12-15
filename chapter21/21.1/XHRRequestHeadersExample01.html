@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setRequestHeader()方法</title>
+</head>
+<body>
+    <p>在send()方法和open()方法之间调用setRequestHeader()</p>
+    <script>
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+                if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                    //获取不到'MyHeader'的值，暂不清楚是什么原因
+                    var myHeader = xhr.getResponseHeader('MyHeader');//null
+                    var allHeaders = xhr.getAllResponseHeaders();
+                    console.log(myHeader);
+                    console.log(allHeaders);
+                    alert(xhr.responseText);
+                }
+                else{
+                    alert('Request was unsuccessful: ' + xhr.status);
+                }
+            }
+        };
+
+        xhr.open('get', 'XHRExample01.html', true);
+        //打开控制台，可以看到发送的Get请求的header中，有通过这个方法设置的键值对
+        xhr.setRequestHeader('MyHeader', 'MyValue');
+        xhr.send(null);
+    </script>
+</body>
+</html>

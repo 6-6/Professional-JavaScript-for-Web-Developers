@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XHR基础请求示例</title>
+</head>
+<body>
+    <p>open()方法只是启动一个请求以备发送</p>
+    <p>send()方法传入参数，代表作为请求主体发送的数据，如果不需要通过请求主体发送
+        数据，则必须传入 null</p>
+    <script>
+        var xhr = new XMLHttpRequest();
+        
+        xhr.open('get', 'example.php', false);
+        xhr.send(null);
+
+        //状态码200成功，304使用浏览器缓存版本
+        if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+            alert(xhr.responseText);
+        }
+        //除此之外就代表请求失败
+        else{
+            alert('Request was unsuccessful: ' + xhr.status);
+        }
+    </script>
+</body>
+</html>

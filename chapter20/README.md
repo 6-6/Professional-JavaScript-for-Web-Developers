@@ -74,4 +74,8 @@ JSON.stringify()方法的第三个参数用于控制结果中的缩进和空白�
 3. toJSON()方法
 JSON.stringify()还是不能满足对某些对象进行自定义序列化的需求。可以给对象定义 toJSON()方法，返回其自身的 JSON 数据格式。原生 Date 对象有一个 toJSON()方法，
 能够将 JavaScript的 Date 对象自动转换成 ISO 8601日期字符串（与在 Date 对象上调用 toISOString()的结果完全一样）。
-[](./20.2/JSONStringifyExample05.html)
+[toJSON()方法](./20.2/JSONStringifyExample05.html)
+
+### 20.2.3 解析选项
+JSON.parse()方法被称为还原函数，将JSON字符串转换为JSON对象。
+[JSON.parse()方法添加过滤器](./20.2/JSONParseExample02.html)

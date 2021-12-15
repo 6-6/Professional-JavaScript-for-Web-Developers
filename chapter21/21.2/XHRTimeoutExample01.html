@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>timeout属性设置ajax请求超时时间</title>
+</head>
+<body>
+    <p>
+        进入控制台将network的节流模式改为slow 3g，将缓存清空再次刷新，让ajax请求加载时间超过timeout的时间。
+        这样就会进入ontimeout事件处理程序。
+    </p>
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4){
+                //这里加try catch语句的原因是，假设超时终止请求后再访问status属性，就会导致错误
+                try{
+                    if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+                        alert(xhr.responseText);
+                    }
+                    else{
+                        alert('Request was unsuccessful: ' + xhr.status);
+                    }
+                }
+                catch(ex){
+                    //假设由ontimeout事件处理程序处理
+                }
+            }
+        }
+
+        xhr.open('get', '../21.1/XHRExample01.html', true);
+        xhr.timeout = 1000;//将超时设置为1秒钟
+        xhr.ontimeout = function(){
+            alert('Request did not return in a second.');
+        };
+        xhr.send(null);
+    </script>
+</body>
+</html>
