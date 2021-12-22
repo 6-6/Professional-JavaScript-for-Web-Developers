@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>其它构造函数无法直接继承作用域安全的构造函数</title>
+</head>
+<body>
+    <script>
+        function Polygon(sides){
+            if(this instanceof Polygon){
+                this.sides = sides;
+                this.getArea = function(){
+                    return 0;
+                };
+            }
+            else{
+                return new Polygon(sides);
+            }
+        }
+
+        function Rectangle(width, height){
+            Polygon.call(this, 2);
+            this.width = width;
+            this.height = height;
+            this.getArea = function(){
+                return this.width * this.height;
+            };
+        }
+
+        var rect = new Rectangle(5, 10);
+        /*
+            这个例子，我们通过Polygon.call()来继承sides属性，但由于Polygon()构造函数作用域做了安全处理，
+            Rectangle()构造函数无法继承到sides属性，因此通过实例rect.sides属性则为undefined
+        */
+        console.log(rect.sides);//undefined
+    </script>
+</body>
+</html>

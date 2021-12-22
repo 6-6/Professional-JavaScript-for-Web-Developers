@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" id="my-btn">点我</button>
+    <p>
+        我们已知闭包可以获取作用域以外的变量，并将变量环境保存，如果不主动销毁会一直保留。
+        这里我们只是做测试，暂不优化闭包。
+    </p>
+
+    <script>
+        //自定义绑定和解绑事件的 EventUtil对象，兼容早期IE浏览器
+        var EventUtil = {
+            getEvent: function(event){
+                return event ? event : window.event;
+            },
+            addHandler: function(element, type, handler){
+                if(element.addEventListener){
+                    element.addEventListener(type, handler, false);
+                }
+                else if (element.detachEvent){
+                    element.attachEvent("on" + type, handler);
+                }
+                else{
+                    element['on' + type] = handler
+                }
+            },
+            removeHandler: function(element, type, handler){
+                if(element.addEventListener){
+                    //2.输出看看，可以看到完整的handler被传过去了，所以this能够正常的指向handler对象
+                    console.log(handler);
+                    element.removeEventListener(type, handler, false);
+                }
+                else if (element.detachEvent){
+                    element.detachEvent("on" + type, handler);
+                }
+                else{
+                    element['on' + type] = null;
+                }
+            }
+        };
+
+        var handler = {
+            message: "Event handled",
+            handleClick: function(){
+                alert(this.message);
+                console.log(this);//<button>对象
+            }
+        };
+
+        var btn = document.getElementById("my-btn");
+        //1.这里定义了一个匿名函数
+        EventUtil.addHandler(btn, "click", function(event){
+            handler.handleClick(event);
+        });
+    </script>
+</body>
+</html>

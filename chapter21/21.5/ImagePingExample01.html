@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图像Ping</title>
+  </head>
+  <body>
+    <script>
+        var img = new Image();
+        img.onload = img.onerror = function(){
+            alert('Done!');
+        };
+        
+        //实际上这里的请求可能指向后端的方法，例如有一些记录用户点击页面次数的接口
+        //img.src = "http://www.example.com/test?name=Nicholas";
+
+        img.src = 'https://developer.mozilla.org/favicon-192x192.png';
+        document.getElementsByTagName('body')[0].appendChild(img);
+    </script>
+  </body>
+</html>

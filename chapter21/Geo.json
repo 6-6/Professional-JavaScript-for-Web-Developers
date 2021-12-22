@@ -1,0 +1,10 @@
+{
+    "appId": "",
+    "timestamp": 1639990397,
+    "nonceStr": "tp1k0CojrV",
+    "signature": "ebecd65bbad21b25fe0d517d7c450fd391d40786",
+    "jsApiList": [
+        "updateAppMessageShareData",
+        "updateTimelineShareData"
+    ]
+}

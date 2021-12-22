@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解决作用域安全的构造函数继承问题</title>
+</head>
+<body>
+    <script>
+        function Polygon(sides){
+            //那么this对象是否也指向Rectangle构造函数呢？（this instanceof Rectangle）
+            /* 
+                这里结果有两次，分别为false和true，分析下为何是这个结果？
+                第一次Rectangle.prototype = new Polygon();这里的调用，此时this的指向还是Polygon
+                第二次Polygon.call(this, 2);这里Rectangle已经继承了Polygon实例，所以this的指向的构造函数有两个，Rectangle和Polygon
+            */
+            console.log('Rectangle： ', this instanceof Rectangle);//
+            console.log('Polygon： ', this instanceof Polygon);//
+
+            if(this instanceof Polygon){
+                this.sides = sides;
+                this.getArea = function(){
+                    return 0;
+                };
+            }
+            else{
+                return new Polygon(sides);
+            }
+        }
+
+        function Rectangle(width, height){
+            Polygon.call(this, 2);
+            this.width = width;
+            this.height = height;
+            this.getArea = function(){
+                return this.width * this.height;
+            };
+        }
+
+        /*
+         （复习chapter6章节）Rectangle构造函数的原型链指向Polygon的实例
+        Rectangle实例继承了所有Polygon实例的属性和方法，所以this instanceof Polygon就会为true
+        */
+        Rectangle.prototype = new Polygon();
+
+        var rect = new Rectangle(5, 10);
+        console.log(rect.sides);
+    </script>
+</body>
+</html>

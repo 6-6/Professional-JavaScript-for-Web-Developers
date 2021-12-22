@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>惰性载入函数-2</title>
+</head>
+<body>
+    <p>
+        和第一版区别就在于这版使用的技巧是创建一个匿名自执行函数（### 7.2.1 闭包与变量 有提到该概念），
+        本质上达到的效果是一样的，不同的是在声明函数就已经指定合适的代码了。
+  </p>
+    <script>
+        //新建一个自定义构造函数Person()
+        function Person(name, age){
+            this.name = name;
+            this.age = age;
+        }
+
+        var createPerson = (function(){
+            if(typeof Person != 'undefined'){
+                return function(){
+                    return new Person('Nichlas', 26);
+                }
+            }
+            else{
+                return function(){
+                    throw new Error('No person object available.');
+                }
+            }
+        })();
+
+        //匿名的自执行函数已经执行了，所以不需要调用createPerson()，内部执行的代码已经发生了变化
+        console.log(createPerson);
+
+        var person = createPerson();
+        //输出person实例
+        console.log(person);
+
+    </script>
+</body>
+</html>

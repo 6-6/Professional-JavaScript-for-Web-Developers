@@ -90,4 +90,108 @@ Progress Events 规范是 W3C 的一个工作草案，定义了与客户端服�
 * loadend：在通信完成或者触发 error、 abort 或 load 事件后触发。
 
 ### 21.3.1 load事件
-[](./21.3/XHRProgressEventExample01.html)
+响应接收完毕后将触发 load 事件，因此也就没有必要去检查 readyState 属性了。用以替代 readystatechange 事件。onload 事件处理程序会接收到一个 event 对象，其 target 属性就指向 XHR 对象实例，因而可以访问到 XHR 对象的所有方法和属性。
+
+```javascript
+var xhr = createXHR(); 
+xhr.onload = function(){ 
+    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){ 
+        alert(xhr.responseText); 
+    } else { 
+        alert("Request was unsuccessful: " + xhr.status); 
+    } 
+}; 
+xhr.open("get", "altevents.php", true); 
+xhr.send(null);
+```
+
+### 21.3.2 progress事件
+progress 事件会在浏览器接收新数据期间周期性地触发，而 onprogress 事件处理程序会接收到一个 event 对象，其 target 属性是 XHR 对象，但
+包含着三个额外的属性：
+* lengthComputable：表示进度信息是否可用的布尔值
+* position：表示已经接收的字节数
+* totalSize：表示根据Content-Length 响应头部确定的预期字节数
+
+[onprogress 事件处理程序](./21.3/XHRProgressEventExample01.html)
+
+## 21.4 跨源资源共享
+默认情况下， XHR 对象只能访问与包含它的页面位于同一个域中的资源。
+
+CORS（Cross-Origin Resource Sharing，跨源资源共享）定义了在必须访
+问跨源资源时，浏览器与服务器应该如何沟通。 
+
+附加 Origin 头部，其中包含请求页面的源信息（协议、域名和端
+口），以便服务器根据这个头部信息来决定是否给予响应。下面是 Origin 头部的一个示例：
+
+```Origin: http://www.nczonline.net```
+
+如果服务器认为这个请求可以接受，就在 Access-Control-Allow-Origin 头部中回发相同的源信息（如果是公共资源，可以回发"*"）。例如：
+
+```Access-Control-Allow-Origin: http://www.nczonline.net```
+
+### 21.4.2 其他浏览器对CORS的实现
+WebKit 都通过 XMLHttpRequest对象实现了对 CORS 的原生支持。请求位于另一个域中的资源，使用标准的 XHR 对象并在 open()方法中传入**绝对 URL** 即可（前提两方需开启跨域），例如：[跨域测试](./21.4/CORSExample01.html)
+
+与 IE 中的 XDR 对象不同，通过跨域 XHR 对象可以访问 status 和 statusText 属性，而且还支持同步请求。跨域 XHR 对象也有一些限制，但为了安全这些限制是必需的。以下就是这些限制：
+* 不能使用 setRequestHeader()设置自定义头部。
+* 不能发送和接收 cookie。
+* 调用 getAllResponseHeaders()方法总会返回空字符串。
+
+> 对于本地资源，最好使用相对 URL，在访问远程资源时再使用绝对 URL。避免出现限制访问头部或本地 cookie 信息等问题。
+
+### 21.4.3 Preflighted Reqeusts
+CORS 通过一种叫做 Preflighted Requests 的机制支持开发人员使用自定义的头部、
+GET 或 POST 之外的方法，以及不同类型的主体内容。在使用下列高级选项来发送请求时，就会向服务器发送一个 Preflight 请求。这种请求使用 OPTIONS 方法，发送下列头部：
+* Origin：与简单的请求相同。
+* Access-Control-Request-Method：请求自身使用的方法。
+* Access-Control-Request-Headers：（可选）自定义的头部信息，多个头部以逗号分隔。
+以下是一个带有自定义头部 NCZ 的使用 POST 方法发送的请求。
+```javascript
+Origin: http://www.nczonline.net
+Access-Control-Request-Method: POST
+Access-Control-Request-Headers: NCZ
+```
+
+发送这个请求后，服务器可以决定是否允许这种类型的请求。服务器通过在响应中发送如下头部与
+浏览器进行沟通。
+* Access-Control-Allow-Origin：与简单的请求相同。
+* Access-Control-Allow-Methods：允许的方法，多个方法以逗号分隔。
+* Access-Control-Allow-Headers：允许的头部，多个头部以逗号分隔。
+* Access-Control-Max-Age：应该将这个 Preflight 请求缓存多长时间（以秒表示）。
+
+例如：
+```javascript
+Access-Control-Allow-Origin: http://www.nczonline.net
+Access-Control-Allow-Methods: POST, GET
+Access-Control-Allow-Headers: NCZ
+Access-Control-Max-Age: 1728000
+```
+
+> Preflight 请求结束后，结果将按照响应中指定的时间缓存起来。而为此付出的代价只是第一次发送这种请求时会多一次 HTTP 请求。
+
+### 21.4.4 带凭据的请求
+默认情况下，跨源请求不提供凭据（cookie、HTTP认证及客户端SSL证明等）。通过将withCredentials属性设置为true，可以指定某个请求应该发送凭据。如果服务器接受带凭据的请求，会用下面的 HTTP 头部来响应。
+```Access-Control-Allow-Credentials: true```
+
+如果发送的是带凭据的请求，但服务器的响应中没有包含这个头部，那么浏览器就不会把响应交给JavaScript（于是， responseText 中将是空字符串， status 的值为 0，而且会调用 onerror()事件处理程序）。另外，服务器还可以在 Preflight 响应中发送这个 HTTP 头部，表示允许源发送带凭据的请求。
+
+
+### 21.5 其他跨域技术
+利用 DOM 中能够执行跨域请求的功能，在不依赖 XHR 对象的情况下也能发送某种请求。例如：```<img>```标签可以显示跨域的图片
+
+### 21.5.1 图像Ping
+图像ping利用的是img标签可以不受跨域影响，进行单向的跨域通信。浏览器得不到任何具体的数据，但通过侦听 load 和 error 事件，它能知道响应是什么时候接收到的。例如：[图像Ping](./21.5/ImagePingExample01.html)
+
+### 21.5.2 JSONP
+JSONP 是 JSON with padding（填充式 JSON 或参数式 JSON）的简写，是应用 JSON 的一种新方法。 JSONP 看起来与 JSON 差不多，只不过是被包含在函数调用中的 JSON，就像下面这样：
+```javascript
+callback({ "name": "Nicholas" });
+```
+
+JSONP 由两部分组成：回调函数和数据。回调函数是当响应到来时应该在页面中调用的函数。回调函数的名字一般是在请求中指定的。而数据就是传入回调函数中的 JSON 数据。下面是一个典型的 JSONP请求。
+```
+http://freegeoip.net/json/?callback=handleResponse
+```
+
+JSONP 是通过动态```<script>```元素来使用的，```<script>```元素与```<img>```元素类似，都有能力不受限制地从其他域加载资源。
+[](./21.5/JSONPExample01.html)

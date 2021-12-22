@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>惰性载入函数-1</title>
+</head>
+<body>
+    <p>第二种方式再写一个惰性载入函数：<a href="./LazyLoadingExample02.html">惰性载入函数-2</a></p>
+    
+    <script>
+        //新建一个自定义构造函数Person()
+        function Person(name, age){
+            this.name = name;
+            this.age = age;
+        }
+
+        function createPerson(){
+            //首次必定会执行if else语句
+            if(typeof Person != 'undefined'){
+                //接着覆盖createPerson()方法，因为首次已经进行判断了，第二次没必要再进行if语句判断了
+                createPerson = function(){
+                    return new Person('Nichlas', 26);
+                }
+            }
+            //我们可以注释Person()构造函数，即可达到执行else的效果
+            else{
+                createPerson() = function(){
+                    throw new Error('No person object available.');
+                }
+            }
+
+            return createPerson();
+        }
+
+        var person = createPerson();
+
+        //输出person实例
+        console.log(person);
+        //输出变量createPerson，可以看到赋值到该变量的方法，内部执行的代码已经发生了变化
+        console.log(createPerson);
+    </script>
+</body>
+</html>

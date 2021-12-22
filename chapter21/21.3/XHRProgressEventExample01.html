@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>onprogress 事件处理程序</title>
+  </head>
+  <body>
+    <div id="status"></div>
+
+    <script>
+      window.onload = function () {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+            alert(xhr.responseText);
+          } else {
+            alert("Request was unsuccessful: " + xhr.status);
+          }
+        };
+
+        xhr.onprogress = function (event) {
+          var divStatus = document.getElementById("status");
+          console.log(event);
+          if (event.lengthComputable) {
+            divStatus.innerHTML =
+              "Received " +
+              event.position +
+              " of " +
+              event.totalSize +
+              " bytes";
+          }
+        };
+
+        xhr.open("get", "../progress.php", true);
+        xhr.send(null);
+      };
+    </script>
+  </body>
+</html>

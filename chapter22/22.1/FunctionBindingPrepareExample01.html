@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数自定义绑定，通过闭包解决this指向问题</title>
+</head>
+<body>
+    <button type="button" id="my-btn">点我</button>
+    <p>
+        点击按钮，结果为undefined，这个问题在于没有保存handler.handleClick()的环境，所以 this 对象最后是指向了 DOM 按钮。
+        结合之前对this指向的理解，我们可知this指向最后调用它的地方，那么绑定事件只是传递了handleClick()方法，真正调用它的
+        地方是button点击的时候才执行，所以this指向变为button对象
+    </p>
+
+    <p>如何解决这样的问题？我们可以<a href="./FunctionBindingPrepareExample02.html">创建一个闭包改变this指向</a></p>
+    <script>
+        //自定义绑定和解绑事件的 EventUtil对象，兼容早期IE浏览器
+        var EventUtil = {
+            getEvent: function(event){
+                return event ? event : window.event;
+            },
+            addHandler: function(element, type, handler){
+                if(element.addEventListener){
+                    element.addEventListener(type, handler, false);
+                }
+                else if (element.detachEvent){
+                    element.attachEvent("on" + type, handler);
+                }
+                else{
+                    element['on' + type] = handler
+                }
+            },
+            removeHandler: function(element, type, handler){
+                if(element.addEventListener){
+                    element.removeEventListener(type, handler, false);
+                }
+                else if (element.detachEvent){
+                    element.detachEvent("on" + type, handler);
+                }
+                else{
+                    element['on' + type] = null;
+                }
+            }
+        };
+
+        var handler = {
+            message: "Event handled",
+            handleClick: function(){
+                alert(this.message);
+                console.log(this);//<button>对象
+            }
+        };
+
+        var btn = document.getElementById("my-btn");
+        EventUtil.addHandler(btn, "click", handler.handleClick);
+    </script>
+</body>
+</html>

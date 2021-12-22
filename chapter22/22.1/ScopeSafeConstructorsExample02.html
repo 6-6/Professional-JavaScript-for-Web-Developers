@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>构建作用域安全的构造函数</title>
+</head>
+<body>
+    <script>
+        function Person(name, age, job){
+            if(this instanceof Person){
+                this.name = name;
+                this.age = age;
+                this.job = job;
+            }
+            else{
+                return new Person(name, age, job);   
+            }
+        }
+
+        /* 
+            如果这里直接调用Person()方法，this对象是在运行时绑定的，
+            意味着this会指向window对象上，这并非我们本意。而且这样会导致错误，
+            因为window.name属性适用于识别链接目标和frame的，对其属性覆盖可能
+            会导致某些错误的产生。
+
+            为了防止错误的产生，我们可以在Person()方法内部判断this对象是正确类型的实例，
+            如果不是，可以创建一个新的实例并返回。
+        */
+        var person1 = Person('Nicholas', 29, 'Software Engineer');
+        console.log(window.name);//""
+        console.log(person1.name);//"Nicholas"
+
+        var person2 = new Person("Shelby", 34, "Ergonomist");
+        console.log(person2.name); //"Shelby"
+
+    </script>
+</body>
+</html>
