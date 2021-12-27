@@ -4,15 +4,63 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>函数自定义bind()方法绑定</title>
 </head>
 <body>
+    <button type="button" id="my-btn">点我</button>
+
     <script>
+        //自定义绑定和解绑事件的 EventUtil对象，兼容早期IE浏览器
+        var EventUtil = {
+            getEvent: function(event){
+                return event ? event : window.event;
+            },
+            addHandler: function(element, type, handler){
+                if(element.addEventListener){
+                    element.addEventListener(type, handler, false);
+                }
+                else if (element.detachEvent){
+                    element.attachEvent('on' + type, handler);
+                }
+                else{
+                    element['on' + type] = handler
+                }
+            },
+            removeHandler: function(element, type, handler){
+                if(element.addEventListener){
+                    element.removeEventListener(type, handler, false);
+                }
+                else if (element.detachEvent){
+                    element.detachEvent('on' + type, handler);
+                }
+                else{
+                    element['on' + type] = null;
+                }
+            }
+        };
+
+        var handler = {
+            message: 'Event handled',
+            handleClick: function(){
+                alert(this.message + ':' + event.type);                
+            }
+        };
+
+        /*
+        bind()方法 用于将一个函数绑定到指定环境
+        @param {function} [fn] 绑定事件回调处理程序
+        @param {object} [context] 需要this指向的对象（即这里说的环境）
+        */
         function bind(fn, context){
+            // 创建了一个匿名函数，同时它也是一个闭包，这个函数是否是必须的？
+            // 观察addHandler()函数内部，可以看到addEventListener()接收的是一个函数，所以这里需要返回一个函数
             return function(){
                 return fn.apply(context, arguments);
             };
         }
+        
+        var btn = document.getElementById('my-btn');
+        EventUtil.addHandler(btn, 'click', bind(handler.handleClick, handler));
     </script>
 </body>
 </html>

@@ -4,17 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>函数自定义绑定，通过闭包解决this指向问题</title>
+    <title>将bind()函数柯里化</title>
 </head>
 <body>
     <button type="button" id="my-btn">点我</button>
-    <p>
-        点击按钮，结果为undefined，这个问题在于没有保存handler.handleClick()的环境，所以 this 对象最后是指向了 DOM 按钮。
-        结合之前对this指向的理解，我们可知this指向最后调用它的地方，那么绑定事件只是传递了handleClick()方法，真正调用它的
-        地方是button点击的时候才执行，所以this指向变为button对象
-    </p>
 
-    <p>如何解决这样的问题？我们可以<a href="./FunctionBindingPrepareExample02.html">创建一个闭包改变this指向</a></p>
     <script>
         //自定义绑定和解绑事件的 EventUtil对象，兼容早期IE浏览器
         var EventUtil = {
@@ -47,14 +41,32 @@
 
         var handler = {
             message: 'Event handled',
-            handleClick: function(){
-                alert(this.message);
-                console.log(this);//<button>对象
+            handleClick: function(name, event){
+                alert(this.message + ':' + name + ':' + event.type);                
             }
         };
 
+        /*
+        bind()方法 用于将一个函数绑定到指定环境
+        @param {function} [fn] 绑定事件回调处理程序
+        @param {object} [context] 需要this指向的对象（即这里说的环境）
+        */
+        function bind(fn, context){
+            //截取bind函数中，除去前两位的参数
+            var args = Array.prototype.slice.call(arguments, 2);
+            //注意观察这里的匿名函数，被当作参数代入addEventListener()方法中的回调方法
+            return function(){
+                //因此截取这里的arguments就可以获取到event对象
+                var innerArgs = Array.prototype.slice.call(arguments);
+                //组合参数
+                var finalArgs = args.concat(innerArgs);
+                // handler.handleClick()方法即将接收两个参数：要处理的元素的名字和event 对象
+                return fn.apply(context, finalArgs);
+            };
+        }
+        
         var btn = document.getElementById('my-btn');
-        EventUtil.addHandler(btn, 'click', handler.handleClick);
+        EventUtil.addHandler(btn, 'click', bind(handler.handleClick, handler, 'my-btn'));
     </script>
 </body>
 </html>

@@ -4,17 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>函数自定义绑定，通过闭包解决this指向问题</title>
+    <title>原生bind()方法实现柯里化</title>
 </head>
 <body>
     <button type="button" id="my-btn">点我</button>
+    <h1>语法：</h1>
     <p>
-        点击按钮，结果为undefined，这个问题在于没有保存handler.handleClick()的环境，所以 this 对象最后是指向了 DOM 按钮。
-        结合之前对this指向的理解，我们可知this指向最后调用它的地方，那么绑定事件只是传递了handleClick()方法，真正调用它的
-        地方是button点击的时候才执行，所以this指向变为button对象
+        function.bind(thisArg[, arg1[, arg2[, ...]]])
     </p>
 
-    <p>如何解决这样的问题？我们可以<a href="./FunctionBindingPrepareExample02.html">创建一个闭包改变this指向</a></p>
+    <h2>参数：</h2>
+    <ul>
+        <li>
+            <p>thisArg</p>
+            <p>调用绑定函数时作为 this 参数传递给目标函数的值。（即上个例子绑定函数的this环境）</p>
+        </li>
+        <li>
+            <p>arg1, arg2, ...</p>
+            <p>绑定函数的参数列表中的参数</p>
+        </li>
+    </ul>
     <script>
         //自定义绑定和解绑事件的 EventUtil对象，兼容早期IE浏览器
         var EventUtil = {
@@ -47,14 +56,13 @@
 
         var handler = {
             message: 'Event handled',
-            handleClick: function(){
-                alert(this.message);
-                console.log(this);//<button>对象
+            handleClick: function(name, event){
+                alert(this.message + ':' + name + ':' + event.type);                
             }
         };
-
+        
         var btn = document.getElementById('my-btn');
-        EventUtil.addHandler(btn, 'click', handler.handleClick);
+        EventUtil.addHandler(btn, 'click', handler.handleClick.bind(handler, 'my-btn'));
     </script>
 </body>
 </html>

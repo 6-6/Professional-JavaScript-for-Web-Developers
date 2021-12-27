@@ -60,4 +60,45 @@ EventUtil.addHandler(btn, "click", handler.handleClick);
 ```
 [函数自定义绑定](./22.1/FunctionBindingPrepareExample01.html)
 [函数自定义绑定，通过闭包解决this指向问题](./22.1/FunctionBindingPrepareExample02.html)
-[](./22.1/FunctionBindingExample01.html)
+[函数自定义bind()方法绑定](./22.1/FunctionBindingExample01.html)
+[原生bind()方法绑定](./22.1/FunctionBindingExample02.html)
+
+### 22.1.5 函数柯里化
+与函数绑定紧密相关的主题是函数柯里化（function currying），它用于创建已经设置好了一个或多
+个参数的函数。函数柯里化的基本方法和函数绑定是一样的：使用一个闭包返回一个函数。两者的区别
+在于，当函数被调用时，返回的函数还需要设置一些传入的参数。请看以下例子。
+
+```javascript
+function add(num1, num2){
+    return num1 + num2;
+}
+function curriedAdd(num2){
+    return add(5, num2);
+}
+alert(add(2, 3)); //5
+alert(curriedAdd(3)); //8
+```
+
+尽管从技术上来说 curriedAdd()并非柯里化的函数，但它很好地展示了其概念。创建柯里化函数的通用方式示例：
+* [函数柯里化](./22.1/FunctionCurryingExample01.html)
+* [将bind()函数柯里化](./22.1/FunctionCurryingExample02.html)
+* [原生bind()方法实现柯里化](./22.1/FunctionCurryingExample03.html)
+
+## 22.2 防篡改对象
+任何对象都可以被在同一环境中运行的代码修改。很可能会意外地修改别人的代码，甚至更糟糕地，用不兼容的功能重写原生对象。ECMAScript 5 致力于解决这个问题，可以让开发人员定义防篡改对象（tamper-proof object）。
+
+第6章讨论了对象属性的问题，也讨论了如何手工设置每个属性的```[[Configurable]]```、
+```[[Writable]]```、 ```[[Enumerable]]```、 ```[[Value]]```、 ```[[Get]]```以及```[[Set]]```特性，以改变属性的行为。
+
+ECMAScript 5也增加了几个方法，通过它们可以指定对象的行为。不过请注意：一旦把对象定义为防篡改，就无法撤销了。
+
+### 22.2.1 不可扩展对象
+默认情况下，所有对象都是可以扩展的。也就是说，任何时候都可以向对象中添加属性和方法。例
+如，可以像下面这样先定义一个对象，后来再给它添加一个属性：
+```javascript
+var person = { name: "Nicholas" };
+person.age = 29;
+```
+
+```Object.preventExtensions()```方法的作用让对象不能再添加属性和方法：[](./22.2/NonExtensibleObjectsExample01.html)
+

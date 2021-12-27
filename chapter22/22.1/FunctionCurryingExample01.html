@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数柯里化</title>
+</head>
+<body>
+    <p>分支问题：函数柯里化的意义是什么？或者是说好处有什么？</p>
+    
+    <script>
+        function curry(fn){
+            /* 
+            arguments对象是一个伪数组，所以不具备Array对象的方法，因此将arguments对象传入call()方法，
+           arguments对象就会拥有Array对象原型链中的slice()方法。
+            */
+            var args = Array.prototype.slice.call(arguments, 1);//结果是除了数组中首位以后的数组
+            return function(){
+                //内层匿名函数方法的arguments也通过Array.prototype.slice.call转换为真实的数组
+                var innerArgs = Array.prototype.slice.call(arguments);
+                //concat()拼接外层函数和内存函数的参数
+                var finalArgs = args.concat(innerArgs);
+                //为什么这里apply()传入的是null？因为这里不考虑执行环境，本质上和fn(...finalArgs)并无不同
+                return fn.apply(null, finalArgs);
+            };
+        }
+
+        function add(num1, num2){
+            return num1 + num2;
+        }
+
+        var currieAdd = curry(add, 5, 12);
+        console.log(currieAdd());//17
+    </script>
+</body>
+</html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>函数自定义绑定，通过闭包解决this指向问题]</title>
 </head>
 <body>
     <button type="button" id="my-btn">点我</button>
@@ -24,7 +24,7 @@
                     element.addEventListener(type, handler, false);
                 }
                 else if (element.detachEvent){
-                    element.attachEvent("on" + type, handler);
+                    element.attachEvent('on' + type, handler);
                 }
                 else{
                     element['on' + type] = handler
@@ -37,7 +37,7 @@
                     element.removeEventListener(type, handler, false);
                 }
                 else if (element.detachEvent){
-                    element.detachEvent("on" + type, handler);
+                    element.detachEvent('on' + type, handler);
                 }
                 else{
                     element['on' + type] = null;
@@ -46,16 +46,16 @@
         };
 
         var handler = {
-            message: "Event handled",
+            message: 'Event handled',
             handleClick: function(){
                 alert(this.message);
                 console.log(this);//<button>对象
             }
         };
 
-        var btn = document.getElementById("my-btn");
+        var btn = document.getElementById('my-btn');
         //1.这里定义了一个匿名函数
-        EventUtil.addHandler(btn, "click", function(event){
+        EventUtil.addHandler(btn, 'click', function(event){
             handler.handleClick(event);
         });
     </script>
