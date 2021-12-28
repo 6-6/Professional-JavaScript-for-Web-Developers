@@ -90,7 +90,9 @@ alert(curriedAdd(3)); //8
 第6章讨论了对象属性的问题，也讨论了如何手工设置每个属性的```[[Configurable]]```、
 ```[[Writable]]```、 ```[[Enumerable]]```、 ```[[Value]]```、 ```[[Get]]```以及```[[Set]]```特性，以改变属性的行为。
 
-ECMAScript 5也增加了几个方法，通过它们可以指定对象的行为。不过请注意：一旦把对象定义为防篡改，就无法撤销了。
+防篡改方法等级依次为（严格程度小到大）：```Object.preventExtensions() < Object.seal() < Object.freeze()```
+
+> 一旦把对象定义为防篡改，就无法撤销了。
 
 ### 22.2.1 不可扩展对象
 默认情况下，所有对象都是可以扩展的。也就是说，任何时候都可以向对象中添加属性和方法。例
@@ -100,5 +102,62 @@ var person = { name: "Nicholas" };
 person.age = 29;
 ```
 
-```Object.preventExtensions()```方法的作用让对象不能再添加属性和方法：[](./22.2/NonExtensibleObjectsExample01.html)
+* [Object.preventExtensions()方法禁用对象添加属性和方法](./22.2/NonExtensibleObjectsExample01.html)
+* [Object.isExtensible()方法确定对象是否可扩展](./22.2/NonExtensibleObjectsExample02.html)
 
+
+### 22.2.2 密封的对象
+ECMAScript 5 为对象定义的第二个保护级别是密封对象（sealed object）。密封对象不可扩展，而
+且已有成员的```[[Configurable]]```特性将被设置为 false。这就意味着**不能删除属性和方法**，因为不能
+使用 Object.defineProperty()把数据属性修改为访问器属性。
+
+* [Object.seal()方法密封对象](./22.2/SealedObjectsExample01.html)
+* [Object.isExtensible()和Object.isSealed()方法](./22.2/SealedObjectsExample02.html)
+
+### 22.2.3 冻结的对象
+最严格的防篡改级别是冻结对象（frozen object）。冻结的对象既不可扩展，又是密封的，而且对象
+数据属性的[[Writable]]特性会被设置为 false。如果定义[[Set]]函数，访问器属性仍然是可写的。
+ECMAScript 5 定义的 Object.freeze()方法可以用来冻结对象。
+
+[Object.freeze()方法冻结对象](./22.2/FrozenObjectsExample01.html)
+
+JavaScript 库最怕有人意外（或有意）地修改了库中的核心对象。冻结（或密封）主要的库对象能够防止这些问题的发生。
+
+## 22.3 高级定时器
+JavaScript 是运行于**单线程**的环境中的，而定时器仅仅只是计划代码在未来的某个时间执行。执行时机是不能保证的。在页面下载完后的代码运行、事件处理程序、 Ajax 回调函数都必须使用同样的线程来执行。实际上，浏览器负责进行排序，指派某段代码在某个时间点运行的优先级。
+
+```javascript
+var btn = document.getElementById("my-btn");
+btn.onclick = function(){
+    setTimeout(function(){
+        document.getElementById("message").style.visibility = "visible";
+    }, 250);
+    //其他代码
+};
+```
+以上这段代码，给一个按钮设置了一个事件处理方法，事件处理方法内部设置了250ms后调用的定时器。实际上定时器指定的时间间隔，不是何时执行代码，而是何时将定时器代码添加到队列（JavaScript是单线程）。队列中所有的代码都要等到 JavaScript 进程空闲之后才能执行，而不管它们是如何添加到队列中的。
+
+### 22.3.1 重复的定时器
+将以上代码setTimeout方法改为使用 setInterval()创建的定时器，JavaScript引擎会将代码重复规则地插入队列中。为什么说是规则的插入队列呢？当使用 setInterval()时，仅当没有该定时器的任何其他代码实例时，才将定时器代码添加到队列中。
+
+但这样会导致setInterval()创建的重复定时器会有两个问题：
+1. 某些间隔会被跳过；（假设定时器内时间执行了300ms，下一个250ms间隔定时器就无法执行，因为此时定时器还未结束，JavaScript引擎不会再去添加一个定时器副本）
+2. 多个定时器的代码执行之间的间隔可能会比预期的小。
+
+为了避免setInterval()方法的缺点，可以使用setTimeout()的链式调用：
+```javascript
+setTimeout(function(){
+    //确保了每次定时器中的代码完全执行完毕了，再去添加新的定时器
+    setTimeout(arguments.callee, interval);
+}, interval);
+```
+
+### 22.3.2 Yielding Processes
+为了防止恶意web程序，JavaScript 被严格限制，如果代码运行超过特定的时间或者特定语句数量就不
+让它继续执行。且会弹出浏览器错误的提示框，用户可以允许其继续执行或停止。
+
+JavaScript 的执行是一个阻塞操作，脚本运行所花时间越久，用户无法与页面交互的时间也越久。当你发现某个循环占用了大量时间，可以使用定时器分割这个循环。
+
+[数组分块技术解决显示大量数据卡顿](./22.3/ArrayChunkingExample.html)
+
+### 22.3.3 函数节流

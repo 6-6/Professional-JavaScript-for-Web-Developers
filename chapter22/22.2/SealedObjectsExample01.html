@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object.seal()方法密封对象</title>
+</head>
+<body>
+    <script>
+        var person = { name: 'Nicholas' };
+        //密封对象
+        Object.seal(person);
+
+        //密封对象已使用，所以对对象进行扩展是无效的
+        person.age = 29;
+        console.log(person.age);//undefined
+
+        //密封对象已使用，所以对对象删除也是无效的
+        delete person.name;
+        console.log(person.name);//'Nicholas'
+
+        //重写属性的值还是可以的
+        person.name = 'Greg';
+        console.log(person.name);//'Greg'
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object.isExtensible()方法确定对象是否可扩展</title>
+</head>
+<body>
+    <script>
+        var person = { name: 'Nicholas'};
+        //判断person对象是否可扩展
+        console.log(Object.isExtensible(person));//true
+
+        //禁用person对象扩展
+        Object.preventExtensions(person);
+        console.log(Object.isExtensible(person));//false
+    </script>
+</body>
+</html>

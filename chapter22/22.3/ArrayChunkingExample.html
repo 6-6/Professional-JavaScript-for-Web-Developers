@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组分块技术解决显示大量数据卡顿</title>
+</head>
+<body>
+    <p>实际开发场景中，后端有可能返回大量的数据，如果直接显示出来会造成延迟卡顿甚至会崩溃。数组分块技术是一个思路，将数据分割延迟渲染DOM节点。</p>
+
+    <div id="myDiv"></div>
+    <script>
+        var data = [12,123,1234,453,436,23,23,5,4123,45,346,5634,2234,345,342];
+
+        function printValue(item){
+            var div = document.getElementById('myDiv');
+            div.innerHTML += item + '<br>';
+        }
+
+        /* shift()方法会导致原数组变换，如果不想这样，data.concat()将返回一个新的副本数组，切断其引用 */
+        chunk(data.concat(), printValue);
+
+        /*
+        数组分块函数
+        @params {Array} [array] 要处理项目的数组
+        @params {Function} [process] 用于处理项目的函数
+        @params {Object} [context] 运行该函数的环境
+        */
+        function chunk(array, process, context){
+            setTimeout(function(){
+                var item = array.shift();
+                /* 这里为什么要使用call()方式调用？这里的需求当然可以不用，只是为了可扩展性，参考./22.1/FunctionBindingExample02.html  */
+                process.call(context, item);
+
+                if(array.length > 0){
+                    /* 再次调用当前函数，指向setTimeout的回调函数 */
+                    setTimeout(arguments.callee, 100);
+                }
+            }, 100);
+        }
+    </script>
+</body>
+</html>

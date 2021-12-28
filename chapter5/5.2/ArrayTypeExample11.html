@@ -11,17 +11,29 @@
     正所谓“先进先出”，就在于push()操作最后一项，而shift()操作第一项。
     就像是现实中排队一样，先来的先到，后来者居后排队。
 </p>
+
+<p>
+    Array.push() 输出的是操作后数组的长度
+</p>
+<p>
+    Array.shift() 输出的是被移除的数组项
+</p>
 <script>
-    let colors = new Array();
-    let count = colors.push('red', 'green');
-    console.log(count);
+    /* 初始化一个数组 ['red'] */
+    let colors = new Array('red');
+    /* Array.push()方法将会从数组尾部推入数据 */
+    let count = colors.push('green', 'black');
+    /* 输出数组colors */
+    console.log(colors);// ['red', 'green', 'black']
 
-    count = colors.push('black');
-    console.log(count);
-
+    /* colors.shift() 删除数组中第一个元素 */
     let item = colors.shift();
-    console.log(item);
-    console.log(colors.length);
+    
+    /* 输出的是被移除的数组项 */
+    console.log('Array.shift()：', item);// red
+    /* 输出的是操作后数组的长度 */
+    console.log('Array.push()：', count);// 3
+    console.log(colors);// ['green']
 </script>
 </body>
 </html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object.preventExtensions()方法禁用对象添加属性和方法</title>
+</head>
+<body>
+    <script>
+        var person = { name: 'Nicholas'};
+        //这个方法将禁止person对象添加属性和方法
+        Object.preventExtensions(person);
+        person.age = 29;
+
+        console.log(person.age);//undefined
+        console.log(person.name);//'Nicholas'
+
+        //删除属性不受到影响
+        delete person.name;
+        console.log(person.name);//undefined
+    </script>
+</body>
+</html>

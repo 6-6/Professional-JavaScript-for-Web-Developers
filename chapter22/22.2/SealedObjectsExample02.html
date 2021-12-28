@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object.isExtensible()和Object.isSealed()方法</title>
+</head>
+<body>
+    <script>
+        var person = { name: 'Nicholas' };
+        //isExtensible()方法检测是否可扩展该对象
+        console.log(Object.isExtensible(person));//true
+
+        //isSealed()方法检测是否密封该对象
+        console.log(Object.isSealed(person));//false
+
+        //使用seal()密封person对象，所以无法扩展该对象，isExtensible()就为false
+        Object.seal(person);
+        console.log(Object.isExtensible(person));//false
+        console.log(Object.isSealed(person));//true
+    </script>
+</body>
+</html>
