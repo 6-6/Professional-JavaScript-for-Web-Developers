@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节流函数应用onresize事件</title>
+    <style>
+        #myDiv{
+            width: 100%;
+            border: 1px solid #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div id="myDiv"></div>
+    <p>
+        节流函数简单来理解，不管用户操作的事件响应多少次，最终只执行一次（而且用户要操作频率小于设置的定时器间隔100ms，如果不中断就会一直清除前面的定时器）
+    </p>
+
+    <p>
+        <b>分支问题：页面首次运行的时候，resizeDiv()方法并未运行，所以没有改变其高度形成正方形。</b>
+    </p>
+    <p>
+        resizeDiv()方法改为自执行函数即可
+    </p>
+    <script>
+        /* 
+        节流函数
+        @params {Function} [method] 要执行的函数
+        @params {Object} [context] 在哪个作用域中执行（即经常说的环境和this指向）
+        */
+        function throttle(method, context){
+            /* 每次运行都会清除上次定时器id */
+            clearTimeout(method.tId);
+            /* 再次创建定时器，保证要执行的函数一定运行 */
+            method.tId = setTimeout(function(){
+                method.call(context);
+            }, 100);
+        }
+
+        var resizeDiv = (function(){
+            var div = document.getElementById('myDiv');
+            /* div元素的布局宽度和高度保持一致，所以会显示为一个正方形 */
+            div.style.height = div.offsetWidth + 'px';
+        })();
+
+        /* 每次调整窗口的尺寸，都会响应这个事件。 */
+        window.onresize = function(){
+            /* 事件的处理方式，不去直接调用resizeDiv()方法，而是通过节流函数间接调用 */
+            throttle(resizeDiv);
+        }
+    </script>
+</body>
+</html>

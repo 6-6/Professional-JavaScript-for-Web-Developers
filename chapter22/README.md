@@ -161,3 +161,42 @@ JavaScript 的执行是一个阻塞操作，脚本运行所花时间越久，用
 [数组分块技术解决显示大量数据卡顿](./22.3/ArrayChunkingExample.html)
 
 ### 22.3.3 函数节流
+onresize 事件处理程序的时候容易发生，当调整浏览器大小的时候，该事件会连续触发。在 onresize 事件处理程序内部如果尝试进行 DOM 操作，其高频率的更改可能会让浏览器崩溃。为了绕开这个问题，你可以使用定时器对该函数进行节流。
+
+```javascript
+var processor = {
+    timeoutId: null,
+    //实际进行处理的方法
+    performProcessing: function(){
+        //实际执行的代码
+    },
+    //初始处理调用的方法
+    process: function(){
+        /* 每次运行都会清除上次定时器id */
+        clearTimeout(this.timeoutId);
+        var that = this;
+        /* 再次创建定时器，保证performProcessing()方法一定运行 */
+        this.timeoutId = setTimeout(function(){
+            that.performProcessing();
+        }, 100);
+    }
+};
+```
+
+在以上例子中，创建一个processor的对象。这个对象有两个方法：
+* performProcessing()：初始化实际执行的业务代码，只通过process()方法来调用
+* process()：初始化处理调用的方法
+
+如果 100ms 之内调用了 process()共 20 次， performanceProcessing()仍只会被调用一次。可以再精简为单个节流函数：[节流函数应用onresize事件](./22.3/ThrottlingExample.html)
+
+## 22.4 自定义事件
+观察者模式由两类对象组成： 主体和观察者。主体负责发布事件，同时观察者通过订阅这些事件来
+观察该主体。该模式的一个关键概念是主体并不知道观察者的任何事情，也就是说它可以独自存在并正
+常运作即使观察者不存在。从另一方面来说，观察者知道主体并能注册事件的回调函数（事件处理程序）。
+涉及 DOM 上时， DOM 元素便是主体，你的事件处理代码便是观察者。
+
+事件是与 DOM 交互的最常见的方式，但它们也可以用于非 DOM 代码中——通过实现自定义事件。
+自定义事件背后的概念是创建一个管理事件的对象，让其他对象监听那些事件。实现此功能的基本模式
+可以如下定义：
+
+[](./22.4/EventTargetExample01.html)
