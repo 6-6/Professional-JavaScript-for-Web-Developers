@@ -5,18 +5,28 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>使用函数call()和apply()，的扩展作用域</title>
+    <title>使用函数call()和apply()扩展作用域</title>
 </head>
 <body>
 <p>
+    理解了call()和apply()有改变this指向的效果，那么它是如何扩展作用域的？
+</p>
+<p>
+    答：以sayColor.call(o)为例子，我们通过call()传递过来对象o是引用类型，那么我们当然可以获取到这个对象的属性和方法。所以sayColor()方法的作用域this指向变成了o对象，
+    那么只是作用域的改变吗？因为这里还未涉及原型继承的知识，所以看起来并没有“扩展作用域”。移步：<a href="../../chapter6/6.3/CombinationInheritanceExample01.html">原型继承</a>
 </p>
 
 <script>
     window.color = 'red';
-    let o = {color: 'blue'};
+    let o = {
+        color: 'blue'
+    };
 
     function sayColor(){
-        console.log(this.color);
+        //往this对象当中添加一个shape属性
+        this.shape = 'triangle'
+        console.log('this：', this);
+        console.log('this.color：', this.color);
     }
 
     /*
@@ -25,9 +35,12 @@
     * */
     sayColor();
 
-    sayColor.call(this);// 传入this，即全局环境下的window，同普通调用函数一致
-    sayColor.call(window);// 也可以直接将window对象传入
-    sayColor.call(o);// 将对象o传入，那么this指向改变为o，因此this.color的值为'blue'
+    /* 传入this对象，而此时的this指向了window对象，因此结果为'red' */
+    sayColor.call(this);
+    /* 也可以直接将window对象传入 */
+    sayColor.call(window);
+    /* 将对象o传入，那么this指向改变为o，因此this.color的值为'blue' */
+    sayColor.call(o);
 </script>
 </body>
 </html>

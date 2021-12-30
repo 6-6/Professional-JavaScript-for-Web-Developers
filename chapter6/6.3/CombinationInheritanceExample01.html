@@ -8,44 +8,53 @@
     <title>原型链和借用构造函数的组合继承</title>
 </head>
 <body>
-
+<p>理解原型链知识，必须先了解this对象指向，构造函数等知识。</p>
 <script>
   function SuperType(name){
     this.name = name;
     this.colors = ['red', 'blue', 'green'];
+
+    /* 注意了！console.log可以看到age属性，这是因为console.log 函数在浏览器中输出的是变量引用地址的内存快照*/
+    // console.log(this);
+    // alert(this.age);
   }
 
-  //定义SuperType.prototype原型方法sayName
+  /* 在原型链上定义了一个方法sayName */
   SuperType.prototype.sayName = function(){
-    alert(this.name);
+    console.log('this.name： ', this.name);
   }
 
   function SubType(name, age){
-    // 继承构造函数SuperType所有属性
+    /* 传递this对象到SuperType()中，当前的构造函数便继承了SuperType()的属性和方法 */
     SuperType.call(this, name);
+    /* 这里添加一个age属性，那么思考下SuperType()当中是否能访问到呢？输出看看 */
     this.age = age;
   }
-
-  //继承SuperType构造函数原型对象上的方法
+  
+  //SubType原型链，继承了SuperType构造函数的属性和方法（包括原型链）
   SubType.prototype = new SuperType();
   //SubType.prototype原型被重写，construtor随之变化，应主动修正
   SubType.prototype.constructor = SubType;
   //定义SubType.prototype原型方法sayAge
   SubType.prototype.sayAge = function(){
-    alert(this.age);
+    console.log('this.age： ', this.age);
   }
 
-  //可以通过子类型向超类型传递值
+  //形成一个实例instance1
   let instance1 = new SubType('Nicholas', 29);
-  //改变构造函数中的colors属性，再次创建实例instance2构造函数重置，不影响其的colors属性
+
+  //改变实例instance1中的colors属性
   instance1.colors.push('black');
   console.log(instance1.colors);//['red', 'blue', 'green', 'black']
+  
   //子类型继承父类型的方法
   instance1.sayName();//'Nicholas'
   //子类型上自带原型方法
   instance1.sayAge();//29
   
+  //再次创建实例instance2构造函数，相当于新建一个对象
   let instance2 = new SubType('Greg', 27);
+  //之前instance1对colors属性的操作不影响instance2实例
   console.log(instance2.colors);//['red', 'blue', 'green']
   instance2.sayName();//'Greg'
   instance2.sayAge();//27

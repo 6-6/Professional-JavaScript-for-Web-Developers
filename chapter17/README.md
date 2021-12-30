@@ -144,6 +144,8 @@ console 对象向 JavaScript 控制台中写入消息，这个对象具有下列
 * log(message)：将一般消息记录到控制台
 * warn(message)：将警告消息记录到控制台
 
+关于console.log()在输出引用类型会出现意想不到的效果，因为console.log 函数在浏览器中输出的是变量引用地址的内存快照，例如：[原型链和借用构造函数的组合继承](../chapter6/6.3/CombinationInheritanceExample01.html)当中输出age属性
+
 ### 17.3.2 将消息记录到当前页面
 这种技术在不支持 JavaScript 控制台的 IE7 及更早版本或其他浏览器中十分有用。示例：[将消息记录到当前页面](./17.3/PageLoggingExample01.html)
 
