@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>寄生组合继承自定义事件对象</title>
+  </head>
+  <body>
+    <a href="../../chapter6/6.3/ParasiticCombinationInheritanceExample01.html">寄生式组合式继承</a>
+    <script src="./EventTarget.js"></script>
+    <script>
+      window.onload = function () {
+        function object(o) {
+          function F() {}
+          F.prototype = o;
+          return new F();
+        }
+
+        function inheritPrototype(subType, superType) {
+          let prototype = object(superType.prototype);
+          prototype.constructor = subType;
+          subType.prototype = prototype;
+        }
+
+        //定义一个构造函数
+        function Person(name, age) {
+          //继承EventTarget()的方法和属性
+          EventTarget.call(this);
+          this.name = name;
+          this.age = age;
+        }
+
+        //寄生组合继承（参见第 6 章）方法来继承 EventTarget
+        inheritPrototype(Person, EventTarget);
+        
+        Person.prototype.say = function (message) {
+          this.fire({ type: 'message', message: message });
+        };
+
+        function handleMessage(event) {
+          alert(event.target.name + ' says: ' + event.message);
+        }
+
+        //创建新person
+        var person = new Person('Nicholas', 29);
+        
+        //添加一个事件处理程序
+        person.addHandler('message', handleMessage);
+
+        //在该对象上调用1个方法，触发它的消息事件
+        person.say('Hi there');
+      };
+    </script>
+  </body>
+</html>

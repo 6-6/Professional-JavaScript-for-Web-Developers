@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mousemove实现元素跟随鼠标</title>
+  <style>
+    body{
+      position: relative;
+    }
+    #myDiv{
+      width: 100px;
+      height: 100px;
+      background-color: #ff0000;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <div id="myDiv"></div>
+  <script>
+    var EventUtil = {
+        getEvent: function(event){
+            return event ? event : window.event;
+        },
+        addHandler: function(element, type, handler){
+            if(element.addEventListener){
+                element.addEventListener(type, handler, false);
+            }
+            else if (element.detachEvent){
+                element.attachEvent('on' + type, handler);
+            }
+            else{
+                element['on' + type] = handler
+            }
+        },
+        removeHandler: function(element, type, handler){
+            if(element.addEventListener){
+                element.removeEventListener(type, handler, false);
+            }
+            else if (element.detachEvent){
+                element.detachEvent('on' + type, handler);
+            }
+            else{
+                element['on' + type] = null;
+            }
+        }
+    };
+
+    EventUtil.addHandler(document, 'mousemove', function(event){
+      var myDiv = document.getElementById('myDiv');
+      myDiv.style.left = event.clientX + 'px';
+      myDiv.style.top = event.clientY + 'px';
+    });
+  </script>
+</body>
+</html>

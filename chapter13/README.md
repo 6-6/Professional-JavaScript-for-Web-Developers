@@ -80,3 +80,8 @@ true，则可以使用这个方法 |
 * [preventDefault()方法](./13.3/DOMEventObjectExample04.html)
 * [stopPropagation()方法](./13.3/DOMEventObjectExample05.html)
 * [eventPhase属性](./13.3/DOMEventObjectExample06.html)
+
+### 13.3.3 跨浏览器的事件对象
+```javascript
+//TODO
+```

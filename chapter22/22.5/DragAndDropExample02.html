@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>实现元素拖拽功能</title>
+    <style>
+      body{
+        position: relative;
+      }
+      .draggable{
+        width: 100px;
+        height: 100px;
+        background-color: #ff0000;
+        position: absolute;
+        top: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="draggable"></div>
+    <div>
+      <button type="button" onclick="DragDrop.enable()">开启拖拽</button>
+      <button type="button" onclick="DragDrop.disable()">关闭拖拽</button>
+    </div>
+
+    <script>
+      var EventUtil = {
+        getEvent: function (event) {
+          return event ? event : window.event;
+        },
+        getTarget: function (event) {
+          return event.target || event.srcElement;
+        },
+        preventDefault: function (event) {
+          if (event.preventDefault) {
+            event.preventDefault();
+          } else {
+            event.returnValue = false;
+          }
+        },
+        addHandler: function (element, type, handler) {
+          if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+          } else if (element.detachEvent) {
+            element.attachEvent('on' + type, handler);
+          } else {
+            element['on' + type] = handler;
+          }
+        },
+        removeHandler: function (element, type, handler) {
+          if (element.addEventListener) {
+            element.removeEventListener(type, handler, false);
+          } else if (element.detachEvent) {
+            element.detachEvent('on' + type, handler);
+          } else {
+            element['on' + type] = null;
+          }
+        },
+        stopPropagation: function (event) {
+          if (event.stopPropagation) {
+            event.stopPropagation();
+          } else {
+            event.cancelBubble = true;
+          }
+        }
+      };
+
+      var DragDrop = (function () {
+        var dragging = null;
+
+        function handleEvent(event) {
+          //获取事件
+          event = EventUtil.getEvent(event);      
+          //获取事件触发的元素
+          var target = EventUtil.getTarget(event);
+
+          //确定事件类型
+          switch (event.type) {
+            case 'mousedown':
+              //className带有'draggable'的设为可拖拽的元素
+              if (target.className.indexOf('draggable') > -1) {
+                dragging = target;
+              }
+              break;
+            case 'mousemove':
+              if (dragging !== null) {
+                //指定位置
+                dragging.style.left = event.clientX + 'px';
+                dragging.style.top = event.clientY + 'px';
+              }
+              break;
+            case 'mouseup':
+              dragging = null;
+              break;
+          }
+        }
+
+        //公共接口
+        return {
+          enable: function () {
+            EventUtil.addHandler(document, 'mousedown', handleEvent);
+            EventUtil.addHandler(document, 'mousemove', handleEvent);
+            EventUtil.addHandler(document, 'mouseup', handleEvent);
+          },
+          disable: function () {
+            EventUtil.removeHandler(document, 'mousedown', handleEvent);
+            EventUtil.removeHandler(document, 'mousemove', handleEvent);
+            EventUtil.removeHandler(document, 'mouseup', handleEvent);
+          },
+        };
+      })();
+
+      console.log(DragDrop);
+      
+    </script>
+  </body>
+</html>

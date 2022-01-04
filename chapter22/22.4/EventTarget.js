@@ -3,6 +3,7 @@ function EventTarget(){
 }
 
 EventTarget.prototype = {
+    constructor: EventTarget,
     /* 
     绑定一个自定义事件，本质意义上是将事件处理程序，形成队列放入handlers对象中type数组
     @params {String} type 自定义事件类型名称
