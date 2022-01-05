@@ -25,6 +25,8 @@
       <button type="button" onclick="DragDrop.disable()">关闭拖拽</button>
     </div>
 
+    <div id="status"></div>
+
     <script src="../22.4/EventTarget.js"></script>
     <script>
       var EventUtil = {
@@ -69,6 +71,7 @@
       };
 
       var DragDrop = (function () {
+        var dragdrop = new EventTarget();
         var dragging = null,
             diffX = 0,
             diffY = 0;
@@ -87,6 +90,8 @@
                 dragging = target;
                 diffX = event.clientX - target.offsetLeft;
                 diffY = event.clientY - target.offsetTop;
+                //触发自定义事件
+                dragdrop.fire({type: 'dragstart', target: dragging, x: event.clientX, y: event.clientY});
               }
               break;
             case 'mousemove':
@@ -94,29 +99,53 @@
                 //指定位置
                 dragging.style.left = (event.clientX - diffX) + 'px';
                 dragging.style.top = (event.clientY - diffY) + 'px';
+
+                dragdrop.fire({type: 'drag', target: dragging, x: event.clientX, y: event.clientY});
               }
               break;
             case 'mouseup':
+              dragdrop.fire({type: 'dragend', target: dragging, x: event.clientX, y: event.clientY});
               dragging = null;
               break;
           }
         }
 
         //公共接口
-        return {
-          enable: function () {
+        dragdrop.enable = function () {
+            /* 
+            mousedown是一个原生事件，无法使用自定义事件绑定，因此兼容了两种事件绑定的写法
+            */
             EventUtil.addHandler(document, 'mousedown', handleEvent);
             EventUtil.addHandler(document, 'mousemove', handleEvent);
             EventUtil.addHandler(document, 'mouseup', handleEvent);
-          },
-          disable: function () {
+        }
+
+        dragdrop.disable = function () {
             EventUtil.removeHandler(document, 'mousedown', handleEvent);
             EventUtil.removeHandler(document, 'mousemove', handleEvent);
             EventUtil.removeHandler(document, 'mouseup', handleEvent);
-          },
-        };
+        }
+
+        return dragdrop;
       })();
 
+      /*
+        这里按照书中示例所写，对于这里的意义，我理解是创建一个自定义的事件，单独属于DragDrop对象的
+      */
+      DragDrop.addHandler('dragstart', function(event){
+          var status = document.getElementById('status');
+          status.innerHTML = event.target.id + '开启拖拽' 
+      });
+
+      DragDrop.addHandler('drag', function(event){
+          var status = document.getElementById('status');
+          status.innerHTML += '<br/>' + event.target.id + '正在移动' + '(' + event.x + ',' + event.y + ')';
+      });
+
+      DragDrop.addHandler('dragend', function(event){
+          var status = document.getElementById('status');
+          status.innerHTML += '<br/>' + event.target.id + '结束于' + '(' + event.x + ',' + event.y + ')';
+      });
       console.log(DragDrop);
       
     </script>
