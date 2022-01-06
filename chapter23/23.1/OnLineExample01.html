@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>navigator.onLine属性，判断是否离线访问</title>
+</head>
+<body>
+  <p>想要模拟离线访问，可以F12 > Network > offline 来开启离线模式</p>
+  <script>
+    //注意onLine的书写
+    if(navigator.onLine){
+      console.log('在线访问');
+    }
+    else{
+      console.log('离线访问');
+    }
+  </script>
+</body>
+</html>

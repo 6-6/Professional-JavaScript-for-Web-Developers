@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>online和offline事件</title>
+  </head>
+  <body>
+    <p>想要模拟离线访问，可以F12 > Network > offline 来开启离线模式，切换的时候触发online和offline事件。</p>
+    <script>
+      window.onload = function () {
+        var EventUtil = {
+          getEvent: function (event) {
+            return event ? event : window.event;
+          },
+          getTarget: function (event) {
+            return event.target || event.srcElement;
+          },
+          preventDefault: function (event) {
+            if (event.preventDefault) {
+              event.preventDefault();
+            } else {
+              event.returnValue = false;
+            }
+          },
+          addHandler: function (element, type, handler) {
+            if (element.addEventListener) {
+              element.addEventListener(type, handler, false);
+            } else if (element.detachEvent) {
+              element.attachEvent('on' + type, handler);
+            } else {
+              element['on' + type] = handler;
+            }
+          },
+          removeHandler: function (element, type, handler) {
+            if (element.addEventListener) {
+              element.removeEventListener(type, handler, false);
+            } else if (element.detachEvent) {
+              element.detachEvent('on' + type, handler);
+            } else {
+              element['on' + type] = null;
+            }
+          },
+          stopPropagation: function (event) {
+            if (event.stopPropagation) {
+              event.stopPropagation();
+            } else {
+              event.cancelBubble = true;
+            }
+          },
+        };
+
+        EventUtil.addHandler(window, 'online', function () {
+          alert('Online');
+        });
+
+        EventUtil.addHandler(window, 'offline', function () {
+          alert('Offline');
+        });
+      };
+    </script>
+  </body>
+</html>

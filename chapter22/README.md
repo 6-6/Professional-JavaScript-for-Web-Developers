@@ -214,4 +214,4 @@ var processor = {
 ### 22.5.2 添加自定义事件
 上个例子创建了 DragDrop 对象实现拖拽功能，如果我们将[自定义事件对象](./22.4/EventTargetExample01.html)与其结合实现自定义的事件，那么将会更加完整。
 
-[实现元素拖拽功能-优化鼠标指针](./22.5/DragAndDropExample04.html)
+[实现元素拖拽功能-自定义事件](./22.5/DragAndDropExample04.html)
