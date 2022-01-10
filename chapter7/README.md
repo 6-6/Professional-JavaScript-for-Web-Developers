@@ -88,10 +88,13 @@ function assignHandler(){
 JavaScript 没有块级作用域的概念，但我们可以利用函数作用域模拟出块级作用域。
 
 ```javascript
+//自执行函数/立即执行函数
 (function(){
   //这里是块级作用域
 })();
 ```
+> 注：javascript引擎规定，如果function关键字出现在行首，一律解释成函数声明语句。
+
 
 * [javascript没有块级作用域](./7.3/BlockScopeExample01.html)
 * [重复声明变量](./7.3/BlockScopeExample02.html)

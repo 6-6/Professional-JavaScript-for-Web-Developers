@@ -190,7 +190,7 @@ var processor = {
 如果 100ms 之内调用了 process()共 20 次， performanceProcessing()仍只会被调用一次。可以再精简为单个节流函数：[节流函数应用onresize事件](./22.3/ThrottlingExample.html)
 
 ## 22.4 自定义事件
-之前在[html指定事件处理程序](/Professional-JavaScript-for-Web-Developers/chapter13/13.2/HTMLEventHandlerExample01.html)问过一个问题，是否可以自定义一个事件？当时使用的```new Event()```构造函数，而现在我们不依赖Event()构造函数，实现一个自定义事件。
+之前在[html指定事件处理程序](../chapter13/13.2/HTMLEventHandlerExample01.html)问过一个问题，是否可以自定义一个事件？当时使用的```new Event()```构造函数，而现在我们不依赖Event()构造函数，实现一个自定义事件。
 
 观察者模式由两类对象组成： 主体和观察者。主体负责发布事件，同时观察者通过订阅这些事件来观察该主体。该模式的一个关键概念是主体并不知道观察者的任何事情，也就是说它可以独自存在并正常运作即使观察者不存在。从另一方面来说，观察者知道主体并能注册事件的回调函数（事件处理程序）。涉及 DOM 上时， DOM 元素便是主体，你的事件处理代码便是观察者。
 
