@@ -8,7 +8,7 @@
 </head>
 <body>
     <script>
-        var person = { name: 'Nicholas'};
+        var person = { name: 'Nicholas', children: {name: 'James'}};
         Object.freeze(person);
 
         //无法对对象进行扩展
@@ -22,6 +22,15 @@
         //数据属性的[[Writable]]特性会被设置为 false，所以无法对属性进行写入操作
         person.name = 'Greg';
         console.log(person.name);//'Nicholas'
+
+        //对象的本身是被冻结了，原先添加的属性是不可更改，但如果属性是个对象，依然可以进行扩展
+        person.children.name = 'jing';
+        console.log(person.children.name);//'jing'
+
+        //对象属性的子属性可以被删除
+        delete person.children.name;
+        console.log(person.children.name);//undefined
+
     </script>
 </body>
 </html>
